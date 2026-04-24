@@ -871,7 +871,7 @@ function saveToFile(allRecords, latest, code) {
   ].join('\n')).join('');
 
   // Descargar el TXT actualizado
-  const blob = new Blob([header + allRecords.map((r, i) => [
+  const fullTextContent = header + allRecords.map((r, i) => [
     `[${i+1}] ${r.solicitud} · ${r.fecha}`,
     `Nombre:      ${r.nombre} ${r.apellido}`,
     `Correo:      ${r.email}`,
@@ -886,8 +886,19 @@ function saveToFile(allRecords, latest, code) {
     `Aceptaciones: Términos=${r.aceptaTerminos?'Sí':'No'} | Aviso médico=${r.aceptaAviso?'Sí':'No'} | Noticias=${r.aceptaNoticias?'Sí':'No'}`,
     '─'.repeat(60),
     '',
-  ].join('\n')).join('')], { type: 'text/plain;charset=utf-8' });
+  ].join('\n')).join('');
 
+  // 1. Enviar a Vercel Blob a través de nuestra API
+  fetch('/api/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: fullTextContent
+  }).then(res => res.json())
+    .then(data => console.log('Upload a Vercel Blob exitoso:', data))
+    .catch(err => console.error('Error subiendo a Vercel Blob:', err));
+
+  // 2. Descargar localmente
+  const blob = new Blob([fullTextContent], { type: 'text/plain;charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `burnapp_solicitudes_${new Date().toISOString().slice(0,10)}.txt`;
