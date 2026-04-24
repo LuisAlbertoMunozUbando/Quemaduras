@@ -768,14 +768,18 @@ function buildSummary() {
   `).join('') + `<div style="height:4px"></div>`;
 }
 
-// ─── ENVÍO + GUARDADO LOCAL ───
-function enviarSolicitud() {
+// ─── ENVÍO Y NOTIFICACIÓN POR EMAIL ───
+async function enviarSolicitud() {
   const chk1 = document.getElementById('ck1').classList.contains('checked');
   const chk2 = document.getElementById('ck2').classList.contains('checked');
   if (!chk1 || !chk2) { shake(); return; }
 
   const btn = document.getElementById('btnEnviar');
-  btn.textContent = 'Guardando...'; btn.disabled = true;
+  const originalText = btn.innerHTML;
+  
+  // Estado: Enviando
+  btn.textContent = 'Enviando...'; 
+  btn.disabled = true;
 
   const code = 'BA-' + Date.now().toString(36).toUpperCase();
   const registro = {
@@ -795,19 +799,22 @@ function enviarSolicitud() {
     comentarios: document.getElementById('f_comentarios').value.trim() || '',
     aceptaTerminos: true,
     aceptaAviso: true,
-    aceptaNoticias: document.getElementById('ck3').classList.contains('checked'),
+    aceptaNoticias: document.getElementById('ck3').classList.contains('checked')
   };
 
-  // ─── GUARDAR EN LOCALSTORAGE (persistente en el navegador) ───
-  const existing = JSON.parse(localStorage.getItem('burnapp_solicitudes') || '[]');
-  existing.push(registro);
-  localStorage.setItem('burnapp_solicitudes', JSON.stringify(existing));
+  try {
+    // 1. Llamada al backend
+    const res = await fetch('/api/send-request-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(registro)
+    });
 
-  // ─── GENERAR Y DESCARGAR ARCHIVO TXT ───
-  saveToFile(existing, registro, code);
+    if (!res.ok) {
+      throw new Error('La respuesta de red no fue satisfactoria.');
+    }
 
-  setTimeout(() => {
-    // Ocultar todos los paneles y steps
+    // 2. Éxito: Ocultar paneles y mostrar success screen
     document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
     document.getElementById('stepsNav').style.display = 'none';
     document.querySelector('.progress-bar').style.display = 'none';
@@ -817,93 +824,14 @@ function enviarSolicitud() {
 
     showToast();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 1000);
-}
 
-function saveToFile(allRecords, latest, code) {
-  // Formato TXT legible
-  const divider = '─'.repeat(60);
-  const entry = [
-    divider,
-    `SOLICITUD DE ACCESO BURNAPP`,
-    `Código: ${latest.solicitud}`,
-    `Fecha: ${latest.fecha}`,
-    divider,
-    `DATOS PERSONALES`,
-    `  Nombre:      ${latest.nombre} ${latest.apellido}`,
-    `  Correo:      ${latest.email}`,
-    `  Teléfono:    ${latest.telefono || '—'}`,
-    `  País:        ${latest.pais}`,
-    `  Ciudad:      ${latest.ciudad || '—'}`,
-    `  Institución: ${latest.institucion}`,
-    `  Perfil:      ${latest.perfil}`,
-    ``,
-    `TIPO DE USO`,
-    `  Uso:         ${latest.tipoUso}`,
-    `  Plataforma:  ${latest.plataforma}`,
-    `  Fuente:      ${latest.fuente || '—'}`,
-    ``,
-    `COMENTARIOS`,
-    `  ${latest.comentarios || '(ninguno)'}`,
-    ``,
-    `ACEPTACIONES`,
-    `  Términos:    ${latest.aceptaTerminos ? 'Sí' : 'No'}`,
-    `  Aviso médico: ${latest.aceptaAviso ? 'Sí' : 'No'}`,
-    `  Noticias:    ${latest.aceptaNoticias ? 'Sí' : 'No'}`,
-    divider,
-    '',
-  ].join('\n');
-
-  // Compilar todos los registros
-  const header = [
-    '╔══════════════════════════════════════════════════════════╗',
-    '║         BURNAPP – REGISTRO DE SOLICITUDES DE ACCESO      ║',
-    `║  Total de registros: ${allRecords.length.toString().padEnd(35)}║`,
-    '╚══════════════════════════════════════════════════════════╝',
-    '',
-  ].join('\n');
-
-  const allText = header + allRecords.map((r, i) => [
-    `[${i + 1}] Código: ${r.solicitud} | Fecha: ${r.fecha}`,
-    `    ${r.nombre} ${r.apellido} | ${r.email} | ${r.pais} | ${r.perfil}`,
-    `    Uso: ${r.tipoUso} | Plataforma: ${r.plataforma}`,
-    '',
-  ].join('\n')).join('');
-
-  // Descargar el TXT actualizado
-  const fullTextContent = header + allRecords.map((r, i) => [
-    `[${i+1}] ${r.solicitud} · ${r.fecha}`,
-    `Nombre:      ${r.nombre} ${r.apellido}`,
-    `Correo:      ${r.email}`,
-    `Teléfono:    ${r.telefono || '—'}`,
-    `País/Ciudad: ${r.pais}${r.ciudad ? ' / ' + r.ciudad : ''}`,
-    `Institución: ${r.institucion}`,
-    `Perfil:      ${r.perfil}`,
-    `Tipo de uso: ${r.tipoUso}`,
-    `Plataforma:  ${r.plataforma}`,
-    `Fuente:      ${r.fuente || '—'}`,
-    `Comentarios: ${r.comentarios || '—'}`,
-    `Aceptaciones: Términos=${r.aceptaTerminos?'Sí':'No'} | Aviso médico=${r.aceptaAviso?'Sí':'No'} | Noticias=${r.aceptaNoticias?'Sí':'No'}`,
-    '─'.repeat(60),
-    '',
-  ].join('\n')).join('');
-
-  // 1. Enviar a Vercel Blob a través de nuestra API
-  fetch('/api/save', {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain' },
-    body: fullTextContent
-  }).then(res => res.json())
-    .then(data => console.log('Upload a Vercel Blob exitoso:', data))
-    .catch(err => console.error('Error subiendo a Vercel Blob:', err));
-
-  // 2. Descargar localmente
-  const blob = new Blob([fullTextContent], { type: 'text/plain;charset=utf-8' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `burnapp_solicitudes_${new Date().toISOString().slice(0,10)}.txt`;
-  a.click();
-  URL.revokeObjectURL(a.href);
+  } catch (error) {
+    console.error('Error enviando la solicitud:', error);
+    // 3. Error: Restaurar botón y mostrar alerta
+    alert('Ocurrió un problema y la solicitud no pudo ser enviada. Por favor, inténtalo de nuevo más tarde.');
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }
 }
 
 function showToast() {
