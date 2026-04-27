@@ -12,6 +12,10 @@
 <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Estatura (cm)</label><input type="number" id="p-height" value="170" min="30" max="250" style="width:100%" oninput="updatePatient()"></div>
 <div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Sexo</label><select id="p-sex" style="width:100%" onchange="updatePatient()"><option value="m">Masculino</option><option value="f">Femenino</option></select></div>
 </div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px">
+<div style="grid-column:span 2"><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Nombre del paciente (opcional)</label><input type="text" id="p-name" placeholder="Ej. Juan Pérez" style="width:100%"></div>
+<div style="grid-column:span 2"><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Clave de paciente (opcional)</label><input type="text" id="p-key" placeholder="Ej. QMD-001" style="width:100%"></div>
+</div>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
 <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">IMC</div><div style="font-size:16px;font-weight:500" id="bmi-val">—</div></div>
 <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">BSA total (cm²)</div><div style="font-size:16px;font-weight:500" id="bsa-val">—</div></div>
@@ -95,7 +99,23 @@
 <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">Gravedad global</div><div style="font-size:14px;font-weight:500" id="r-grav">—</div></div>
 </div>
 <div id="prog-box" style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px"></div>
+<div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+<button onclick="saveInference()" style="font-size:12px;padding:6px 12px;font-weight:500">Guardar inferencia del paciente</button>
+<span id="save-status" style="font-size:11px;color:var(--color-text-secondary)">Guarda para seguimiento evolutivo.</span>
 </div>
+</div>
+<!-- CONSULTAS EVOLUTIVAS -->
+<div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:10px">
+<p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px">Consultas y comparativo por paciente</p>
+<div style="display:grid;grid-template-columns:2fr 2fr auto;gap:8px;align-items:end;margin-bottom:10px">
+<div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Nombre del paciente</label><input type="text" id="q-name" placeholder="Buscar por nombre" style="width:100%"></div>
+<div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Clave del paciente</label><input type="text" id="q-key" placeholder="Buscar por clave" style="width:100%"></div>
+<div><button onclick="loadPatientHistory()" style="font-size:12px;padding:6px 12px;font-weight:500">Consultar</button></div>
+</div>
+<div id="query-status" style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px">Consulta el histórico para ver evolución diaria.</div>
+<div id="query-results" style="display:flex;flex-direction:column;gap:8px"></div>
+</div>
+
 <!-- COMENTARIO FINAL -->
 <div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:10px">
 <label for="final-comment" style="font-size:12px;font-weight:500;color:var(--color-text-secondary);display:block;margin:0 0 8px">Comentario final (opcional)</label>
@@ -254,6 +274,9 @@ let drawing=false,dragging=false;
 let pts=[],dsx,dsy,dwx,dwy;
 let siw=1,IW=0,IH=0;
 let burnResult=null;
+let currentImageDataUrl='';
+let currentImageName='';
+let latestComputed=null;
 
 function toggleRefs(){
   const p=document.getElementById('refs-panel');
@@ -311,7 +334,7 @@ function selectR(r){
 function loadImg(e){
   const f=e.target.files[0];if(!f)return;
   const rd=new FileReader();
-  rd.onload=ev=>{const im=new Image();im.onload=()=>{img=im;document.getElementById('upload-lbl').textContent=f.name;document.getElementById('canvas-sec').style.display='block';setupC();};im.src=ev.target.result;};
+  rd.onload=ev=>{const im=new Image();im.onload=()=>{img=im;currentImageDataUrl=ev.target.result;currentImageName=f.name;document.getElementById('upload-lbl').textContent=f.name;document.getElementById('canvas-sec').style.display='block';setupC();};im.src=ev.target.result;};
   rd.readAsDataURL(f);
 }
 
@@ -440,6 +463,18 @@ function showResults(){
   const healText=burn.w[0]!==null?`${(burn.w[0]*hm).toFixed(1)}–${(burn.w[1]*hm).toFixed(1)} semanas (ajustado por región ×${hm})`:'Indeterminado';
   const baux_msg=baux>100?'Pronóstico vital muy grave (mortalidad elevada)':baux>80?'Pronóstico vital grave':baux>60?'Pronóstico moderadamente grave':'Pronóstico vital favorable';
   const tx=burn.sev===1?'Hidratación tópica, protección solar. Sin apósito especial.':burn.sev===2?'Apósitos no adherentes, antisépticos (clorhexidina), control 48h. Fisioterapia precoz en '+sel.label+'.':burn.sev===3?'Desbridamiento, injerto anticipado. Prendas de compresión 12–18 meses. Fisioterapia intensiva.':burn.sev===4?'Escarectomía urgente. Injerto/colgajo. UCI quemados si SCQ>20%.':'Valoración presencial urgente.';
+  latestComputed={
+    region:sel,
+    cm2:+cm2.toFixed(1),
+    pct:+pct.toFixed(2),
+    baux,
+    gravLabel,
+    healText,
+    treatment:tx,
+    scarRisk:burn.scar,
+    tone:document.getElementById('tone-desc').textContent,
+    degree:burn.deg
+  };
   document.getElementById('prog-box').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Cicatrización estimada</div><div style="font-size:13px;margin-bottom:10px">${healText}</div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Tratamiento recomendado</div><div style="font-size:13px;margin-bottom:10px">${tx}</div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Secuelas cicatriciales</div><div style="font-size:13px">${burn.scar}</div></div><div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Índice de Baux (${baux})</div><div style="font-size:13px;margin-bottom:10px">${baux_msg}</div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Nota anatómica</div><div style="font-size:13px;margin-bottom:10px">${sel.note}</div>${age<5||age>65?`<div style="font-size:12px;font-weight:500;color:#b71c1c;padding:6px 8px;border-radius:var(--border-radius-md);background:#fce4ec;border:0.5px solid #f48fb1">Paciente en grupo de alto riesgo (edad: ${age} años).</div>`:''}</div></div><div style="margin-top:10px;font-size:11px;color:var(--color-text-secondary);padding-top:8px;border-top:0.5px solid var(--color-border-tertiary)">Puntuación compuesta: anatómica (${anSev}/4) + grado (${burnSev}/4) + edad (${ageFactor}/1) + SCQ (${bsaFactor}/2) = <strong>${total}</strong> → <strong style="color:${gravColor}">${gravLabel}</strong></div>`;
   document.getElementById('res-sec').style.display='block';
 }
@@ -454,6 +489,95 @@ function clearD(){
   document.getElementById('tone-badge').style.background='#eee';
   document.getElementById('tone-badge').style.color='';
   document.getElementById('tone-badge').style.border='';
+}
+
+
+function buildPatientIdentifier(){
+  const name=(document.getElementById('p-name')?.value||'').trim();
+  const key=(document.getElementById('p-key')?.value||'').trim();
+  if(!name&&!key)return null;
+  return {name,key};
+}
+
+async function saveInference(){
+  const status=document.getElementById('save-status');
+  if(!latestComputed||!currentImageDataUrl){status.textContent='Primero analiza una imagen antes de guardar.';status.style.color='#b71c1c';return;}
+  const patient=buildPatientIdentifier();
+  if(!patient){status.textContent='Captura al menos nombre o clave del paciente.';status.style.color='#b71c1c';return;}
+  status.textContent='Guardando inferencia...';status.style.color='var(--color-text-secondary)';
+  try{
+    const payload={
+      patientName:patient.name,
+      patientKey:patient.key,
+      imageDataUrl:currentImageDataUrl,
+      imageName:currentImageName||'quemadura.jpg',
+      inference:{
+        age:+document.getElementById('p-age').value||null,
+        sex:document.getElementById('p-sex').value,
+        region:latestComputed.region.label,
+        regionId:latestComputed.region.id,
+        areaCm2:latestComputed.cm2,
+        pctScq:latestComputed.pct,
+        baux:latestComputed.baux,
+        gravedad:latestComputed.gravLabel,
+        grado:latestComputed.degree,
+        tono:latestComputed.tone,
+        cicatrizacion:latestComputed.healText,
+        tratamiento:latestComputed.treatment,
+        riesgoCicatriz:latestComputed.scarRisk,
+        comentario:(document.getElementById('final-comment').value||'').trim()
+      }
+    };
+    const r=await fetch('/api/burn-inference',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Error guardando');
+    status.textContent=`Guardado exitoso. Registros del paciente: ${d.totalEntries}.`;
+    status.style.color='#2e7d32';
+    document.getElementById('q-name').value=patient.name;
+    document.getElementById('q-key').value=patient.key;
+  }catch(err){
+    status.textContent='No se pudo guardar: '+err.message;
+    status.style.color='#b71c1c';
+  }
+}
+
+function renderHistory(records){
+  const root=document.getElementById('query-results');
+  root.innerHTML='';
+  if(!records.length){root.innerHTML='<div style="font-size:11px;color:var(--color-text-secondary)">No hay registros para ese paciente.</div>';return;}
+  records.sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt));
+  const firstArea=records[0].areaCm2||0;
+  records.forEach((rec,idx)=>{
+    const delta=firstArea?(((rec.areaCm2-firstArea)/firstArea)*100):0;
+    const prev=idx>0?records[idx-1]:null;
+    const deltaPrev=prev&&prev.areaCm2?(((rec.areaCm2-prev.areaCm2)/prev.areaCm2)*100):0;
+    const card=document.createElement('div');
+    card.style.cssText='background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px';
+    card.innerHTML=`<div style="display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:start"><div>${rec.imageUrl?`<a href="${rec.imageUrl}" target="_blank" rel="noopener"><img src="${rec.imageUrl}" alt="Evolución" style="width:140px;height:105px;object-fit:cover;border-radius:6px;border:0.5px solid var(--color-border-tertiary)"></a>`:'Sin imagen'}</div><div><div style="font-size:12px;font-weight:500">${new Date(rec.createdAt).toLocaleString('es-MX')}</div><div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Región: ${rec.region||'—'} · Grado: ${rec.grado||'—'} · Gravedad: ${rec.gravedad||'—'}</div><div style="font-size:11px;margin-top:4px">Área: <strong>${rec.areaCm2||'—'} cm²</strong> · %SCQ: <strong>${rec.pctScq||'—'}%</strong> · Baux: <strong>${rec.baux||'—'}</strong></div><div style="font-size:11px;margin-top:4px">Δ vs primera: <strong style="color:${delta<=0?'#2e7d32':'#b71c1c'}">${delta.toFixed(1)}%</strong>${prev?` · Δ vs previa: <strong style="color:${deltaPrev<=0?'#2e7d32':'#b71c1c'}">${deltaPrev.toFixed(1)}%</strong>`:''}</div></div></div>`;
+    root.appendChild(card);
+  });
+}
+
+async function loadPatientHistory(){
+  const name=(document.getElementById('q-name').value||'').trim();
+  const key=(document.getElementById('q-key').value||'').trim();
+  const st=document.getElementById('query-status');
+  if(!name&&!key){st.textContent='Ingresa nombre o clave para consultar.';st.style.color='#b71c1c';return;}
+  st.textContent='Consultando histórico...';st.style.color='var(--color-text-secondary)';
+  try{
+    const params=new URLSearchParams();
+    if(name)params.set('name',name);
+    if(key)params.set('key',key);
+    const r=await fetch('/api/burn-consult?'+params.toString());
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Error de consulta');
+    st.textContent=`Registros encontrados: ${d.totalEntries}.`;
+    st.style.color='#2e7d32';
+    renderHistory(d.records||[]);
+  }catch(err){
+    st.textContent='No se pudo consultar: '+err.message;
+    st.style.color='#b71c1c';
+  }
 }
 
 init();setMode('move');
