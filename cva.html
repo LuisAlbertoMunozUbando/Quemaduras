@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Luis Alberto Muñoz Ubando — CV in Extenso</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --ink: #1a1a1a; --ink2: #3d3d3d; --muted: #6b6b6b; --rule: #d0ccc5;
+  --accent: #005f8e; --accent2: #003b56; --bg: #faf8f5; --card: #ffffff;
+  --tag-bg: #eef5fa; --tag: #005f8e;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Source Sans 3',sans-serif;font-weight:300;font-size:15px;line-height:1.7;}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--accent2);display:flex;flex-direction:column;padding:40px 0 24px;z-index:100;overflow-y:auto;}
+.sidebar-name{padding:0 24px 28px;border-bottom:1px solid rgba(255,255,255,0.12);margin-bottom:16px;}
+.sidebar-name h2{font-family:'Playfair Display',serif;font-weight:600;font-size:1rem;color:#fff;line-height:1.3;}
+.sidebar-name p{font-size:0.72rem;color:rgba(255,255,255,0.55);margin-top:4px;letter-spacing:0.04em;text-transform:uppercase;}
+.nav-link{display:block;padding:9px 24px;font-size:0.8rem;color:rgba(255,255,255,0.65);text-decoration:none;letter-spacing:0.02em;transition:all 0.18s;border-left:3px solid transparent;}
+.nav-link:hover,.nav-link.active{color:#fff;background:rgba(255,255,255,0.08);border-left-color:#7ec8e3;}
+.nav-sep{height:1px;background:rgba(255,255,255,0.1);margin:10px 24px;}
+.sidebar-links{margin-top:auto;padding:16px 24px;border-top:1px solid rgba(255,255,255,0.1);}
+.sidebar-links a{display:block;font-size:0.75rem;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:6px;transition:color 0.15s;}
+.sidebar-links a:hover{color:rgba(255,255,255,0.9);}
+
+/* ANALYTICS BUTTON */
+#analytics-btn{display:block;margin:16px 24px 8px;background:linear-gradient(135deg,#0097c4,#005f8e);color:#fff;border:none;border-radius:8px;padding:10px 14px;font-size:0.78rem;font-weight:600;cursor:pointer;letter-spacing:0.04em;text-align:center;transition:all 0.2s;font-family:'Source Sans 3',sans-serif;}
+#analytics-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,150,196,0.4);}
+
+/* ANALYTICS MODAL */
+#analytics-modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,10,20,0.82);backdrop-filter:blur(8px);padding:20px;overflow-y:auto;}
+#analytics-modal.open{display:flex;flex-direction:column;align-items:center;}
+.modal-inner{background:#fff;border-radius:16px;width:100%;max-width:960px;padding:36px;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.3);}
+.modal-close-btn{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--rule);border-radius:50%;width:32px;height:32px;font-size:1.1rem;cursor:pointer;color:var(--muted);transition:all 0.15s;display:flex;align-items:center;justify-content:center;}
+.modal-close-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--accent2);margin-bottom:6px;}
+.modal-subtitle{font-size:0.88rem;color:var(--muted);margin-bottom:28px;}
+.chart-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;}
+.chart-tab{padding:7px 16px;border-radius:100px;border:1.5px solid var(--rule);background:transparent;font-size:0.8rem;font-weight:500;cursor:pointer;color:var(--muted);transition:all 0.15s;font-family:'Source Sans 3',sans-serif;}
+.chart-tab.active,.chart-tab:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.chart-panel{display:none;}
+.chart-panel.active{display:block;}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.chart-box{background:#f8f9fb;border:1px solid var(--rule);border-radius:12px;padding:20px;}
+.chart-box h4{font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--accent2);margin-bottom:4px;}
+.chart-box p{font-size:0.75rem;color:var(--muted);margin-bottom:14px;}
+.chart-box canvas{max-height:260px;}
+.chart-box.wide{grid-column:span 2;}
+@media(max-width:700px){.chart-grid{grid-template-columns:1fr;}.chart-box.wide{grid-column:span 1;}}
+
+/* MAIN */
+main{margin-left:220px;padding:0 64px 80px;max-width:1060px;}
+.hero{padding:64px 0 48px;border-bottom:2px solid var(--rule);margin-bottom:56px;}
+.hero h1{font-family:'Playfair Display',serif;font-weight:700;font-size:3rem;line-height:1.1;letter-spacing:-0.5px;color:var(--ink);margin-bottom:8px;}
+.hero .title-line{font-size:1rem;color:var(--accent);font-weight:500;letter-spacing:0.03em;margin-bottom:20px;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px;}
+.hero-meta a{display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--accent);text-decoration:none;border:1px solid var(--rule);padding:5px 12px;border-radius:100px;transition:all 0.15s;}
+.hero-meta a:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--tag-bg);color:var(--tag);font-size:0.78rem;font-weight:500;padding:4px 12px;border-radius:4px;margin-right:8px;margin-top:4px;}
+.section{margin-bottom:60px;scroll-margin-top:24px;}
+.section-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--accent2);margin-bottom:24px;padding-bottom:10px;border-bottom:2px solid var(--rule);display:flex;align-items:center;gap:12px;}
+.section-title::before{content:'';display:inline-block;width:4px;height:22px;background:var(--accent);border-radius:2px;}
+.timeline{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:grid;grid-template-columns:100px 1fr;gap:0 24px;padding:16px 0;border-bottom:1px solid var(--rule);}
+.tl-item:last-child{border-bottom:none;}
+.tl-year{font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:500;color:var(--muted);padding-top:2px;white-space:nowrap;}
+.tl-content strong{font-weight:600;color:var(--ink);font-size:0.92rem;}
+.tl-content span{display:block;font-size:0.85rem;color:var(--muted);}
+.cv-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.cv-list li{padding-left:18px;position:relative;font-size:0.9rem;color:var(--ink2);}
+.cv-list li::before{content:'—';position:absolute;left:0;color:var(--accent);font-weight:600;}
+.skills-grid{display:grid;grid-template-columns:130px 1fr;gap:12px 24px;}
+.skill-label{font-weight:600;font-size:0.82rem;color:var(--accent2);padding-top:2px;}
+.skill-val{font-size:0.88rem;color:var(--ink2);}
+.pub-year-group{margin-bottom:28px;}
+.pub-year-header{font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:500;color:#fff;background:var(--accent);display:inline-block;padding:3px 12px;border-radius:4px;margin-bottom:12px;letter-spacing:0.04em;}
+.pub-item{display:grid;grid-template-columns:36px 1fr;gap:0 12px;padding:10px 0;border-bottom:1px solid var(--rule);}
+.pub-item:last-child{border-bottom:none;}
+.pub-num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);padding-top:2px;text-align:right;}
+.pub-title{font-weight:600;font-size:0.88rem;color:var(--ink);line-height:1.4;margin-bottom:3px;}
+.pub-authors{font-size:0.8rem;color:var(--muted);margin-bottom:2px;}
+.pub-authors strong{color:var(--accent2);}
+.pub-venue{font-size:0.8rem;color:var(--ink2);font-style:italic;}
+.pub-venue a{color:var(--accent);text-decoration:none;}
+.pub-venue a:hover{text-decoration:underline;}
+.ef-item{display:grid;grid-template-columns:36px 110px 1fr;gap:0 12px;padding:9px 0;border-bottom:1px solid var(--rule);align-items:start;}
+.ef-item:last-child{border-bottom:none;}
+.ef-num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);text-align:right;padding-top:2px;}
+.ef-date{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);white-space:nowrap;padding-top:2px;}
+.ef-title a{font-size:0.88rem;color:var(--accent);font-weight:500;line-height:1.4;text-decoration:none;}
+.ef-title a:hover{text-decoration:underline;color:var(--accent2);}
+.thesis-item{padding:12px 0;border-bottom:1px solid var(--rule);}
+.thesis-item:last-child{border-bottom:none;}
+.thesis-title{font-weight:600;font-size:0.88rem;color:var(--ink);margin-bottom:3px;}
+.thesis-meta{font-size:0.8rem;color:var(--muted);}
+.team-cloud{display:flex;flex-wrap:wrap;gap:8px;}
+.team-tag{background:var(--tag-bg);color:var(--tag);font-size:0.78rem;padding:4px 10px;border-radius:4px;border:1px solid rgba(0,95,142,0.15);}
+.teaching-item{padding:10px 16px;background:var(--card);border:1px solid var(--rule);border-radius:6px;margin-bottom:8px;font-size:0.88rem;color:var(--ink2);}
+.teaching-item a{color:var(--accent);text-decoration:none;font-weight:500;}
+.teaching-item a:hover{text-decoration:underline;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.stat-card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:18px;text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--accent);line-height:1;margin-bottom:4px;}
+.stat-label{font-size:0.75rem;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;}
+/* Courses table */
+.courses-table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.courses-table th{background:var(--accent2);color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:0.78rem;letter-spacing:0.04em;}
+.courses-table th:first-child{text-align:center;width:60px;}
+.courses-table td{padding:8px 12px;border-bottom:1px solid var(--rule);vertical-align:top;}
+.courses-table td:first-child{text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--muted);}
+.courses-table tr:hover td{background:#f0f5fa;}
+.courses-table .dates{font-size:0.75rem;color:var(--muted);}
+#progress{position:fixed;top:0;left:220px;right:0;height:3px;background:var(--accent);transform-origin:left;z-index:200;transform:scaleX(0);transition:transform 0.1s linear;}
+@media(max-width:900px){#sidebar{display:none;}main{margin-left:0;padding:24px 20px 60px;}}
+@media print{#sidebar{display:none;}main{margin-left:0;padding:0;}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-name">
+    <h2>Dr. Luis Alberto<br>Muñoz Ubando</h2>
+    <p>CV in Extenso · 2026</p>
+  </div>
+  <button id="analytics-btn" onclick="openAnalytics()">📊 Analytics del CV</button>
+  <a href="#top" class="nav-link active">Overview</a>
+  <a href="#interests" class="nav-link">Research Interests</a>
+  <a href="#education" class="nav-link">Education</a>
+  <a href="#appointments" class="nav-link">Appointments</a>
+  <a href="#awards" class="nav-link">Awards</a>
+  <a href="#activities" class="nav-link">Activities</a>
+  <a href="#supervision" class="nav-link">Supervision</a>
+  <a href="#team" class="nav-link">Former Team</a>
+  <a href="#teaching" class="nav-link">Teaching</a>
+  <a href="#courses" class="nav-link">Courses</a>
+  <div class="nav-sep"></div>
+  <a href="#publications" class="nav-link">Publications</a>
+  <a href="#elfinanciero" class="nav-link">El Financiero</a>
+  <div class="sidebar-links">
+    <a href="https://orcid.org/0000-0002-5845-6663" target="_blank">ORCID →</a>
+    <a href="https://www.scopus.com/authid/detail.uri?authorId=35096500500" target="_blank">SCOPUS →</a>
+    <a href="https://scholar.google.com.mx/citations?hl=en&user=3o9-OssAAAAJ" target="_blank">Google Scholar →</a>
+    <a href="https://www.linkedin.com/in/luisalbertomunozubando/" target="_blank">LinkedIn →</a>
+    <a href="https://github.com/LuisAlbertoMunozUbando" target="_blank">GitHub →</a>
+    <a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/" target="_blank">El Financiero →</a>
+  </div>
+</nav>
+
+<!-- ANALYTICS MODAL -->
+<div id="analytics-modal">
+  <div class="modal-inner">
+    <button class="modal-close-btn" onclick="closeAnalytics()">✕</button>
+    <div class="modal-title">📊 Analytics del CV</div>
+    <div class="modal-subtitle">Visualizaciones cruzadas de producción académica, docencia y divulgación</div>
+    <div class="chart-tabs">
+      <button class="chart-tab active" onclick="switchTab(0)">Producción académica</button>
+      <button class="chart-tab" onclick="switchTab(1)">Docencia</button>
+      <button class="chart-tab" onclick="switchTab(2)">Divulgación</button>
+      <button class="chart-tab" onclick="switchTab(3)">Impacto global</button>
+    </div>
+    <div class="chart-panel active" id="tab0">
+      <div class="chart-grid">
+        <div class="chart-box wide">
+          <h4>Publicaciones por año</h4>
+          <p>Evolución cronológica de la producción científica (1992–2026)</p>
+          <canvas id="c_pubs_year"></canvas>
+        </div>
+        <div class="chart-box">
+          <h4>Tipo de publicación</h4>
+          <p>Distribución por categoría</p>
+          <canvas id="c_pub_type"></canvas>
+        </div>
+        <div class="chart-box">
+          <h4>Colaboración internacional</h4>
+          <p>Co-autores por país de institución</p>
+          <canvas id="c_collab"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="chart-panel" id="tab1">
+      <div class="chart-grid">
+        <div class="chart-box wide">
+          <h4>Cursos impartidos por semestre (2021–2026)</h4>
+          <p>Número de asignaturas distintas y repeticiones por período</p>
+          <canvas id="c_courses_sem"></canvas>
+        </div>
+        <div class="chart-box">
+          <h4>Top 10 asignaturas</h4>
+          <p>Por número de veces impartidas</p>
+          <canvas id="c_courses_top"></canvas>
+        </div>
+        <div class="chart-box">
+          <h4>Tesis dirigidas por año</h4>
+          <p>Master / PhD completadas 2022–2026</p>
+          <canvas id="c_tesis_year"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="chart-panel" id="tab2">
+      <div class="chart-grid">
+        <div class="chart-box wide">
+          <h4>Artículos El Financiero por año</h4>
+          <p>Producción de la columna de opinión 2018–2026</p>
+          <canvas id="c_ef_year"></canvas>
+        </div>
+        <div class="chart-box">
+          <h4>Artículos El Financiero por mes</h4>
+          <p>¿En qué mes escribe más?</p>
+          <canvas id="c_ef_month"></canvas>
+        </div>
+        <div class="chart-box">
+          <h4>Publicaciones científicas vs. artículos EF</h4>
+          <p>Actividad académica y divulgativa cruzada</p>
+          <canvas id="c_sci_vs_ef"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="chart-panel" id="tab3">
+      <div class="chart-grid">
+        <div class="chart-box">
+          <h4>Alumni por sector</h4>
+          <p>Distribución de exalumnos por industria</p>
+          <canvas id="c_alumni_sector"></canvas>
+        </div>
+        <div class="chart-box">
+          <h4>Alumni por región</h4>
+          <p>Distribución geográfica de exalumnos</p>
+          <canvas id="c_alumni_region"></canvas>
+        </div>
+        <div class="chart-box wide">
+          <h4>Línea de tiempo: hitos y producción acumulada</h4>
+          <p>Publicaciones acumuladas vs. eventos clave de carrera</p>
+          <canvas id="c_cumulative"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="top">
+  <h1>Dr. Luis Alberto<br>Muñoz Ubando</h1>
+  <p class="title-line">Tec de Monterrey &nbsp;·&nbsp; School of Engineering and Sciences</p>
+  <div class="hero-meta">
+    <a href="mailto:amunoz@tec.mx">✉ amunoz@tec.mx</a>
+    <a href="https://orcid.org/0000-0002-5845-6663" target="_blank">ORCID: 0000-0002-5845-6663</a>
+    <a href="https://www.scopus.com/authid/detail.uri?authorId=35096500500" target="_blank">SCOPUS: 35096500500</a>
+    <a href="https://scholar.google.com.mx/citations?hl=en&user=3o9-OssAAAAJ" target="_blank">Google Scholar</a>
+    <a href="https://www.linkedin.com/in/luisalbertomunozubando/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/LuisAlbertoMunozUbando" target="_blank">GitHub</a>
+  </div>
+  <div>
+    <span class="hero-badge">SNI · CONAHCYT 2022–2025</span>
+    <span class="hero-badge">NVIDIA Ambassador</span>
+    <span class="hero-badge">IEEE · ACM Member</span>
+    <span class="hero-badge">México · +52 999 297 3327</span>
+  </div>
+</section>
+
+<div class="stat-row">
+  <div class="stat-card"><div class="stat-num">103</div><div class="stat-label">Publications</div></div>
+  <div class="stat-card"><div class="stat-num">194</div><div class="stat-label">EF Artículos</div></div>
+  <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">Conferencias</div></div>
+  <div class="stat-card"><div class="stat-num">14K+</div><div class="stat-label">Coursera learners</div></div>
+</div>
+
+<section class="section" id="interests">
+  <h2 class="section-title">Research Interests</h2>
+  <div class="team-cloud">
+    <span class="team-tag">Scientific Computing</span><span class="team-tag">Robotics — Dexterous &amp; Humanoid Manipulation</span><span class="team-tag">Computer Vision — Tracking</span><span class="team-tag">Hardware Design Innovation</span><span class="team-tag">Artificial Intelligence</span><span class="team-tag">Deep Learning</span><span class="team-tag">LLMs</span><span class="team-tag">Reinforcement Learning</span><span class="team-tag">Surgical Robotics</span><span class="team-tag">Brain-Computer Interfaces</span><span class="team-tag">Autonomous Navigation</span>
+  </div>
+</section>
+
+<section class="section" id="education">
+  <h2 class="section-title">Education &amp; Training</h2>
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-year">2005–2006</span><div class="tl-content"><strong>Senior Research Scientist</strong><span>TU Wien, Austria</span></div></div>
+    <div class="tl-item"><span class="tl-year">2000–2002</span><div class="tl-content"><strong>M.Sc. Science Outreach</strong><span>Universum, UNAM, México</span></div></div>
+    <div class="tl-item"><span class="tl-year">1998–2000</span><div class="tl-content"><strong>PostDoctoral Training, Senior Scientist</strong><span>University of Oxford, UK</span></div></div>
+    <div class="tl-item"><span class="tl-year">1994–1998</span><div class="tl-content"><strong>Ph.D. in Vision and Robotics</strong><span>INRIA / ENSIMAG, Grenoble, France</span></div></div>
+    <div class="tl-item"><span class="tl-year">1993–1994</span><div class="tl-content"><strong>M.Sc. Intelligent Robotics</strong><span>INRIA / ENSIMAG, Grenoble, France</span></div></div>
+    <div class="tl-item"><span class="tl-year">1988–1993</span><div class="tl-content"><strong>B.S. Electronic Systems Engineering</strong><span>Tec de Monterrey, México</span></div></div>
+  </div>
+</section>
+
+<section class="section" id="appointments">
+  <h2 class="section-title">Academic Appointments &amp; Work History</h2>
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-year">2011–present</span><div class="tl-content"><strong>Faculty at EIC — Tec de Monterrey</strong><span>Robotics, Computer Vision, Data Science, Intelligent Systems</span></div></div>
+    <div class="tl-item"><span class="tl-year">2005–2008</span><div class="tl-content"><strong>Faculty — UNAM, Faculty of Sciences</strong><span>México</span></div></div>
+    <div class="tl-item"><span class="tl-year">2002–2005</span><div class="tl-content"><strong>Faculty — UADY, Mathematics Faculty</strong><span>México</span></div></div>
+    <div class="tl-item"><span class="tl-year">2000–2002</span><div class="tl-content"><strong>Senior Program Officer — CONACYT</strong><span>México</span></div></div>
+  </div>
+</section>
+
+<section class="section" id="awards">
+  <h2 class="section-title">Achievements, Honours &amp; Awards</h2>
+  <ul class="cv-list">
+    <li>NVIDIA Ambassador, Certificate of Competency</li>
+    <li>2025 NVIDIA — Computer Vision for Industrial Inspection</li>
+    <li>2025 ANYBOTICS Certificate of Completion on Anymal Robotics Safety Inspection</li>
+    <li>2024 International funding competition DIGIT CFP through AI at Meta, in partnership with GelSight Inc.</li>
+    <li>2023 Distinguished ROS-Industrial Americas Chapter Founder for México at TEC de Monterrey</li>
+    <li>2022 7th place at XPrize ANA Avatar Challenge</li>
+    <li>2022 TEC Monterrey + NVIDIA + University of Manchester: Jetson AI Labs</li>
+    <li>2022 5th place at Interactive Service Robot Competition in the Cyberspace (IROS 2022)</li>
+    <li>2021 AirLab Robotics Challenge — "The Most Consistent Solution"</li>
+    <li>2015 Offshore Technology Conference — First place Startup-University R&amp;D Showcase Video Contest</li>
+    <li>2022–2025 Member of the Mexican System of Researchers (SNI — CONAHCYT)</li>
+  </ul>
+</section>
+
+<section class="section" id="activities">
+  <h2 class="section-title">Research &amp; Professional Activities</h2>
+  <ul class="cv-list">
+    <li>Consultant for the World Bank and IDB (Inter-American Development Bank)</li>
+    <li>Active member of IEEE, ACM, THA (Triple Helix Association), Nature, Science, The Futurist</li>
+    <li>Scientific Review Committee for IEEE Transactions on Systems, Man and Cybernetics; IEEE Transactions on Robotics; IEEE ICRA; IEEE IROS</li>
+    <li>Patent Evaluation for IMPI, OMPI, European Patents Office</li>
+  </ul>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--accent2);margin:24px 0 12px;">National &amp; International Activities</h3>
+  <ul class="cv-list">
+    <li>Global Innovation Index advisor for México &amp; LATAM (2012–2018)</li>
+    <li>Active Member of the Steering Committee of N2N Gulf of Mexico — Data Science Team Lead</li>
+    <li>Texas A&amp;M – Yucatan initiative steering committee</li>
+    <li>Startup México board of advisors</li>
+  </ul>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--accent2);margin:24px 0 12px;">Academic Initiatives</h3>
+  <ul class="cv-list">
+    <li>Former President of the Board of Directors — Heuristic Innovation Center</li>
+    <li>VP for Digital Agenda, CANIETI Chamber</li>
+    <li>VP for Innovation and Tech Transfer, CANIETI Chamber</li>
+    <li>Academic Advisor for the creation of The Robotics Institute of Yucatán</li>
+    <li>Board of Directors at The Polytechnical University of Yucatán</li>
+  </ul>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--accent2);margin:24px 0 12px;">Science &amp; Technology Outreach</h3>
+  <ul class="cv-list">
+    <li>&gt; 30 Automation Development Projects since 1992</li>
+    <li>&gt; 500 Technical Conferences</li>
+    <li>&gt; 200 Newspaper Articles — <a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/" target="_blank" style="color:var(--accent)">El Financiero</a></li>
+    <li>&gt; 11,000 Robot Units sold by <a href="http://www.andromie.com/" target="_blank" style="color:var(--accent)">Andromie Robotics</a></li>
+    <li>&gt; 3,000 Users of Vitadat created by Cytron Medical</li>
+    <li>&gt; 300 MVPs Supported by <a href="http://www.mvpinabox.com.mx/" target="_blank" style="color:var(--accent)">MVP in a Box</a></li>
+    <li>&gt; 14,000 on-line Coursera learners in <a href="https://www.coursera.org/learn/introduccion-a-la-robotica-e-industria-4" target="_blank" style="color:var(--accent)">Robotics course</a></li>
+  </ul>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--accent2);margin:24px 0 12px;">Skills</h3>
+  <div class="skills-grid">
+    <span class="skill-label">Innovation</span><span class="skill-val">TRL, CRISP-DM, Design Sprint, Customer Development, Miró</span>
+    <span class="skill-label">Programming</span><span class="skill-val">Matlab, Python, C++, Rust, LaTeX, Dataiku</span>
+    <span class="skill-label">OS / Tools</span><span class="skill-val">ROS 1–2, Linux, MacOS, Windows; Docker; matplotlib, gnuplot, numpy, scipy, pandas</span>
+    <span class="skill-label">Languages</span><span class="skill-val">English, French, Italian, German, Japanese, Mandarin</span>
+  </div>
+</section>
+
+<section class="section" id="supervision">
+  <h2 class="section-title">Master Thesis / PhD Supervision (2022–2025)</h2>
+  <div class="thesis-item"><div class="thesis-title">"Validating Immersive Technologies for Enhanced Decision-Making Data in Surgical Robotics via Agent-Based Learning"</div><div class="thesis-meta">Nezih Nieto Gutiérrez — Monterrey, 2025</div></div>
+  <div class="thesis-item"><div class="thesis-title">"Brain-Computer Gaming Control through Imagined Speech Commands in Single-Player"</div><div class="thesis-meta">Alma Cuevas — Monterrey, 2025</div></div>
+  <div class="thesis-item"><div class="thesis-title">"Evaluating Pre-trained Neural Networks in Deep Learning for Early Detection and Enhanced Screening of Cervical Pathology"</div><div class="thesis-meta">Orlando Gutiérrez — Monterrey, 2025</div></div>
+  <div class="thesis-item"><div class="thesis-title">"Decoding Imagined Speech from Electroencephalography Signals: The Role of Paradigm Design"</div><div class="thesis-meta">Edgar Aguilera Rodríguez — Monterrey, 2024</div></div>
+  <div class="thesis-item"><div class="thesis-title">"3-D Detection &amp; Tracking for Semi-deformable Objects"</div><div class="thesis-meta">Gustavo De Los Ríos Alatorre — Monterrey, 2024</div></div>
+  <div class="thesis-item"><div class="thesis-title">"American-Option Pricing Using Deep Learning"</div><div class="thesis-meta">Juan Pablo Licona Luque — Monterrey, 2024</div></div>
+  <div class="thesis-item"><div class="thesis-title">"Biomechanical and Machine Learning Integration for the Detection of Knee Injuries"</div><div class="thesis-meta">Diana Sofía Milagros Rosales Gurmendi — Monterrey, 2024</div></div>
+</section>
+
+<section class="section" id="team">
+  <h2 class="section-title">Former Team Members &amp; Research Students</h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">Posiciones actuales de exalumnos y colaboradores (selección)</p>
+  <div class="team-cloud">
+    <span class="team-tag">Iván Fuentes · Google, USA</span><span class="team-tag">Ian de la Garza · Microsoft, USA</span><span class="team-tag">José Cisneros · Microsoft, USA</span><span class="team-tag">Edison Altamirano · ZF, Germany</span><span class="team-tag">François Boux de Casson · Wright Medical, France</span><span class="team-tag">Anton Deguet · JHU, USA</span><span class="team-tag">Richard Thompson · Matlab, UK</span><span class="team-tag">Eric Haynman · ChironHego, Sweden</span><span class="team-tag">Patricia Ortegón · IBM, USA</span><span class="team-tag">Ricardo Pérez Alcocer · IPN, Mexico</span><span class="team-tag">Annlyn McFee · United Nations, NY</span><span class="team-tag">Alonso Patron · Velodyne, USA</span><span class="team-tag">Jorge Rios Martinez · UADY, México</span><span class="team-tag">Pablo Marrufo · Apple, USA</span><span class="team-tag">Monir Mikati · Eurowind Energy, Sweden</span><span class="team-tag">Ulsa Urea Mariño · Texas A&amp;M, USA</span><span class="team-tag">Andrea Mestre · Amazon, France</span><span class="team-tag">Ana Martinez · Slack, USA</span><span class="team-tag">Oyuki Chian · U. New Brunswick, Canada</span><span class="team-tag">José Devesa · HSBC, HK</span><span class="team-tag">Gandhi Hernández · CentroGEO, México</span><span class="team-tag">Elvis Duran · MD-Anderson, USA</span><span class="team-tag">Joaquín Esquivel · Electronic Arts, Vancouver</span><span class="team-tag">Olmo Moreno · ITT, Italy</span><span class="team-tag">Andres Vargas · Visto AI, Canada</span><span class="team-tag">Javier Aldana · Avast, Czech Republic</span><span class="team-tag">Adrián Ramos · B. Brown New Ventures, Germany</span><span class="team-tag">Daniel Rios Pavia · Shopify, Berlin</span><span class="team-tag">Fabian Schwarzer · ITK Engineering, UK</span><span class="team-tag">Rafael Rivera López · UV, México</span><span class="team-tag">Diego Martinez · JPL/NASA, USA</span>
+  </div>
+</section>
+
+<section class="section" id="teaching">
+  <h2 class="section-title">Teaching Resources</h2>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1ZPmQVwgweT_Ya7sfZVRd53Dh0ouv875Td0NSJBENllY/" target="_blank">Comprehensive Professional Profile in Innovation and Technological Development</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1v7rpiqVqLaXkWu9obdOaIxgMXaU6yBrVa_H8PuH0DiI/" target="_blank">Robot Kinematics, Dynamics, and Control with ROS</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/15NMpBfy60E3k2z7DOyM9qfZTP7genEY9OOn25NLh6tI/" target="_blank">Computer Vision, Machine Learning</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1TFy5_xpnnfqlfDmhXYLyz7EMCeWzVURLcXEiCDbyXgU/" target="_blank">Autonomous Vehicles and Computer Vision</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1v5LOMMV66lciJdKOZ-NbnZQrKjgfExzTSltD2Uy4LQw/" target="_blank">Multi-Agents: Principles</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1z4PCliudozeVfp5Jz_SGlcAcTsPnV9rHd-pQ6_sAk94/" target="_blank">Multi-Agents: Advanced Modelling</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1q9xTSggQEOBgG9SuFEY2Kj6iehzRzbqayak75DdwNNc/" target="_blank">Software Engineering for Robotics</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1zY9ilEKp3wmitq-Nx3MGObTz5szEU9OewVgTgereAfI/" target="_blank">Innovation Principles for Autonomous Driving and Computational Electromobility</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1GHuTtl3lLdlXscFCZYyroUNvg994AdtfAOfyyyI2seg/" target="_blank">Emerging Technologies</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/13ExLQWX45qao3InmTEiPmvcuZk88G2an8jmsdDh_bwk/" target="_blank">AI &amp; GenAI for Business</a></div>
+</section>
+
+<section class="section" id="courses">
+  <h2 class="section-title">Courses Taught at Tec de Monterrey (2021–2026)</h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:20px;">38 asignaturas distintas · 104 imparticiones totales</p>
+  <table class="courses-table">
+    <thead><tr><th>#</th><th>Asignatura</th><th>Períodos impartidos</th></tr></thead>
+    <tbody>
+      <tr><td>6</td><td><strong>Tesis II</strong></td><td class="dates">Ago 2023–Dic 2023; Ene 2024–Jun 2024; Ago 2024–Dic 2024; Ene 2025–Feb 2025; Ene 2025–Jun 2025; Ago 2025–Dic 2025</td></tr>
+      <tr><td>5</td><td><strong>Fundamentación de robótica</strong></td><td class="dates">Ene 2022–Jun 2022; Ene 2023–Jun 2023; Ene 2024–Jun 2024; Ene 2025–Jun 2025; Ene 2026–Jun 2026</td></tr>
+      <tr><td>5</td><td><strong>Implementación de robótica inteligente</strong></td><td class="dates">Ene 2022–Jun 2022; Ene 2023–Jun 2023; Ene 2024–Jun 2024; Ene 2025–Jun 2025; Ene 2026–Jun 2026</td></tr>
+      <tr><td>5</td><td><strong>Integración de robótica y sistemas inteligentes</strong></td><td class="dates">Ene 2023–Jun 2023; Ago 2023–Dic 2023; Ene 2024–Jun 2024; Ene 2025–Jun 2025; Ene 2026–Jun 2026</td></tr>
+      <tr><td>5</td><td><strong>Modelación de sistemas multiagentes con gráficas computacionales</strong></td><td class="dates">Ago 2021–Dic 2021; Ago 2022–Dic 2022; Ago 2023–Dic 2023; Ago 2024–Dic 2024; Ago 2025–Dic 2025</td></tr>
+      <tr><td>5</td><td><strong>Taller para la investigación II</strong></td><td class="dates">Ene 2023–Jun 2023; Ene 2024–Jun 2024; Ago 2024–Dic 2024; Ene 2025–Jun 2025; Ago 2025–Dic 2025</td></tr>
+      <tr><td>5</td><td><strong>Tesis I</strong></td><td class="dates">Ene 2023–Jun 2023; Ago 2023–Dic 2023; Ene 2024–Jun 2024; Ago 2024–Dic 2024; Ene 2025–Jun 2025</td></tr>
+      <tr><td>4</td><td><strong>Estancia de investigación</strong></td><td class="dates">Ago 2022–Dic 2022; Ago 2023–Dic 2023; Ago 2024–Dic 2024; Ago 2025–Dic 2025</td></tr>
+      <tr><td>4</td><td><strong>Taller para la investigación I</strong></td><td class="dates">Ene 2023–Jun 2023; Ene 2024–Jun 2024; Ago 2024–Dic 2024; Ene 2025–Jun 2025</td></tr>
+      <tr><td>4</td><td><strong>Taller para la investigación IV</strong></td><td class="dates">Ene 2023–Jun 2023; Ene 2024–Jun 2024; Ago 2024–Dic 2024; Ago 2025–Dic 2025</td></tr>
+      <tr><td>4</td><td><strong>Taller para la investigación V</strong></td><td class="dates">Ene 2023–Jun 2023; Ene 2024–Jun 2024; Ago 2024–Dic 2024; Ago 2025–Dic 2025</td></tr>
+      <tr><td>4</td><td><strong>Tesis III</strong></td><td class="dates">Ene 2024–Jun 2024; Ago 2024–Dic 2024; Ene 2025–Jun 2025; Ene 2026–Jun 2026</td></tr>
+      <tr><td>3</td><td><strong>Taller para la investigación VI</strong></td><td class="dates">Ene 2023–Jun 2023; Ene 2024–Jun 2024; Ago 2025–Dic 2025</td></tr>
+      <tr><td>2</td><td><strong>Autonomía de vehículos aéreos no tripulados</strong></td><td class="dates">Ago 2024–Dic 2024; Ago 2025–Dic 2025</td></tr>
+      <tr><td>2</td><td><strong>EVI Estancia de investigación VI</strong></td><td class="dates">Ago 2023–Dic 2023; Ago 2024–Dic 2024</td></tr>
+      <tr><td>2</td><td><strong>Inteligencia artificial y aprendizaje automático</strong></td><td class="dates">Sep 2024–Dic 2024; Ene 2025–Abr 2025</td></tr>
+      <tr><td>2</td><td><strong>Proyecto integrador de tecnologías emergentes</strong></td><td class="dates">Verano 2021; Ago 2021–Dic 2021</td></tr>
+      <tr><td>2</td><td><strong>Visión para robots</strong></td><td class="dates">Ago 2021–Dic 2021; Ene 2022–Jun 2022</td></tr>
+      <tr><td>1</td><td><strong>Ciencia de datos para la toma de decisiones II</strong></td><td class="dates">Ago 2021–Dic 2021</td></tr>
+      <tr><td>1</td><td><strong>Computación aplicada</strong></td><td class="dates">Ene 2026–Abr 2026</td></tr>
+      <tr><td>1</td><td><strong>Defensa de la propuesta de investigación</strong></td><td class="dates">Ago 2025–Dic 2025</td></tr>
+      <tr><td>1</td><td><strong>Estancia de investigación II</strong></td><td class="dates">Ago 2025–Dic 2025</td></tr>
+      <tr><td>1</td><td><strong>Evaluación Etapa Intermedia - IRS</strong></td><td class="dates">Ene 2022–Jun 2022</td></tr>
+      <tr><td>1</td><td><strong>Evaluación Etapa Intermedia - ITC</strong></td><td class="dates">Ago 2022–Dic 2022</td></tr>
+      <tr><td>1</td><td><strong>EVI Estancia de investigación II</strong></td><td class="dates">Ene 2025–Jun 2025</td></tr>
+      <tr><td>1</td><td><strong>EVI Práctica profesional II</strong></td><td class="dates">Ene 2025–Jun 2025</td></tr>
+      <tr><td>1</td><td><strong>EVI Práctica profesional VI</strong></td><td class="dates">Ago 2023–Dic 2023</td></tr>
+      <tr><td>1</td><td><strong>IA avanzada para ciencia de datos I</strong></td><td class="dates">Ago 2022–Dic 2022</td></tr>
+      <tr><td>1</td><td><strong>IA avanzada para ciencia de datos II</strong></td><td class="dates">Ago 2022–Dic 2022</td></tr>
+      <tr><td>1</td><td><strong>Propuesta de investigación I</strong></td><td class="dates">Ago 2025–Dic 2025</td></tr>
+      <tr><td>1</td><td><strong>Propuesta de investigación II</strong></td><td class="dates">Ago 2025–Dic 2025</td></tr>
+      <tr><td>1</td><td><strong>Proyectos de vinculación U-LEAD</strong></td><td class="dates">Ene 2023–Jun 2023</td></tr>
+      <tr><td>1</td><td><strong>Semana 18 de Inmersión -6</strong></td><td class="dates">Ago 2022–Dic 2022</td></tr>
+      <tr><td>1</td><td><strong>Semana 18 Enfoque IRS-4</strong></td><td class="dates">Ago 2022–Dic 2022</td></tr>
+      <tr><td>1</td><td><strong>Semana 18 Enfoque ITC-5</strong></td><td class="dates">Ago 2021–Dic 2021</td></tr>
+      <tr><td>1</td><td><strong>Sistemas inteligentes</strong></td><td class="dates">Ago 2021–Dic 2021</td></tr>
+      <tr><td>1</td><td><strong>Taller para la investigación III</strong></td><td class="dates">Ago 2025–Dic 2025</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section" id="publications">
+  <h2 class="section-title">Complete List of Publications</h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:28px;">103 publications listed in reverse chronological order. Author name in bold: <strong>Muñoz Ubando, L.A.</strong></p>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2026</div>
+    <div class="pub-item"><div class="pub-num">1</div><div class="pub-body"><div class="pub-title">Taming the LLM: Reliable Task Planning for Robotics Using Parsing and Grounding</div><div class="pub-authors">Flores-Ramírez, A., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">Advances in Soft Computing. MICAI 2025. LNCS, vol. 16221. Springer, Cham. <a href="https://doi.org/10.1007/978-3-032-09037-9_24" target="_blank">doi:10.1007/978-3-032-09037-9_24</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2025</div>
+    <div class="pub-item"><div class="pub-num">2</div><div class="pub-body"><div class="pub-title">LLMs for Embodied Robotics: A comparative analysis on augmentation methods between an embedded AI computer and consumer-grade hardware for Autonomous Navigation</div><div class="pub-authors">Acevedo, A.S., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">2025 Latin American Robotics Symposium (LARS), 1–6</div></div></div>
+    <div class="pub-item"><div class="pub-num">3</div><div class="pub-body"><div class="pub-title">An EEG-based Imagined Speech Database for Comparing Paradigm Designs</div><div class="pub-authors">Aguilera-Rodríguez, E., Cuevas-Romero, A., Mendoza-Franco, S., et al., <strong>Muñoz-Ubando, L.A.</strong>, Ibarra-Zárate, D., Alonso-Valerdi, L.M.</div><div class="pub-venue"><em>Scientific Data,</em> 12(1), 1644. <a href="https://doi.org/10.1038/s41597-025-05926-5" target="_blank">doi:10.1038/s41597-025-05926-5</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">4</div><div class="pub-body"><div class="pub-title">Tracking a Small Oil Pan with xArm Using RGB-D Data and Deep Pose Estimation</div><div class="pub-authors">Cruz, R.J.H., Barba, J.J.J., De Los Ríos Alatorre, G., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Advances in Soft Computing. MICAI 2025 Posters. CCIS, vol. 2712. Springer. <a href="https://doi.org/10.1007/978-3-032-08704-1_3" target="_blank">doi:10.1007/978-3-032-08704-1_3</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">5</div><div class="pub-body"><div class="pub-title">Brain-Computer Gaming Control through Imagined Speech Commands in Single-player</div><div class="pub-authors">Cuevas-Romero, A.R., et al., <strong>Muñoz, L.A.</strong>, Alonso-Valerdi, L.M.</div><div class="pub-venue">11th International BCI Meeting, Banff, AB, Canada, June 2–5</div></div></div>
+    <div class="pub-item"><div class="pub-num">6</div><div class="pub-body"><div class="pub-title">Deep Mutual Information Meets Segmentation: Enhancing Neural Network Segmentation via Mutual Information Regularization</div><div class="pub-authors">de Jesús Félix Arredondo, F., Nieto Gutiérrez, N., et al., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Advances in Soft Computing. MICAI 2025 Posters. CCIS, vol. 2712. Springer. <a href="https://doi.org/10.1007/978-3-032-08704-1_22" target="_blank">doi:10.1007/978-3-032-08704-1_22</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">7</div><div class="pub-body"><div class="pub-title">TeleSign: A Flexible and Intuitive Gesture-Based Teleoperation Framework</div><div class="pub-authors">Hernandez Rios, J.C., Coronado, E., Molina Daniel, J.I., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Best Student Paper nominee, IEEE ARSO, Osaka, Japan, July 17–19</div></div></div>
+    <div class="pub-item"><div class="pub-num">8</div><div class="pub-body"><div class="pub-title">American-Option Pricing Using Deep Learning: A Binomial Tree Methodology and MLP Comparison</div><div class="pub-authors">Licona-Luque, J.P., <strong>Muñoz-Ubando, L.A.</strong>, de Golferichs-García, J.</div><div class="pub-venue">International Congress on Information and Communication Technology (ICICT 2025), London, 129–139</div></div></div>
+    <div class="pub-item"><div class="pub-num">9</div><div class="pub-body"><div class="pub-title">Biomechanical evaluation as basis for the development of predictive models in microsurgery robots</div><div class="pub-authors">Morales López, Z.B., et al., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">31st Congress of the European Society of Biomechanics (ESB 2025), Zürich, Switzerland</div></div></div>
+    <div class="pub-item"><div class="pub-num">10</div><div class="pub-body"><div class="pub-title">Intelligent Robotics, Autonomous Navigation, Grasping, and Object Manipulation for Undergraduates: From Theory to Practice</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">2025 IEEE Global Engineering Education Conference (EDUCON 2025), London, UK, April 22–25</div></div></div>
+    <div class="pub-item"><div class="pub-num">11</div><div class="pub-body"><div class="pub-title">Unveiling Deep Tech: Insights From an Engineering Sciences Perspective to Attend For-Profit and Non-For-Profit Innovation Requirements</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">2025 IEEE Global Engineering Education Conference (EDUCON 2025), London, UK, April 22–25</div></div></div>
+    <div class="pub-item"><div class="pub-num">12</div><div class="pub-body"><div class="pub-title">Computer simulation and hands-on labs: A case study of teaching robotics and AI</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong>, Amigud, A., Sirazitdinova, E.</div><div class="pub-venue"><em>International Journal of Mechanical Engineering Education,</em> 53(2), 451–469. <a href="https://doi.org/10.1177/03064190241240416" target="_blank">doi:10.1177/03064190241240416</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">13</div><div class="pub-body"><div class="pub-title">Leveraging Conditional Diffusion-Policy for trajectory convergence in 6-DoF Robot Manipulation with Mutual Information Estimation Lower Bound</div><div class="pub-authors">Nieto, N., De Los Ríos, G., Murra, A., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">2025 Latin American Robotics Symposium (LARS), 1–6</div></div></div>
+    <div class="pub-item"><div class="pub-num">14</div><div class="pub-body"><div class="pub-title">Are GAFs All you Need for BCIs?</div><div class="pub-authors">Nieto, N., Podesta, M.O., Felix, F., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">2025 IEEE 22nd International Symposium on Biomedical Imaging (ISBI), Houston, TX, 1–4</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2024</div>
+    <div class="pub-item"><div class="pub-num">15</div><div class="pub-body"><div class="pub-title">Using Classical Vision and 3-D Registration for a Successful Pose Estimation of a Bell Pepper</div><div class="pub-authors">De Los Rios Alatorre, G., Nieto Gutierrez, N., Murra López, A.J., <strong>Muñoz Ubando, L.A.</strong>, et al.</div><div class="pub-venue">40th Anniversary of IEEE ICRA (ICRA@40), Rotterdam, Netherlands, Sept. 23–26</div></div></div>
+    <div class="pub-item"><div class="pub-num">16</div><div class="pub-body"><div class="pub-title">Multimodal Emotion Recognition on RAVDESS Dataset using Transfer Learning</div><div class="pub-authors">Flores Couoh, S.N., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 153(5), 11–25. <a href="https://doi.org/10.13053/rcs-153-5-2" target="_blank">doi:10.13053/rcs-153-5-2</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">17</div><div class="pub-body"><div class="pub-title">Soft GelSight Sensor: Tactile Simulation using Finite Element Methods</div><div class="pub-authors">Ucan-Puc, M.A., Nieto Gutierrez, N., De Los Ríos Alatorre, G., Murra López, A.J., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2024 Poster. CCIS, vol. 2213. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_12" target="_blank">doi:10.1007/978-3-031-75543-9_12</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">18</div><div class="pub-body"><div class="pub-title">Benchmarking Open-Source LLMs as Coding Assistants Using HumanEval</div><div class="pub-authors">Rivera-Cerros, E., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">MICAI 2024 Poster. CCIS, vol. 2213. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_13" target="_blank">doi:10.1007/978-3-031-75543-9_13</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">19</div><div class="pub-body"><div class="pub-title">Visual Tracking of an Oil Pan Using Semi-Direct Visual Odometry</div><div class="pub-authors">Murra López, A.J., De Los Ríos Alatorre, G., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2024 Workshop. CCIS, vol. 2213. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_8" target="_blank">doi:10.1007/978-3-031-75543-9_8</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">20</div><div class="pub-body"><div class="pub-title">Industrial Terrain Classification for a Spot-Like Quadruped Robot Using Deep Learning Techniques</div><div class="pub-authors">Ávila-Ortega, A., Nieto Gutiérrez, N., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2024. LNCS, vol. 15210. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_21" target="_blank">doi:10.1007/978-3-031-75543-9_21</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">21</div><div class="pub-body"><div class="pub-title">Deep Learning for Knee Injury Detection through Biomechanical Signals</div><div class="pub-authors">Rosales Gurmendi, D.S.M., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">MICAI 2024. LNCS, vol. 15210. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_22" target="_blank">doi:10.1007/978-3-031-75543-9_22</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">22</div><div class="pub-body"><div class="pub-title">Neuromotor Control via Imagined Speech</div><div class="pub-authors">Aguilera-Rodríguez, E., et al. (incl. <strong>Muñoz-Ubando, L.A.</strong>)</div><div class="pub-venue">10th International BCI Meeting, Brussels, Belgium, June 18–21</div></div></div>
+    <div class="pub-item"><div class="pub-num">23</div><div class="pub-body"><div class="pub-title">Parametric analysis of Operational Amplifier's gain using SPICE</div><div class="pub-authors">Canche-Cab, J.F., Vargas-Treviño, M., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">Ingeniería e Investigación, 44(2). <a href="https://doi.org/10.15446/ing.investig.100568" target="_blank">doi:10.15446/ing.investig.100568</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">24</div><div class="pub-body"><div class="pub-title">A 3D Pose Estimation Benchmark for the CORSMAL Challenge</div><div class="pub-authors">Donaher, S., et al. (incl. <strong>Muñoz, L.A.</strong>)</div><div class="pub-venue">IEEE Transactions on Human-Machine Systems. <a href="https://doi.org/10.1109/THMS.2024.3370629" target="_blank">doi:10.1109/THMS.2024.3370629</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2023</div>
+    <div class="pub-item"><div class="pub-num">25</div><div class="pub-body"><div class="pub-title">Neuromotor Decoding of Imagined Speech for Spelling and Control</div><div class="pub-authors">Aguilera-Rodríguez, E., et al., <strong>Muñoz-Ubando, L.A.</strong>, Alonso-Valerdi, L.M.</div><div class="pub-venue">Brain-Computer Interfaces, 10(2–4), 52–73. <a href="https://doi.org/10.1080/2326263X.2023.2257905" target="_blank">doi:10.1080/2326263X.2023.2257905</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">26</div><div class="pub-body"><div class="pub-title">Detection and Extraction of Oil Pan on a Robotic Arm using Deep Learning</div><div class="pub-authors">Rios Alatorre, G., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">MICAI 2023 Workshop. CCIS, vol. 1838. Springer. <a href="https://doi.org/10.1007/978-3-031-51940-6_22" target="_blank">doi:10.1007/978-3-031-51940-6_22</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">27</div><div class="pub-body"><div class="pub-title">Evaluating Imagined Speech as a BCI Paradigm: A Comparison of Language Decoding Approaches</div><div class="pub-authors">Aguilera-Rodríguez, E., et al. (incl. <strong>Muñoz-Ubando, L.A.</strong>)</div><div class="pub-venue">9th Graz Brain-Computer Interface Conference, Graz, Austria, Sept. 18–22</div></div></div>
+    <div class="pub-item"><div class="pub-num">28</div><div class="pub-body"><div class="pub-title">Evaluating Decoding of Imagined Speech EEG Paradigm</div><div class="pub-authors">Aguilera-Rodríguez, E., Mendoza-Franco, S.A., <strong>Muñoz-Ubando, L.A.</strong>, Alonso-Valerdi, L.M.</div><div class="pub-venue">IEEE EMBC 2023, Sydney, Australia. <a href="https://doi.org/10.1109/EMBC40787.2023.10340827" target="_blank">doi:10.1109/EMBC40787.2023.10340827</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">29</div><div class="pub-body"><div class="pub-title">Leveraging Teleoperation Gestures as Natural Communication Interface</div><div class="pub-authors">Hernandez Rios, J.C., Coronado, E., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">IEEE ARSO 2023. <a href="https://doi.org/10.1109/ARSO56563.2023.10187573" target="_blank">doi:10.1109/ARSO56563.2023.10187573</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">30</div><div class="pub-body"><div class="pub-title">Option Pricing using machine learning tools for the assessment of financial risk and decision making</div><div class="pub-authors">Licona-Luque, J.P., <strong>Muñoz-Ubando, L.A.</strong>, de Golferichs-García, J.</div><div class="pub-venue">MICAI 2023. LNCS, vol. 14502. Springer. <a href="https://doi.org/10.1007/978-3-031-47640-2_7" target="_blank">doi:10.1007/978-3-031-47640-2_7</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">31</div><div class="pub-body"><div class="pub-title">Towards surgical robotics task planning: A survey of AI methods and their applications</div><div class="pub-authors">Nieto Gutiérrez, N., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">MICAI 2023. LNCS, vol. 14502. Springer. <a href="https://doi.org/10.1007/978-3-031-47640-2_2" target="_blank">doi:10.1007/978-3-031-47640-2_2</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">32</div><div class="pub-body"><div class="pub-title">Grasp and Motion planning for manipulation tasks in unstructured environments</div><div class="pub-authors">Robles-Ruiz, A., Nieto, N., De Los Rios, G., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">MICAI 2023 Workshop. CCIS, vol. 1838. Springer. <a href="https://doi.org/10.1007/978-3-031-51940-6_21" target="_blank">doi:10.1007/978-3-031-51940-6_21</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2022</div>
+    <div class="pub-item"><div class="pub-num">33</div><div class="pub-body"><div class="pub-title">Interactive Service Robot in Cyberspace: System and Design Description</div><div class="pub-authors">Coronado, E., et al. (incl. <strong>Muñoz, L.A.</strong>)</div><div class="pub-venue">IROS 2022, Kyoto, Japan. IEEE.</div></div></div>
+    <div class="pub-item"><div class="pub-num">34</div><div class="pub-body"><div class="pub-title">Skin Lesion Classification with Tensorflow using CNN and Transfer Learning</div><div class="pub-authors">Del Risco Ríos, I., Blanco, J.H., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 151(6). <a href="https://doi.org/10.13053/rcs-151-6-9" target="_blank">doi:10.13053/rcs-151-6-9</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">35</div><div class="pub-body"><div class="pub-title">Classification of EEG Imagined Speech Tasks using LDA, SVM and ANN</div><div class="pub-authors">Diaz-Varela, I.O., Aguilera-Rodríguez, E., <strong>Muñoz Ubando, L.A.</strong>, Alonso-Valerdi, L.M.</div><div class="pub-venue">Research in Computing Science, 151(6). <a href="https://doi.org/10.13053/rcs-151-6-12" target="_blank">doi:10.13053/rcs-151-6-12</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">36</div><div class="pub-body"><div class="pub-title">Interactive service robots in cyberspace: Perspectives on system design for the IROS competition (paper proposal)</div><div class="pub-authors">Coronado, E., <strong>Muñoz, L.A.</strong>, et al.</div><div class="pub-venue">Companion of the 2022 ACM/IEEE HRI Conference, Sapporo, Japan. <a href="https://doi.org/10.1109/HRI53351.2022.9889453" target="_blank">doi:10.1109/HRI53351.2022.9889453</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">37</div><div class="pub-body"><div class="pub-title">Perceiving, analyzing and understanding the meaning of gestures from the real world for a service robot</div><div class="pub-authors">Hernandez Rios, J.C., <strong>Muñoz, L.A.</strong>, Coronado, E.</div><div class="pub-venue">Companion of the 2022 ACM/IEEE HRI Conference, Sapporo, Japan. <a href="https://doi.org/10.1109/HRI53351.2022.9889406" target="_blank">doi:10.1109/HRI53351.2022.9889406</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">38</div><div class="pub-body"><div class="pub-title">Vision-Based Detection and Tracking of a Moving Target on a Robotic Platform</div><div class="pub-authors">Leal-Garcia, P., et al., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">MICAI 2022. LNCS, vol. 13613. Springer. <a href="https://doi.org/10.1007/978-3-031-19493-1_13" target="_blank">doi:10.1007/978-3-031-19493-1_13</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2021</div>
+    <div class="pub-item"><div class="pub-num">39</div><div class="pub-body"><div class="pub-title">Combining Deep Learning and Classical Computer Vision for Waste-Container Detection and Tracking</div><div class="pub-authors">Morales Hernández, L.E., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 150(8), 229–242. <a href="https://doi.org/10.13053/rcs-150-8-18" target="_blank">doi:10.13053/rcs-150-8-18</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">40</div><div class="pub-body"><div class="pub-title">Evaluating Multimodal Imagined Speech Classification: EEG Paradigms Comparison</div><div class="pub-authors">Aguilera-Rodríguez, E., <strong>Muñoz-Ubando, L.A.</strong>, Alonso-Valerdi, L.M., Ibarra-Zárate, D.</div><div class="pub-venue">8th Graz BCI Conference, Graz, Austria, Sept. 6–10</div></div></div>
+    <div class="pub-item"><div class="pub-num">41</div><div class="pub-body"><div class="pub-title">AirLab Robotics Challenge — Consistent Solution</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong> et al.</div><div class="pub-venue">AirLab Robotics Challenge, 2021</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2020</div>
+    <div class="pub-item"><div class="pub-num">42</div><div class="pub-body"><div class="pub-title">Towards a Model-free Control for Unmanned Aerial Vehicles (UAVs)</div><div class="pub-authors">Sosa-Ceron, A., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2020. LNCS, vol. 12469. Springer. <a href="https://doi.org/10.1007/978-3-030-60887-3_19" target="_blank">doi:10.1007/978-3-030-60887-3_19</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">43</div><div class="pub-body"><div class="pub-title">Multivariate Temporal Convolutional Network: A Deep Neural Architecture for Multivariate Time Series Forecasting</div><div class="pub-authors">Wan, R., Mei, S., Wang, J., Liu, M., Yang, F.</div><div class="pub-venue"><em>Electronics,</em> 8(8), 876. <a href="https://doi.org/10.3390/electronics8080876" target="_blank">doi:10.3390/electronics8080876</a> (cited)</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2019</div>
+    <div class="pub-item"><div class="pub-num">44</div><div class="pub-body"><div class="pub-title">Embedded Control System: Software Architecture and Artificial Vision for Autonomous Navigation</div><div class="pub-authors">Canche-Cab, J.F., Vargas-Treviño, M., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 148(2), 21–35. <a href="https://doi.org/10.13053/rcs-148-2-2" target="_blank">doi:10.13053/rcs-148-2-2</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">45</div><div class="pub-body"><div class="pub-title">Breast Cancer Detection and Classification via Shallow and Deep Learning</div><div class="pub-authors">Soberanis Mukul, M.I., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 148(11), 29–41. <a href="https://doi.org/10.13053/rcs-148-11-3" target="_blank">doi:10.13053/rcs-148-11-3</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">46</div><div class="pub-body"><div class="pub-title">Emotion Recognition from Physiological Signals Using Deep Learning</div><div class="pub-authors">Flores-Díaz, D., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 148(11), 53–66. <a href="https://doi.org/10.13053/rcs-148-11-5" target="_blank">doi:10.13053/rcs-148-11-5</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">47</div><div class="pub-body"><div class="pub-title">RGBD-based Non-linear Tracking of Deformable Objects for Robot Grasping</div><div class="pub-authors">Gonzalez-Morales, E.A., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2019. LNCS, vol. 11835. Springer. <a href="https://doi.org/10.1007/978-3-030-33749-0_7" target="_blank">doi:10.1007/978-3-030-33749-0_7</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2018</div>
+    <div class="pub-item"><div class="pub-num">48</div><div class="pub-body"><div class="pub-title">Artificial Vision System for a Mobile Robot using Deep Learning: Object Detection and Distance Estimation</div><div class="pub-authors">May Dzul, R.A., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 147(12), 11–24. <a href="https://doi.org/10.13053/rcs-147-12-2" target="_blank">doi:10.13053/rcs-147-12-2</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">49</div><div class="pub-body"><div class="pub-title">A Novel Approach for Solving the Black Scholes Equation</div><div class="pub-authors">Cocom, L.D.B., Gonzalez, A.G.E., Vales, E.J.A.</div><div class="pub-venue"><em>International Journal of Applied Mathematical Research,</em> 2018</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2017</div>
+    <div class="pub-item"><div class="pub-num">50</div><div class="pub-body"><div class="pub-title">Sharing healthcare information on private collaborative networks</div><div class="pub-authors">Cabrera, R.G.E., Canto, H.L.V., <strong>Ubando, L.A.M.</strong>, Ku, J.C.B., Caamal, J.A.M.</div><div class="pub-venue">US Patent App. 15/291,868 (2017)</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2015</div>
+    <div class="pub-item"><div class="pub-num">51</div><div class="pub-body"><div class="pub-title">Control Libre de Modelo basado en Modos Deslizantes Integrales para Robots Submarinos Subactuados</div><div class="pub-authors">Raygosa-Barahona, R., Olguín-Díaz, E., Parra-Vega, V., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue"><em>Revista Iberoamericana de Automática e Informática Industrial (RIAI),</em> 12(3), 313–324. <a href="https://doi.org/10.1016/j.riai.2015.04.004" target="_blank">doi:10.1016/j.riai.2015.04.004</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">52</div><div class="pub-body"><div class="pub-title">A cooperative genetic approach for calculating trajectories of robotic hand fingers</div><div class="pub-authors">Rivera-López, R., Ramos-Quintana, F., <strong>Muñoz, L.A.</strong></div><div class="pub-venue"><em>Programación Matemática y Software,</em> 6(2), 26–35. ISSN: 2007-3283</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2014</div>
+    <div class="pub-item"><div class="pub-num">53</div><div class="pub-body"><div class="pub-title">Sharing healthcare information on private collaborative networks</div><div class="pub-authors">Cabrera, R.G.E., et al., <strong>Ubando, L.A.M.</strong></div><div class="pub-venue">US Patent App. 13/800,619 (2014)</div></div></div>
+    <div class="pub-item"><div class="pub-num">54</div><div class="pub-body"><div class="pub-title">Collecting and transferring physiological data</div><div class="pub-authors">Cabrera, R.G.E., Canto, H.L.V., <strong>Ubando, L.A.M.</strong>, et al.</div><div class="pub-venue">US Patent App. 13/800,659 (2014)</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2013</div>
+    <div class="pub-item"><div class="pub-num">55</div><div class="pub-body"><div class="pub-title">Diagnosis and Prognosis Analysis of Ecological Management under Varying Climate Change Scenarios</div><div class="pub-authors">Varela, P., Medina-Cetina, Z., Fox, B., Angerer, J., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">SIAM Conference on Computational Science and Engineering, Boston, MA</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2011</div>
+    <div class="pub-item"><div class="pub-num">56</div><div class="pub-body"><div class="pub-title">A model-free backstepping with integral sliding mode control for underactuated ROVs</div><div class="pub-authors">Raygosa-Barahona, R., Parra-Vega, V., Olguin-Diaz, E., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">8th Int. Conf. on Electrical Engineering, Computing Science and Automatic Control, Merida, Mexico. <a href="https://doi.org/10.1109/ICEEE.2011.6106577" target="_blank">doi:10.1109/ICEEE.2011.6106577</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">57</div><div class="pub-body"><div class="pub-title">Control Libre de Modelo Para una clase de Sistemas Mecánicos Subactuados</div><div class="pub-authors">Raygosa, R., Parra-Vega, V., Olguín-Díaz, E., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Congreso Nacional AMC, Saltillo, Coahuila, 2011</div></div></div>
+    <div class="pub-item"><div class="pub-num">58</div><div class="pub-body"><div class="pub-title">Análisis sobre riesgos y accidentes en pesquerías artesanales en el sureste de México</div><div class="pub-authors">Salas, S., Euan-Ávila, J.I., Coronado, E., Palomo-Cortés, L.E., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Seminario Internacional sobre Estudios de Pesca, Villahermosa, Tabasco, 2011</div></div></div>
+    <div class="pub-item"><div class="pub-num">59</div><div class="pub-body"><div class="pub-title">Solución a la ecuación de Black-Scholes a través del método de descomposición de Adomian</div><div class="pub-authors">Cocom, L.B., Vales, E.J.A., Estrella, Á.G.</div><div class="pub-venue"><em>Ecorfan Journal,</em> 2(5), 48–69, 2011</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2010</div>
+    <div class="pub-item"><div class="pub-num">60</div><div class="pub-body"><div class="pub-title">Haptic immersion: a method for high dimension visualization and local-minima avoidance on water studies</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Jerónimo, G., Arcega-Cabrera, F., Garza, R., Noreña</div><div class="pub-venue">XVIII Int. Conf. of Computational Methods in Water Resources, Barcelona, Spain, 2010</div></div></div>
+    <div class="pub-item"><div class="pub-num">61</div><div class="pub-body"><div class="pub-title">Cubic Satellites, Vanguard Technology Integration, an Educational Opportunity of Modernization in México</div><div class="pub-authors">Moreno, O., <strong>Muñoz, L.A.</strong>, Moreno, P., Vargas, E.</div><div class="pub-venue">WSKS 2010, Part I, CCIS 111, pp. 289–296. ISBN 978-3-642-16317-0</div></div></div>
+    <div class="pub-item"><div class="pub-num">62</div><div class="pub-body"><div class="pub-title">El Estándar CubeSat: Generación de Recursos Humanos para Aplicaciones Aeroespaciales</div><div class="pub-authors">Moreno, O., <strong>Muñoz, L.A.</strong>, Atoche, J.R.</div><div class="pub-venue">X Congreso Nacional de Ingeniería Eléctrica y Electrónica del Mayab, Mérida, 2010</div></div></div>
+    <div class="pub-item"><div class="pub-num">63</div><div class="pub-body"><div class="pub-title">Análisis Cinemático de la Mordedura del Mero</div><div class="pub-authors">Valenzuela, K., Renán, X., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Avances en Informática y Sistemas Computacionales, Tomo V. ISBN 978-607-7557-71-5</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2009</div>
+    <div class="pub-item"><div class="pub-num">64</div><div class="pub-body"><div class="pub-title">Procesamiento Digital de Secuencias de Imágenes usando Puntos de Interés Dinámicos</div><div class="pub-authors">Cárdenas, J.M., <strong>Muñoz, L.A.</strong>, Moreno, H.</div><div class="pub-venue">XIV STSIVA, Pereira, Colombia, 2009</div></div></div>
+    <div class="pub-item"><div class="pub-num">65</div><div class="pub-body"><div class="pub-title">On the design of a 2DOF nanorobot</div><div class="pub-authors">Dominguez, R., Avalos, J., <strong>Muñoz, L.A.</strong>, Anaya, A.</div><div class="pub-venue">XXIV SOMI Instrumentation Conference, Mérida, Yucatán, 2009</div></div></div>
+    <div class="pub-item"><div class="pub-num">66</div><div class="pub-body"><div class="pub-title">Educatronics, New Technologies and Knowledge Society: A Critical Approach</div><div class="pub-authors">Moreno, O., Moreno, P., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">WSKS 2009, Chania, Crete, Greece. LNAI, vol. 5736. ISBN 978-3-642-04753-4</div></div></div>
+    <div class="pub-item"><div class="pub-num">67</div><div class="pub-body"><div class="pub-title">A novel communications platform to enable the collaboration of Autonomous Underwater Vehicles</div><div class="pub-authors">Urzaiz, G., Villa, D., et al., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">ICWN'09, Int. Conf. on Wireless Networks, Las Vegas, Nevada, 2009</div></div></div>
+    <div class="pub-item"><div class="pub-num">68</div><div class="pub-body"><div class="pub-title">Cognitive Vision (book contribution)</div><div class="pub-authors">Vincze, M. (incl. <strong>Muñoz, L.A.</strong>)</div><div class="pub-venue">Book chapter, 2009</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2008</div>
+    <div class="pub-item"><div class="pub-num">69</div><div class="pub-body"><div class="pub-title">An Advanced Model and its Control System for Fast and Precise Maneuvering of an UAV+Robotic Arm</div><div class="pub-authors">Alvarez, R., Parra, V., Ramos Aparicio, A., <strong>Muñoz, L.A.</strong>, Olguin, E.</div><div class="pub-venue">2nd Latin American UV/S Conference, Panama City, Aug. 5–7, 2008</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2007</div>
+    <div class="pub-item"><div class="pub-num">70</div><div class="pub-body"><div class="pub-title">Procesado de imágenes para la visión por ordenador, aplicado al registro en tiempo real de objetos a partir de modelos 3D y de imágenes 2D</div><div class="pub-authors">Atoche Enseñat, J.R. (Director: <strong>Muñoz, L.A.</strong>)</div><div class="pub-venue">PhD thesis, Universitat Politècnica de València, 2007</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2006</div>
+    <div class="pub-item"><div class="pub-num">71</div><div class="pub-body"><div class="pub-title">Motion tracking and Segmentation using FPGAs</div><div class="pub-authors">Atoche, R., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">XII Iberchip Workshop (IWS 2006), San José, Costa Rica</div></div></div>
+    <div class="pub-item"><div class="pub-num">72</div><div class="pub-body"><div class="pub-title">A Cognitive Model of Gaze Following and Object Permanence</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Vincze, M.</div><div class="pub-venue">EpirRob 2006, Sixth Int. Conf. on Epigenetic Robotics, Paris</div></div></div>
+    <div class="pub-item"><div class="pub-num">73</div><div class="pub-body"><div class="pub-title">Enhanced Real-Time Execution of Modular Control Software based on IEC 61499</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Technical Report, TU Wien, 2006</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2005</div>
+    <div class="pub-item"><div class="pub-num">74</div><div class="pub-body"><div class="pub-title">Automatic pose computation via registration: ICP using FPGAs</div><div class="pub-authors">Atoche Enseñat, J.R., <strong>Muñoz, L.A.</strong>, Espinosa, A., Sebastia, C.</div><div class="pub-venue">IASTED Int. Conf. on Robotics and Applications (RA 2005), Cambridge, USA</div></div></div>
+    <div class="pub-item"><div class="pub-num">75</div><div class="pub-body"><div class="pub-title">Towards the Automatic pose computation via registration: New results on Computing edges using FPGAs</div><div class="pub-authors">Atoche Enseñat, J.R., <strong>Muñoz, L.A.</strong>, Espinosa, A., Sebastia, C.</div><div class="pub-venue">8th Int. Symp. on Laser Metrology, Mérida, Yucatán — Third Prize, Best Student Poster</div></div></div>
+    <div class="pub-item"><div class="pub-num">76</div><div class="pub-body"><div class="pub-title">FPGAs based Visual Servoing of a 2-d.o.f. planar camera-in-hand Robot with Cartesian Control even at Singular Configurations</div><div class="pub-authors">Brito-Loeza, C., Atoche-Enseñat, J.R., Pérez, R., <strong>Muñoz, L.A.</strong>, Navarro-Soza, M.</div><div class="pub-venue">9th WMSCI, Orlando, Florida, 2005</div></div></div>
+    <div class="pub-item"><div class="pub-num">77</div><div class="pub-body"><div class="pub-title">Quantum Search for Dexterous Manipulation Planning</div><div class="pub-authors">Venegas-Andraca, S.E., <strong>Muñoz, L.A.</strong>, Espinosa, A.</div><div class="pub-venue">VII Congreso Mexicano de Robótica, 1–4, 2005</div></div></div>
+    <div class="pub-item"><div class="pub-num">78</div><div class="pub-body"><div class="pub-title">Localización y seguimiento de la mano humana usando visión por computadora</div><div class="pub-authors">Berzunza, G., Espinosa, A., <strong>Muñoz, L.A.</strong>, Rojas, M.</div><div class="pub-venue">Séptimo Congreso Nacional de Robótica, Ciudad de México, 2005</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2004</div>
+    <div class="pub-item"><div class="pub-num">79</div><div class="pub-body"><div class="pub-title">On the control of Cooperative Robots Without velocity measurements</div><div class="pub-authors">Gudiño-Lau, J., Arteaga, M.A., <strong>Muñoz, L.A.</strong>, Parra-Vega, V.</div><div class="pub-venue"><em>IEEE Transactions on Control Systems Technology,</em> 12(4), 600–608. DOI: 10.1109/TCST.2004.824965</div></div></div>
+    <div class="pub-item"><div class="pub-num">80</div><div class="pub-body"><div class="pub-title">Las tecnologías de la información y la comunicación y la formación en entornos virtuales</div><div class="pub-authors"><strong>Muñoz, L.A.</strong></div><div class="pub-venue"><em>Revista Complutense de Educación,</em> 15(1), 51–74, 2004</div></div></div>
+    <div class="pub-item"><div class="pub-num">81</div><div class="pub-body"><div class="pub-title">Control Visual de Un Sistema de Extracción para Hornos Giratorios</div><div class="pub-authors">Sandoval, M., Espinosa, A., Dean, E., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Sexto Congreso Nacional de Robótica, Torreón, pp. 111–116, 2004</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2002–2003</div>
+    <div class="pub-item"><div class="pub-num">82</div><div class="pub-body"><div class="pub-title">Control of cooperative robots without velocity measurements</div><div class="pub-authors">Arteaga, M., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">IEEE/RSJ Int. Conf. on Intelligent Robots and Systems, Lausanne, Switzerland, 3, 2837–2842, 2002</div></div></div>
+    <div class="pub-item"><div class="pub-num">83</div><div class="pub-body"><div class="pub-title">Providing synthetic Views for Teleoperation Using Visual Pose Tracking in Multiple Cameras</div><div class="pub-authors">Thompson, R.L., Reid, I.D., <strong>Muñoz, L.A.</strong>, Murray, D.W.</div><div class="pub-venue"><em>IEEE Trans. on Systems, Man and Cybernetics: Part A,</em> 31(1), 43–54. DOI: 10.1109/3468.903865, 2002</div></div></div>
+    <div class="pub-item"><div class="pub-num">84</div><div class="pub-body"><div class="pub-title">Robótica y visión: de computación y matemáticas hacia las ciencias</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Espinosa, A.</div><div class="pub-venue">Avances en Ciencias de la Computación. ISBN 970-36-0098-0, 2003</div></div></div>
+    <div class="pub-item"><div class="pub-num">85</div><div class="pub-body"><div class="pub-title">Cultura Digital para la Zona Arqueológica de Uxmal</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Huchim, J., Rojas, M., Briceño, A., Gómez, J.</div><div class="pub-venue">CONACULTA-INAH &amp; National Park Service, Oaxaca, 2003</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">1999–2001</div>
+    <div class="pub-item"><div class="pub-num">86</div><div class="pub-body"><div class="pub-title">Ciencia en México: casos de éxito</div><div class="pub-authors">Deutsch, G., Morales, C., <strong>Muñoz Ubando, L.A.</strong>, Marín, B.</div><div class="pub-venue">Consejo Nacional de Ciencia y Tecnología, México, 2001</div></div></div>
+    <div class="pub-item"><div class="pub-num">87</div><div class="pub-body"><div class="pub-title">The effects of bias in pose recovery on teleoperator performance in systems with haptic and visual feedback</div><div class="pub-authors">Thompson, R.L., McAree, R., <strong>Muñoz, L.A.</strong>, Murray, D.W.</div><div class="pub-venue">IEEE IROS, San Francisco, USA, Oct. 13–17, 2000</div></div></div>
+    <div class="pub-item"><div class="pub-num">88</div><div class="pub-body"><div class="pub-title">Vers la manipulation autonome avec main articulée (Doctoral Thesis)</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Grenoble INPG, France, 1999</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">1995–1998</div>
+    <div class="pub-item"><div class="pub-num">89</div><div class="pub-body"><div class="pub-title">Robust Dexterous Manipulation: A Methodology using Visual Servoing</div><div class="pub-authors"><strong>Muñoz, L.A.</strong></div><div class="pub-venue">IEEE IROS, Victoria, Canada, Oct. 13–17, 1998</div></div></div>
+    <div class="pub-item"><div class="pub-num">90</div><div class="pub-body"><div class="pub-title">Robust Dexterous Manipulation using Visual Servoing</div><div class="pub-authors"><strong>Muñoz, L.A.</strong></div><div class="pub-venue">SIRS – Int. Symp. on Intelligent Robotics Systems, Edinburgh, UK, July 21–23, 1998</div></div></div>
+    <div class="pub-item"><div class="pub-num">91</div><div class="pub-body"><div class="pub-title">A study on multifingered gripper control</div><div class="pub-authors">Doersam, T., Hammerschmidt, O., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Proc. of Int. Conf. on Robotics and Automation, 2, 1112–1117, 1997</div></div></div>
+    <div class="pub-item"><div class="pub-num">92</div><div class="pub-body"><div class="pub-title">Simple Controllers for Multifingered Grippers</div><div class="pub-authors">Hammerschmidt, O., Doersam, Th., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">IEEE ICRA, Albuquerque, USA, April 20–23, 1997</div></div></div>
+    <div class="pub-item"><div class="pub-num">93</div><div class="pub-body"><div class="pub-title">Simple Object Manipulation with dexterous hands</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Doersam, Th.</div><div class="pub-venue">IFAC Int. Conf. of Industrial Systems, Belfort, France, May 20–22, 1997</div></div></div>
+    <div class="pub-item"><div class="pub-num">94</div><div class="pub-body"><div class="pub-title">Simple controllers for dexterous hands</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Doersam, T.</div><div class="pub-venue">World Scientific Publishing, Advances in Robotics, 71–79, 1996</div></div></div>
+    <div class="pub-item"><div class="pub-num">95</div><div class="pub-body"><div class="pub-title">Dexterous Manipulation: A Geometrical Reasoning Point of View</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Bard, Ch., Nájera, J.</div><div class="pub-venue">IEEE ICRA, Nagoya, Japan, May 20–24, 1995</div></div></div>
+    <div class="pub-item"><div class="pub-num">96</div><div class="pub-body"><div class="pub-title">Robotic hands: modelisation, control and grasping strategies</div><div class="pub-authors">Doersam, T., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">IAR Annual Meeting, Grenoble, France, Nov. 23–24, 1995</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">1992–1994</div>
+    <div class="pub-item"><div class="pub-num">97</div><div class="pub-body"><div class="pub-title">Spécification et contrôle d'exécution de stratégies de mouvements fins d'assemblage avec une main articulée (Master's thesis)</div><div class="pub-authors"><strong>Muñoz, L.A.</strong></div><div class="pub-venue">ENSIMAG, Grenoble, France, 1994</div></div></div>
+    <div class="pub-item"><div class="pub-num">98</div><div class="pub-body"><div class="pub-title">Ah Tok: El desarrollo de un robot experimental de 6 grados de libertad</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Trejo, R., Chacón, R.</div><div class="pub-venue">2do Congreso Interuniversitario de Electrónica, Computación y Eléctrica (IEEE/CIECE), Guanajuato, México, 1992</div></div></div>
+  </div>
+</section>
+
+<!-- EL FINANCIERO -->
+
+
+<section class="section" id="elfinanciero">
+  <h2 class="section-title">El Financiero — Opinion Column (2018–2026)</h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:24px;">
+    194 artículos · <a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/" target="_blank" style="color:var(--accent)">elfinanciero.com.mx/opinion/alberto-munoz</a>
+  </p>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2026 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(24)</span></div>
+    <div class="ef-item"><div class="ef-num">1</div><div class="ef-date">21 abr 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/04/21/mythos-godel-y-el-precio-estructural-de-la-ciberseguridad/" target="_blank" rel="noopener">Mythos, Gödel y el precio estructural de la ciberseguridad</a></div></div>
+    <div class="ef-item"><div class="ef-num">2</div><div class="ef-date">13 abr 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/04/13/del-pleistoceno-a-la-ia-la-larga-historia-de-anticipar/" target="_blank" rel="noopener">Del Pleistoceno a la IA: la larga historia de anticipar</a></div></div>
+    <div class="ef-item"><div class="ef-num">3</div><div class="ef-date">03 abr 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/04/03/finalmente-las-patentes-provisionales-llegan-a-mexico/" target="_blank" rel="noopener">Finalmente, las patentes provisionales llegan a México</a></div></div>
+    <div class="ef-item"><div class="ef-num">4</div><div class="ef-date">01 abr 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/04/01/popol-vuh-leonardo-y-la-obligacion-de-pensar-cuando-la-tecnologia-ve-mas-de-lo-que-la-sociedad-comprende/" target="_blank" rel="noopener">Popol Vuh, Leonardo y la obligación de pensar: cuando la tecnología ve más de lo que la sociedad comprende</a></div></div>
+    <div class="ef-item"><div class="ef-num">5</div><div class="ef-date">25 mar 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/03/25/la-tokenizacion-como-instrumento-de-una-urgente-nueva-politica-industrialpara-mexico-y-latam/" target="_blank" rel="noopener">La tokenización como instrumento de una urgente nueva política industrial.para México y LATAM</a></div></div>
+    <div class="ef-item"><div class="ef-num">6</div><div class="ef-date">17 mar 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/03/17/la-siguiente-frontera-de-la-inteligencia-artificial-no-esta-en-el-texto-sino-en-como-modelamos-la-realidad/" target="_blank" rel="noopener">La siguiente frontera de la inteligencia artificial no está en el texto, sino en cómo modelamos la realidad</a></div></div>
+    <div class="ef-item"><div class="ef-num">7</div><div class="ef-date">09 mar 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/03/09/asuntos-financieros-en-la-inteligencia-artificial-algunas-lecciones-del-debate-entre-openai-y-anthropic/" target="_blank" rel="noopener">Asuntos financieros en la Inteligencia Artificial, algunas lecciones del debate entre OpenAI y Anthropic</a></div></div>
+    <div class="ef-item"><div class="ef-num">8</div><div class="ef-date">02 mar 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/03/02/de-openai-a-anthropic-la-familia-que-termino-en-el-pentagono/" target="_blank" rel="noopener">De OpenAI a Anthropic: la familia que terminó en el Pentágono</a></div></div>
+    <div class="ef-item"><div class="ef-num">9</div><div class="ef-date">23 feb 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/02/23/unicornios-tecnologicos-cuando-la-ciencia-que-se-toma-en-serio-para-la-innovacion-en-ia-generativa-y-robotica/" target="_blank" rel="noopener">Unicornios tecnológicos: Cuando la ciencia que se toma en serio para la innovación en IA Generativa y Robótica</a></div></div>
+    <div class="ef-item"><div class="ef-num">10</div><div class="ef-date">16 feb 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/02/16/quien-se-queda-con-el-excedente-en-la-era-de-la-ia-una-lectura-ricardiana-del-shock-tecnologico/" target="_blank" rel="noopener">¿Quién se queda con el excedente en la era de la IA? Una lectura Ricardiana del shock tecnológico</a></div></div>
+    <div class="ef-item"><div class="ef-num">11</div><div class="ef-date">06 feb 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/02/06/cuando-todo-es-computo-el-humano-al-centro-y-la-maquina-tambien/" target="_blank" rel="noopener">Cuando todo es cómputo: el humano al centro… y la máquina también</a></div></div>
+    <div class="ef-item"><div class="ef-num">12</div><div class="ef-date">03 feb 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/02/03/pinocho-con-wallet-agentes-molt-y-la-ilusion-de-la-inteligencia-autonoma/" target="_blank" rel="noopener">Pinocho con wallet, agentes, Molt y la ilusión de la inteligencia autónoma</a></div></div>
+    <div class="ef-item"><div class="ef-num">13</div><div class="ef-date">30 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/30/cuando-la-ia-desafia-la-formacion-de-skills-una-interpretacion-del-capabilities-outlook-de-la-wipo/" target="_blank" rel="noopener">Cuando la IA desafía la formación de skills: una interpretación del Capabilities Outlook de la WIPO</a></div></div>
+    <div class="ef-item"><div class="ef-num">14</div><div class="ef-date">30 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/30/america-latina-inteligencia-artificial-colaboracion-regional-y-la-oportunidad-de-convertir-la-diversidad-en-ventaja/" target="_blank" rel="noopener">América Latina: inteligencia artificial, colaboración regional y la oportunidad de convertir la diversidad en ventaja</a></div></div>
+    <div class="ef-item"><div class="ef-num">15</div><div class="ef-date">28 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/28/lo-que-machines-can-think-2026-revela-sobre-la-nueva-economia-de-la-inteligencia-artificial/" target="_blank" rel="noopener">Lo que Machines Can Think 2026 revela sobre la nueva economía de la inteligencia artificial</a></div></div>
+    <div class="ef-item"><div class="ef-num">16</div><div class="ef-date">26 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/26/carney-en-davos-lecciones-para-el-ecosistema-de-innovacion-en-mexico/" target="_blank" rel="noopener">Carney en Davos, lecciones para el ecosistema de Innovación en México</a></div></div>
+    <div class="ef-item"><div class="ef-num">17</div><div class="ef-date">24 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/24/seguridad-industria-y-educacion-el-triangulo-estrategico-que-define-el-futuro/" target="_blank" rel="noopener">Seguridad, industria y educación: el triángulo estratégico que define el futuro</a></div></div>
+    <div class="ef-item"><div class="ef-num">18</div><div class="ef-date">23 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/23/mexico-y-america-latina-el-software-como-brujula-de-la-complejidad-economica/" target="_blank" rel="noopener">México y América Latina: el software como brújula de la complejidad económica</a></div></div>
+    <div class="ef-item"><div class="ef-num">19</div><div class="ef-date">21 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/21/ingenieria-emocional-la-ventaja-competitiva-que-mexico-si-puede-construir/" target="_blank" rel="noopener">Ingeniería emocional: la ventaja competitiva que México sí puede construir</a></div></div>
+    <div class="ef-item"><div class="ef-num">20</div><div class="ef-date">16 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/16/del-storytelling-a-la-ingenieria-como-se-fabrica-un-ecosistema-real/" target="_blank" rel="noopener">Del storytelling a la ingeniería: cómo se fabrica un ecosistema real</a></div></div>
+    <div class="ef-item"><div class="ef-num">21</div><div class="ef-date">16 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/16/la-guerra-por-desarrollo-de-software-cuando-la-herramienta-es-el-taller-y-el-taller-es-la-herramienta/" target="_blank" rel="noopener">La guerra por desarrollo de software: cuando la herramienta es el taller (y el taller es la herramienta)</a></div></div>
+    <div class="ef-item"><div class="ef-num">22</div><div class="ef-date">13 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/13/menos-show-mas-capacidad-la-ia-exige-instituciones-no-slogans/" target="_blank" rel="noopener">Menos show, más capacidad: la IA exige instituciones, no slogans</a></div></div>
+    <div class="ef-item"><div class="ef-num">23</div><div class="ef-date">12 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/12/la-consolidacion-de-la-perdurable-hegemonia-china-en-el-mundo-segun-foreign-affairs/" target="_blank" rel="noopener">La consolidación de la perdurable hegemonía China en el mundo, según Foreign Affairs</a></div></div>
+    <div class="ef-item"><div class="ef-num">24</div><div class="ef-date">02 ene 2026</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2026/01/02/menos-magia-mas-ingenieria-el-verdadero-punto-de-inflexion-de-la-ia-en-2026/" target="_blank" rel="noopener">Menos magia, más ingeniería: el verdadero punto de inflexión de la IA en 2026</a></div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2025 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(46)</span></div>
+    <div class="ef-item"><div class="ef-num">25</div><div class="ef-date">27 dic 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/12/27/el-vibe-coding-ia-open-source-gpus-y-por-que-las-necesidades-del-desarrollo-de-software-no-desaparecen-y-por-que-importa-mas-que-nunca/" target="_blank" rel="noopener">El vibe coding : IA, open source, GPUs y por qué las necesidades del desarrollo de software no desaparecen (y por qué importa más que nunca)</a></div></div>
+    <div class="ef-item"><div class="ef-num">26</div><div class="ef-date">25 dic 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/12/25/la-brecha-pyme-en-ia-el-verdadero-cuello-de-botella-del-g7-y-de-mexico/" target="_blank" rel="noopener">La brecha PyME en IA: el verdadero ‘cuello de botella’ del G7 (y de México)</a></div></div>
+    <div class="ef-item"><div class="ef-num">27</div><div class="ef-date">19 dic 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/12/19/semana-de-aprendizajes-para-startups-tecnologicas-crecer-no-es-lo-mismo-que-sobrevivir/" target="_blank" rel="noopener">Semana de aprendizajes para startups tecnológicas: crecer no es lo mismo que sobrevivir</a></div></div>
+    <div class="ef-item"><div class="ef-num">28</div><div class="ef-date">17 dic 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/12/17/nemotron-3-nano-para-robots-multiagentes-inteligentes/" target="_blank" rel="noopener">Nemotron 3 Nano para robots multiagentes inteligentes</a></div></div>
+    <div class="ef-item"><div class="ef-num">29</div><div class="ef-date">15 dic 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/12/15/regular-la-ia-no-es-contenerla-es-convertir-la-regulacion-en-un-habilitador-de-innovacion-y-desarrollo/" target="_blank" rel="noopener">Regular la IA no es contenerla: Es convertir la regulación en un habilitador de innovación y desarrollo</a></div></div>
+    <div class="ef-item"><div class="ef-num">30</div><div class="ef-date">12 dic 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/12/12/la-f1-del-supercomputo-y-la-inteligencia-artificial-de-monaco-al-taller-de-la-esquina/" target="_blank" rel="noopener">La F1 del supercómputo y la Inteligencia Artificial: de Mónaco al taller de la esquina</a></div></div>
+    <div class="ef-item"><div class="ef-num">31</div><div class="ef-date">08 dic 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/12/08/la-epica-del-paralelismo-de-los-molinos-de-viento-al-lenguaje-de-los-nvidia-cuda-tile/" target="_blank" rel="noopener">La épica del paralelismo: De los molinos de viento al lenguaje de los NVIDIA CUDA Tile</a></div></div>
+    <div class="ef-item"><div class="ef-num">32</div><div class="ef-date">01 dic 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/12/01/el-verdadero-iceberg-de-la-ia-no-son-los-empleos-perdidos-sino-lo-que-no-estamos-midiendo/" target="_blank" rel="noopener">El verdadero “iceberg” de la IA no son los empleos perdidos, sino lo que no estamos midiendo</a></div></div>
+    <div class="ef-item"><div class="ef-num">33</div><div class="ef-date">29 nov 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/11/29/mexico-desconocido-la-geograf-ia-y-el-futuro/" target="_blank" rel="noopener">México Desconocido, la geograf-I.A. y el futuro</a></div></div>
+    <div class="ef-item"><div class="ef-num">34</div><div class="ef-date">25 nov 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/11/25/de-la-ciencia-ficcion-aplicada-a-la-economia-ficcion-humanoides-mexico-y-el-futuro-del-trabajo-en-norteamerica/" target="_blank" rel="noopener">De la ciencia ficción aplicada a la economía ficción humanoides, México y el futuro del trabajo en Norteamérica</a></div></div>
+    <div class="ef-item"><div class="ef-num">35</div><div class="ef-date">21 nov 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/11/21/mexico-en-el-outlook-sobre-ciencia-tecnologia-e-innovacion-2025-retos-y-oportunidades/" target="_blank" rel="noopener">México en el Outlook sobre ciencia, tecnología e innovación 2025: Retos y oportunidades</a></div></div>
+    <div class="ef-item"><div class="ef-num">36</div><div class="ef-date">12 nov 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/11/12/el-estado-de-la-ia-en-la-industria-segun-la-consultora-mckinsey/" target="_blank" rel="noopener">El estado de la IA en la industria, según la consultora McKinsey</a></div></div>
+    <div class="ef-item"><div class="ef-num">37</div><div class="ef-date">11 nov 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/11/11/inteligencia-artificial-al-servicio-de-la-creatividad/" target="_blank" rel="noopener">Inteligencia Artificial al servicio de la creatividad</a></div></div>
+    <div class="ef-item"><div class="ef-num">38</div><div class="ef-date">07 nov 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/11/07/robots-vs-millones-en-software-la-batalla-silenciosa-entre-china-y-estados-unidos/" target="_blank" rel="noopener">Robots vs. millones en software: La batalla silenciosa entre China y Estados Unidos</a></div></div>
+    <div class="ef-item"><div class="ef-num">39</div><div class="ef-date">31 oct 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/10/31/de-la-infraestructura-al-ecosistema-el-plan-de-nvidia-para-liderar-la-ia-abierta/" target="_blank" rel="noopener">De la infraestructura al ecosistema: el plan de NVIDIA para liderar la IA abierta</a></div></div>
+    <div class="ef-item"><div class="ef-num">40</div><div class="ef-date">24 oct 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/10/24/la-nueva-civilizacion-en-construccion-la-criatura-del-nuevo-estado-y-el-poder-global-de-la-ia/" target="_blank" rel="noopener">La nueva civilización en construcción: La criatura del nuevo Estado y el poder global de la IA</a></div></div>
+    <div class="ef-item"><div class="ef-num">41</div><div class="ef-date">18 oct 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/10/18/china-y-estados-unidos-inteligiendo-el-futuro-robotizado-en-america/" target="_blank" rel="noopener">hina y Estados Unidos, inteligiendo el futuro robotizado en América</a></div></div>
+    <div class="ef-item"><div class="ef-num">42</div><div class="ef-date">15 oct 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/10/15/la-urgente-y-necesaria-inversion-privada-en-id-lecciones-de-la-vision-de-aghion-y-howitt-ante-la-evidencia-latinoamericana/" target="_blank" rel="noopener">a urgente y necesaria inversión privada en I+D, lecciones de la visión de Aghion y Howitt ante la evidencia latinoamericana</a></div></div>
+    <div class="ef-item"><div class="ef-num">43</div><div class="ef-date">10 oct 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/10/10/mexico-ante-la-gran-reconfiguracion-industrial-de-la-oportunidad-a-la-consolidacion-del-valor-agregado/" target="_blank" rel="noopener">éxico ante la gran reconfiguración industrial: De la oportunidad a la consolidación del valor agregado</a></div></div>
+    <div class="ef-item"><div class="ef-num">44</div><div class="ef-date">03 oct 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/10/03/arturo-rosenblueth-el-mexicano-de-la-cibernetica/" target="_blank" rel="noopener">Arturo Rosenblueth, ‘el mexicano de la cibernética’</a></div></div>
+    <div class="ef-item"><div class="ef-num">45</div><div class="ef-date">26 sep 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/09/26/la-hardwarizarizacion-urgente-para-mexico/" target="_blank" rel="noopener">a hardwarizarización urgente para México</a></div></div>
+    <div class="ef-item"><div class="ef-num">46</div><div class="ef-date">24 sep 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/09/24/volteando-el-calcetin-la-ia-y-el-riesgo-del-nuevo-libertinaje-regulatorio/" target="_blank" rel="noopener">olteando el calcetín: La IA y el riesgo del nuevo libertinaje regulatorio</a></div></div>
+    <div class="ef-item"><div class="ef-num">47</div><div class="ef-date">12 sep 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/09/12/privacidad-patentes-y-poder-lecciones-del-juicio-contra-google-para-la-era-de-la-genai/" target="_blank" rel="noopener">Privacidad, patentes y poder: Lecciones del juicio contra Google para la era de la GenAI</a></div></div>
+    <div class="ef-item"><div class="ef-num">48</div><div class="ef-date">03 sep 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/09/03/clusters-globales-asimetrias-locales-reflexiones-en-torno-al-gii-2025/" target="_blank" rel="noopener">Clusters globales, asimetrías locales: reflexiones en torno al GII 2025</a></div></div>
+    <div class="ef-item"><div class="ef-num">49</div><div class="ef-date">25 ago 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/08/25/los-nuevo-retos-tecnologicos-por-el-nobel-de-economia/" target="_blank" rel="noopener">os nuevos retos tecnológicos por el Nobel de EconomIA</a></div></div>
+    <div class="ef-item"><div class="ef-num">50</div><div class="ef-date">20 ago 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/08/20/disrupciones-veraniegas-en-inteligencia-artificial/" target="_blank" rel="noopener">isrupciones veraniegas en Inteligencia Artificial</a></div></div>
+    <div class="ef-item"><div class="ef-num">51</div><div class="ef-date">11 ago 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/08/11/la-ley-chips-en-2025-entre-el-debate-y-la-pertinencia/" target="_blank" rel="noopener">a ley CHIPS en 2025: entre el debate y la pertinencia</a></div></div>
+    <div class="ef-item"><div class="ef-num">52</div><div class="ef-date">05 ago 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/08/05/de-la-fiebre-del-codigo-al-imperio-de-la-ia-como-se-redibuja-el-mapa-global-del-talento/" target="_blank" rel="noopener">De la Fiebre del Código al Imperio de la IA: Cómo se Redibuja el Mapa Global del Talento</a></div></div>
+    <div class="ef-item"><div class="ef-num">53</div><div class="ef-date">04 jul 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/07/04/lo-que-no-es-ia-aunque-lo-parezca-aunque-la-vendan-aunque-la-quieran-regular/" target="_blank" rel="noopener">Lo que no es IA, aunque lo parezca, aunque la vendan, aunque la quieran regular</a></div></div>
+    <div class="ef-item"><div class="ef-num">54</div><div class="ef-date">27 jun 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/06/27/ciencia-de-datos-vs-inteligencia-artificial-una-frontera-mas-politica-que-tecnica/" target="_blank" rel="noopener">Ciencia de datos vs. inteligencia artificial: Una frontera más política que técnica</a></div></div>
+    <div class="ef-item"><div class="ef-num">55</div><div class="ef-date">06 jun 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/06/06/un-lunes-tricolor-en-el-mundo-de-los-emprendimientos-tecnologicos-en-ia/" target="_blank" rel="noopener">n lunes tricolor en el mundo de los emprendimientos tecnológicos en IA</a></div></div>
+    <div class="ef-item"><div class="ef-num">56</div><div class="ef-date">28 may 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/05/28/mexico-frente-a-la-seguridad-tecnica-en-ia-una-estrategia-desde-la-neutralidad-activa/" target="_blank" rel="noopener">México frente a la seguridad técnica en IA: una estrategia desde la neutralidad activa</a></div></div>
+    <div class="ef-item"><div class="ef-num">57</div><div class="ef-date">17 may 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/05/17/automate-2025-en-detroit-los-humanoides-se-acercan-discretamente-a-la-industria/" target="_blank" rel="noopener">utomate 2025 en Detroit: Los Humanoides se acercan discretamente a la industria</a></div></div>
+    <div class="ef-item"><div class="ef-num">58</div><div class="ef-date">08 may 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/05/08/el-renacimiento-industrial-necesita-robots-y-a-mexico/" target="_blank" rel="noopener">El renacimiento industrial necesita robots y a México</a></div></div>
+    <div class="ef-item"><div class="ef-num">59</div><div class="ef-date">01 may 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/05/01/evidencia-convergente-vs-convergente-evidencia-ai-automatizacion-y-el-espejismo-de-la-mejora-laboral/" target="_blank" rel="noopener">Evidencia convergente vs. convergente evidencia: AI, automatización y el espejismo de la mejora laboral</a></div></div>
+    <div class="ef-item"><div class="ef-num">60</div><div class="ef-date">14 abr 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/04/14/ai-index-2025-la-inteligencia-artificial-como-palanca-geoestrategica-para-mexico-en-un-mundo-multipolar/" target="_blank" rel="noopener">I Index 2025: La Inteligencia Artificial como Palanca Geoestratégica para México en un Mundo Multipolar</a></div></div>
+    <div class="ef-item"><div class="ef-num">61</div><div class="ef-date">24 mar 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/03/24/nvidia-y-el-futuro-de-la-ia-gtc-2025-un-punto-de-inflexion/" target="_blank" rel="noopener">VIDIA y el Futuro de la IA: GTC 2025, un Punto de Inflexión</a></div></div>
+    <div class="ef-item"><div class="ef-num">62</div><div class="ef-date">19 mar 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/03/19/esp-china-en-una-nueva-etapa-de-su-desarrollo-afianza-su-compromiso-con-el-sector-privado/" target="_blank" rel="noopener">China, en una nueva etapa de su desarrollo, afianza su compromiso con el sector privado</a></div></div>
+    <div class="ef-item"><div class="ef-num">63</div><div class="ef-date">12 mar 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/03/12/de-los-videojuegos-al-premio-nobel-la-revolucion-del-aprendizaje-por-refuerzo/" target="_blank" rel="noopener">De los Videojuegos al Premio Nobel: La Revolución del Aprendizaje por Refuerzo</a></div></div>
+    <div class="ef-item"><div class="ef-num">64</div><div class="ef-date">07 mar 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/03/07/si-no-aprendemos-a-pensar-con-la-ia-dejaremos-que-la-ia-piense-por-nosotros/" target="_blank" rel="noopener">Si no aprendemos a pensar con la IA, dejaremos que la IA piense por nosotros</a></div></div>
+    <div class="ef-item"><div class="ef-num">65</div><div class="ef-date">28 feb 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/02/28/el-futuro-de-la-economia-del-trabajo-con-la-llegada-de-ia-segun-anthropic/" target="_blank" rel="noopener">El futuro de la Economía del Trabajo con la llegada de IA, según Anthropic</a></div></div>
+    <div class="ef-item"><div class="ef-num">66</div><div class="ef-date">08 feb 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/02/08/de-la-piedra-al-silicio-mexico-y-su-oportunidad-intelectual-en-la-revolucion-de-los-semiconductores/" target="_blank" rel="noopener">De la Piedra al Silicio: México y su Oportunidad Intelectual en la Revolución de los Semiconductores</a></div></div>
+    <div class="ef-item"><div class="ef-num">67</div><div class="ef-date">28 ene 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/01/28/deepseek-r1-desenredando-la-especulacion-y-la-realidad/" target="_blank" rel="noopener">DeepSeek R1, desenredando la especulación y la realidad</a></div></div>
+    <div class="ef-item"><div class="ef-num">68</div><div class="ef-date">21 ene 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/01/21/los-retos-de-la-inteligencia-artificial-en-la-nueva-era-trump/" target="_blank" rel="noopener">Los retos de la Inteligencia Artificial en la nueva era Trump</a></div></div>
+    <div class="ef-item"><div class="ef-num">69</div><div class="ef-date">11 ene 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/01/11/como-la-inteligencia-artificial-aprende-y-desaprende/" target="_blank" rel="noopener">Cómo la Inteligencia Artificial aprende y desaprende</a></div></div>
+    <div class="ef-item"><div class="ef-num">70</div><div class="ef-date">08 ene 2025</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2025/01/08/nvidia-en-el-ces-2025-entre-nemotron-y-thor-por-la-batalla-por-la-conduccion-autonoma/" target="_blank" rel="noopener">IDIA en el CES 2025: Entre Nemotron y Thor por la batalla por la conducción autónoma</a></div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2024 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(20)</span></div>
+    <div class="ef-item"><div class="ef-num">71</div><div class="ef-date">27 dic 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/12/27/de-la-mirada-de-elon-musk-a-la-accion-del-mexico-desconocido-innovacion-riesgo-y-alianzas-estrategicas-para-un-2025-transformador/" target="_blank" rel="noopener">De la mirada de Elon Musk a la acción del México desconocido: Innovación, riesgo y alianzas estratégicas para un 2025 transformador</a></div></div>
+    <div class="ef-item"><div class="ef-num">72</div><div class="ef-date">26 dic 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/12/26/alondra-de-la-parra-gershwin-la-vida-en-azul/" target="_blank" rel="noopener">Alondra de la Parra - Gershwin, la vida en azul</a></div></div>
+    <div class="ef-item"><div class="ef-num">73</div><div class="ef-date">13 dic 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/12/13/francia-y-mexico-hacia-el-futuro-de-la-ia/" target="_blank" rel="noopener">Francia y México hacia el futuro de la IA</a></div></div>
+    <div class="ef-item"><div class="ef-num">74</div><div class="ef-date">04 nov 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/11/22/gary-gereffi-y-el-nearshoring-oportunidades-y-desafios-para-mexico/" target="_blank" rel="noopener">Gary Gereffi y el nearshoring: Oportunidades y desafíos para México</a></div></div>
+    <div class="ef-item"><div class="ef-num">75</div><div class="ef-date">01 oct 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/10/01/la-oportunidad-de-mexico-en-el-desarrollo-de-software-avanzado-y-automatizacion-con-ia-generativa/" target="_blank" rel="noopener">La oportunidad de México en el desarrollo de ‘software’ avanzado y automatización con IA generativa</a></div></div>
+    <div class="ef-item"><div class="ef-num">76</div><div class="ef-date">17 sep 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/09/17/nearshoring-y-oportunidades-para-mexico-el-potencial-de-fusion-entre-robotica-y-hardware-en-la-era-de-la-manufactura-inteligente/" target="_blank" rel="noopener">´Nearshoring’ y oportunidades para México: el potencial de fusión entre robótica y ‘hardware’ en la era de la manufactura inteligente</a></div></div>
+    <div class="ef-item"><div class="ef-num">77</div><div class="ef-date">31 ago 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/08/31/synergy-forum-2024-del-tec-de-monterrey/" target="_blank" rel="noopener">Synergy Forum 2024 del Tec de Monterrey</a></div></div>
+    <div class="ef-item"><div class="ef-num">78</div><div class="ef-date">29 ago 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/08/29/inicia-la-carrera-iarmamentista-universitaria-en-eu/" target="_blank" rel="noopener">nicia la carrera I.A.rmamentista universitaria en EU</a></div></div>
+    <div class="ef-item"><div class="ef-num">79</div><div class="ef-date">16 ago 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/08/16/la-inversion-privada-en-investigacion-basica-un-imperativo-para-la-competitividad-de-mexico/" target="_blank" rel="noopener">La inversión privada en investigación básica. Un imperativo para la competitividad de México</a></div></div>
+    <div class="ef-item"><div class="ef-num">80</div><div class="ef-date">25 jul 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/07/25/llama-31-comprendiendo-el-potencial-y-las-limitaciones/" target="_blank" rel="noopener">Llama 3.1: Comprendiendo el potencial y las limitaciones</a></div></div>
+    <div class="ef-item"><div class="ef-num">81</div><div class="ef-date">18 jul 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/07/18/celebrando-el-futuro-reflexiones-durante-una-graduacion/" target="_blank" rel="noopener">Celebrando el futuro: Reflexiones durante una graduación</a></div></div>
+    <div class="ef-item"><div class="ef-num">82</div><div class="ef-date">21 jun 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/06/21/la-4ta-transformacion-del-conacyt-de-conahcyt-a-secretaria-de-estado/" target="_blank" rel="noopener">a 4ta. transformación del Conacyt: De Conahcyt a secretaría de Estado</a></div></div>
+    <div class="ef-item"><div class="ef-num">83</div><div class="ef-date">07 jun 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/06/07/esta-la-ia-redefiniendo-la-investigacion-cientifica-el-rol-de-los-ciudadanos-y-la-interdependencia-entre-empresarios-e-investigadores/" target="_blank" rel="noopener">Está la IA redefiniendo la investigación científica? El rol de los ciudadanos y la interdependencia entre empresarios e investigadores</a></div></div>
+    <div class="ef-item"><div class="ef-num">84</div><div class="ef-date">31 may 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/05/31/elecciones-e-inteligencia-artificial/" target="_blank" rel="noopener">Elecciones e Inteligencia Artificial</a></div></div>
+    <div class="ef-item"><div class="ef-num">85</div><div class="ef-date">24 may 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-tovar/2024/05/24/inteligencia-artificial-no-solo-generativa/" target="_blank" rel="noopener">Inteligencia artificial, no solo generativa</a></div></div>
+    <div class="ef-item"><div class="ef-num">86</div><div class="ef-date">08 may 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/05/08/wayve-escapa-a-la-sobrerregulacion-en-ia-y-asegura-su-posicion-como-unicornio/" target="_blank" rel="noopener">Wayve escapa a la sobrerregulación en IA y asegura su posición como unicornio</a></div></div>
+    <div class="ef-item"><div class="ef-num">87</div><div class="ef-date">27 abr 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/04/27/innovacion-y-legado-celebrando-60-anos-de-tecnologia-computacional-en-el-tec-de-monterrey/" target="_blank" rel="noopener">Innovación y Legado Celebrando 60 Años de Tecnología Computacional en el Tec de Monterrey</a></div></div>
+    <div class="ef-item"><div class="ef-num">88</div><div class="ef-date">13 abr 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/04/13/el-lenguaje-como-posible-capital-politico-significados-simbolicos-en-el-relato-de-la-innovacion/" target="_blank" rel="noopener">El lenguaje como posible capital (¿Político?) Significados Simbólicos en el Relato de la Innovación</a></div></div>
+    <div class="ef-item"><div class="ef-num">89</div><div class="ef-date">19 mar 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/03/19/nvida-getc-la-conferencia-de-la-era-de-inteligencia-artificial/" target="_blank" rel="noopener">Nvidia GTC: la conferencia de la era de inteligencia artificial</a></div></div>
+    <div class="ef-item"><div class="ef-num">90</div><div class="ef-date">02 feb 2024</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2024/02/02/freud-y-la-genai/" target="_blank" rel="noopener">Freud y la GenAI</a></div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2023 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(23)</span></div>
+    <div class="ef-item"><div class="ef-num">91</div><div class="ef-date">22 dic 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/12/22/2024-como-la-ia-la-cuantica-la-robotica-y-tras-tecnologias-dejaran-su-huella/" target="_blank" rel="noopener">2024 : Cómo la IA, la cuántica, la robótica y tras tecnologías dejarán su huella</a></div></div>
+    <div class="ef-item"><div class="ef-num">92</div><div class="ef-date">13 nov 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/11/13/chatgpt-apenas-cumple-un-ano-y-cada-vez-escribe-mejor-y-ya-dibuja/" target="_blank" rel="noopener">hatGPT apenas cumple un año y cada vez escribe mejor y ya dibuja</a></div></div>
+    <div class="ef-item"><div class="ef-num">93</div><div class="ef-date">27 oct 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/10/27/otis-la-era-digital-y-la-imperante-necesidad-de-cientificos-de-datos-ciudadanos/" target="_blank" rel="noopener">‘OTIS’: La era digital y la imperante necesidad de científicos de datos ciudadanos</a></div></div>
+    <div class="ef-item"><div class="ef-num">94</div><div class="ef-date">03 oct 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/10/03/la-ciencia-y-la-ia-en-la-voz-de-nature-2/" target="_blank" rel="noopener">La ciencia y la IA en la voz de ‘Nature’</a></div></div>
+    <div class="ef-item"><div class="ef-num">95</div><div class="ef-date">21 sep 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/09/21/vaya-semana-para-el-aprendizaje-con-refuerzo-a-nivel-mundial/" target="_blank" rel="noopener">aya semana para el aprendizaje con refuerzo a nivel mundial</a></div></div>
+    <div class="ef-item"><div class="ef-num">96</div><div class="ef-date">06 sep 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/09/06/felices-80-anos-al-tec-de-monterrey/" target="_blank" rel="noopener">Felices 80 años al Tec de Monterrey</a></div></div>
+    <div class="ef-item"><div class="ef-num">97</div><div class="ef-date">01 sep 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/09/01/drones-inteligentes-derrotan-a-pilotos-humanos-gracias-al-aprendizaje-profundo-con-refuerzo/" target="_blank" rel="noopener">rones inteligentes derrotan a pilotos humanos gracias al aprendizaje profundo con refuerzo</a></div></div>
+    <div class="ef-item"><div class="ef-num">98</div><div class="ef-date">19 ago 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/08/19/la-automatizacion-inteligente-es-urgente/" target="_blank" rel="noopener">La automatización inteligente es urgente</a></div></div>
+    <div class="ef-item"><div class="ef-num">99</div><div class="ef-date">28 jul 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/07/28/accion-afirmativa-y-diversidad-en-el-mundo-academico-de-usa/" target="_blank" rel="noopener">Acción afirmativa y diversidad en el mundo académico de USA</a></div></div>
+    <div class="ef-item"><div class="ef-num">100</div><div class="ef-date">18 jul 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/07/18/por-que-le-llaman-luna-de-miel/" target="_blank" rel="noopener">¿ Por qué le llaman ‘Luna de Miel’?</a></div></div>
+    <div class="ef-item"><div class="ef-num">101</div><div class="ef-date">05 jul 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/07/05/amazon-quiere-comprar-irobot-y-los-organimos-antimonopolio-reaccionan/" target="_blank" rel="noopener">mazon quiere comprar iRobot y los organismos antimonopolio reaccionan</a></div></div>
+    <div class="ef-item"><div class="ef-num">102</div><div class="ef-date">24 jun 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/06/24/titan-algunas-experiencias-cercanas-en-robotica-submarina/" target="_blank" rel="noopener">Titán: algunas experiencias cercanas en robótica submarina</a></div></div>
+    <div class="ef-item"><div class="ef-num">103</div><div class="ef-date">21 jun 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/06/21/fao-reconocio-la-milpa-maya-peninsular-como-un-sistema-del-patrimonio-agricola-mundial/" target="_blank" rel="noopener">AO reconoció la Milpa Maya Peninsular como un sistema del Patrimonio Agrícola Mundial</a></div></div>
+    <div class="ef-item"><div class="ef-num">104</div><div class="ef-date">07 jun 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/06/07/visitando-laguna-verde-con-ruben-mares-rip/" target="_blank" rel="noopener">isitando Laguna Verde con Rubén Mares (RIP)</a></div></div>
+    <div class="ef-item"><div class="ef-num">105</div><div class="ef-date">26 may 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/05/26/ahi-vienen-las-ciencias-cognitivas/" target="_blank" rel="noopener">Ahí vienen las ciencias cognitivas</a></div></div>
+    <div class="ef-item"><div class="ef-num">106</div><div class="ef-date">02 may 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/05/02/preparando-a-nuestros-jovenes-para-incursionar-competencias-internacionales-de-robotica/" target="_blank" rel="noopener">Preparando a nuestros jóvenes para incursionar competencias internacionales de robótica</a></div></div>
+    <div class="ef-item"><div class="ef-num">107</div><div class="ef-date">22 abr 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/04/22/wizeline-aterriza-en-el-mundo-academico-de-monterrey/" target="_blank" rel="noopener">Wizeline aterriza en el mundo académico de Monterrey</a></div></div>
+    <div class="ef-item"><div class="ef-num">108</div><div class="ef-date">13 abr 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/04/13/chatgpteando-el-desarrollo-de-software/" target="_blank" rel="noopener">ChatGPTeando el desarrollo de software</a></div></div>
+    <div class="ef-item"><div class="ef-num">109</div><div class="ef-date">07 mar 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/03/07/nuevo-presidente-del-consejo-del-tec-de-monterrey/" target="_blank" rel="noopener">Nuevo presidente del Consejo del Tec de Monterrey</a></div></div>
+    <div class="ef-item"><div class="ef-num">110</div><div class="ef-date">22 feb 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/02/22/japon-y-la-automatizacion-en-la-vida-diaria/" target="_blank" rel="noopener">Japón y la automatización en la vida diaria</a></div></div>
+    <div class="ef-item"><div class="ef-num">111</div><div class="ef-date">28 ene 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/01/28/chatgpt-el-dilema-de-la-innovacion-y-los-despidos-masivos/" target="_blank" rel="noopener">ChatGPT, el dilema de la innovación y los despidos masivos</a></div></div>
+    <div class="ef-item"><div class="ef-num">112</div><div class="ef-date">11 ene 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/01/11/el-computo-evolutivo-gana-un-lugar-en-el-colegio-nacional/" target="_blank" rel="noopener">l Cómputo Evolutivo gana un lugar en el Colegio Nacional</a></div></div>
+    <div class="ef-item"><div class="ef-num">113</div><div class="ef-date">09 ene 2023</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2023/01/09/transportes-digitales-en-la-era-del-conocimiento/" target="_blank" rel="noopener">Transportes digitales en la era del conocimiento</a></div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2022 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(32)</span></div>
+    <div class="ef-item"><div class="ef-num">114</div><div class="ef-date">14 dic 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/12/14/mobileye-del-paper-al-ipo-para-salvar-vidas/" target="_blank" rel="noopener">Mobileye, del paper al I.P.O. para salvar vidas</a></div></div>
+    <div class="ef-item"><div class="ef-num">115</div><div class="ef-date">01 dic 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/12/01/2022-cierra-el-ano-con-recortes-de-personal-downsizing-en-empresas-basadas-en-conocimiento/" target="_blank" rel="noopener">2022 cierra el año con recortes de personal (downsizing) en empresas basadas en conocimiento</a></div></div>
+    <div class="ef-item"><div class="ef-num">116</div><div class="ef-date">09 nov 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/11/09/datathon-y-los-retos-en-el-tec21-ante-la-pertinencia-social-y-empresarial/" target="_blank" rel="noopener">Datathon y los retos en el Tec21 ante la pertinencia social y empresarial</a></div></div>
+    <div class="ef-item"><div class="ef-num">117</div><div class="ef-date">26 oct 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/10/26/las-finanzas-de-los-coches-del-futuro-y-las-patentes/" target="_blank" rel="noopener">Las finanzas de los coches del futuro y las patentes</a></div></div>
+    <div class="ef-item"><div class="ef-num">118</div><div class="ef-date">15 oct 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/10/15/hardware-de-mexico-para-eu-y-el-mundo/" target="_blank" rel="noopener">Hardware de México para EU y el mundo</a></div></div>
+    <div class="ef-item"><div class="ef-num">119</div><div class="ef-date">04 oct 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/10/04/el-humanoide-optimus-de-tesla-y-el-robot-robbie-musk/" target="_blank" rel="noopener">El humanoide Optimus de Tesla y el robot Robbie Musk</a></div></div>
+    <div class="ef-item"><div class="ef-num">120</div><div class="ef-date">28 sep 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/09/28/team-science-hacer-ciencia-y-goles-en-equipo/" target="_blank" rel="noopener">Team Science, hacer ciencia (y goles) en equipo</a></div></div>
+    <div class="ef-item"><div class="ef-num">121</div><div class="ef-date">23 sep 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/09/23/ef-zf-y-el-futuro-de-la-industria-automotriz-en-nuevo-leon-final/" target="_blank" rel="noopener">ZF y el futuro de la industria automotriz en Nuevo León</a></div></div>
+    <div class="ef-item"><div class="ef-num">122</div><div class="ef-date">22 ago 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/08/22/michael-dell-y-el-futuro-de-la-electronica-de-consumo/" target="_blank" rel="noopener">Michael Dell y el futuro de la electrónica de consumo</a></div></div>
+    <div class="ef-item"><div class="ef-num">123</div><div class="ef-date">13 ago 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/08/13/el-futuro-uso-eficiente-de-la-energia-depende-de-la-ingenieria-de-control/" target="_blank" rel="noopener">El futuro uso eficiente de la energía depende de la ingeniería de control</a></div></div>
+    <div class="ef-item"><div class="ef-num">124</div><div class="ef-date">04 ago 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/08/04/los-limites-de-lo-posible-la-ultima-milla/" target="_blank" rel="noopener">Los límites de lo posible, la última milla</a></div></div>
+    <div class="ef-item"><div class="ef-num">125</div><div class="ef-date">21 jul 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/07/21/ideas-con-impacto-felicidades-al-harvard-business-review-por-sus-100-anos/" target="_blank" rel="noopener">‘Ideas con Impacto’, felicidades al Harvard Business Review por sus 100 años</a></div></div>
+    <div class="ef-item"><div class="ef-num">126</div><div class="ef-date">13 jul 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/07/13/el-covid-en-primera-persona/" target="_blank" rel="noopener">El Covid en primera persona</a></div></div>
+    <div class="ef-item"><div class="ef-num">127</div><div class="ef-date">27 jun 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/06/27/la-batalla-por-el-talento-internacional-en-la-industria-del-software/" target="_blank" rel="noopener">La batalla por el talento internacional en la industria del software</a></div></div>
+    <div class="ef-item"><div class="ef-num">128</div><div class="ef-date">21 jun 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/06/21/lamda-y-la-conciencia/" target="_blank" rel="noopener">LaMDA y la conciencia</a></div></div>
+    <div class="ef-item"><div class="ef-num">129</div><div class="ef-date">16 jun 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/06/16/la-inteligencia-artificial-en-el-ejercito-de-eu/" target="_blank" rel="noopener">La inteligencia artificial en el Ejército de EU</a></div></div>
+    <div class="ef-item"><div class="ef-num">130</div><div class="ef-date">07 jun 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/06/07/mexico-y-la-robotica-humanoide-como-innovacion-abierta/" target="_blank" rel="noopener">México y la Robótica Humanoide como innovación abierta</a></div></div>
+    <div class="ef-item"><div class="ef-num">131</div><div class="ef-date">27 may 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/05/24/la-web-30-y-el-blockchain/" target="_blank" rel="noopener">La Web 3.0 y el ‘blockchain’</a></div></div>
+    <div class="ef-item"><div class="ef-num">132</div><div class="ef-date">24 may 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/05/24/necesitamos-mas-desarrollo-tecnologico-sobre-el-internet-del-futuro/" target="_blank" rel="noopener">Necesitamos más desarrollo tecnológico sobre el internet del futuro</a></div></div>
+    <div class="ef-item"><div class="ef-num">133</div><div class="ef-date">24 may 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/05/24/del-computo-cuantico-dependera-nuestra-resiliencia-en-telecomunicaciones/" target="_blank" rel="noopener">Del cómputo cuántico dependerá nuestra resiliencia en telecomunicaciones</a></div></div>
+    <div class="ef-item"><div class="ef-num">134</div><div class="ef-date">08 may 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/05/08/necesitamos-aumentar-la-participacion-de-las-mujeres-en-la-innovacion/" target="_blank" rel="noopener">Necesitamos aumentar la participación de las mujeres en la innovación</a></div></div>
+    <div class="ef-item"><div class="ef-num">135</div><div class="ef-date">22 abr 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/04/22/desmitificando-las-redes-neuronales-convolucionales/" target="_blank" rel="noopener">Desmitificando las redes neuronales convolucionales</a></div></div>
+    <div class="ef-item"><div class="ef-num">136</div><div class="ef-date">11 abr 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/04/11/fronteras-de-la-innovacion-y-la-legalidad/" target="_blank" rel="noopener">Fronteras de la innovación y la legalidad</a></div></div>
+    <div class="ef-item"><div class="ef-num">137</div><div class="ef-date">05 abr 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/04/05/morin-piketty-y-el-capital-digital/" target="_blank" rel="noopener">Morín, Piketty y el capital digital</a></div></div>
+    <div class="ef-item"><div class="ef-num">138</div><div class="ef-date">25 mar 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/03/25/que-tan-inteligentes-son-actualmente-los-algoritmos/" target="_blank" rel="noopener">¿Qué tan inteligentes son actualmente los algoritmos?</a></div></div>
+    <div class="ef-item"><div class="ef-num">139</div><div class="ef-date">08 mar 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/03/08/mexicanas-expertas-en-robotica-en-las-grandes-ligas/" target="_blank" rel="noopener">Mexicanas expertas en robótica en las grandes ligas</a></div></div>
+    <div class="ef-item"><div class="ef-num">140</div><div class="ef-date">02 mar 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/03/02/metaverso-guerra-y-madurez-tecnologica/" target="_blank" rel="noopener">Metaverso, guerra y madurez tecnológica</a></div></div>
+    <div class="ef-item"><div class="ef-num">141</div><div class="ef-date">22 feb 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/02/22/los-retos-de-la-educacion-progresiva/" target="_blank" rel="noopener">Los retos de la educación progresiva</a></div></div>
+    <div class="ef-item"><div class="ef-num">142</div><div class="ef-date">08 feb 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/02/08/realidad-aunque-sea-artificial/" target="_blank" rel="noopener">Realidad aunque sea artificial</a></div></div>
+    <div class="ef-item"><div class="ef-num">143</div><div class="ef-date">28 ene 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/01/28/la-composicion-cognitiva-computacional-de-las-palabras/" target="_blank" rel="noopener">La composición cognitiva computacional de las palabras</a></div></div>
+    <div class="ef-item"><div class="ef-num">144</div><div class="ef-date">18 ene 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/01/18/neuronas-y-maquinas/" target="_blank" rel="noopener">Neuronas y máquinas</a></div></div>
+    <div class="ef-item"><div class="ef-num">145</div><div class="ef-date">07 ene 2022</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2022/01/07/emprendimiento-y-unicornios-de-plastilina/" target="_blank" rel="noopener">Emprendimiento y unicornios de plastilina</a></div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2021 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(21)</span></div>
+    <div class="ef-item"><div class="ef-num">146</div><div class="ef-date">23 dic 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/12/23/vehiculos-autonomos-y-edicion-online/" target="_blank" rel="noopener">Vehículos autónomos y edición ‘online’</a></div></div>
+    <div class="ef-item"><div class="ef-num">147</div><div class="ef-date">03 dic 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/12/03/sistemas-multiagentes-en-circunstancias-extremas-2/" target="_blank" rel="noopener">Sistemas multiagentes en circunstancias extremas</a></div></div>
+    <div class="ef-item"><div class="ef-num">148</div><div class="ef-date">03 dic 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/12/03/sistemas-multiagentes-en-circunstancias-extremas/" target="_blank" rel="noopener">Sistemas multiagentes en circunstancias extremas</a></div></div>
+    <div class="ef-item"><div class="ef-num">149</div><div class="ef-date">23 nov 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/11/23/software-para-robotica-de-servicio-la-nueva-herramienta-de-educacion-tecnologica/" target="_blank" rel="noopener">Software para robótica de servicio, la nueva herramienta de educación tecnológica</a></div></div>
+    <div class="ef-item"><div class="ef-num">150</div><div class="ef-date">15 nov 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/11/14/el-algoritmo-la-percepcion-publica-de-la-ciencia/" target="_blank" rel="noopener">El algoritmo, la percepción pública de la ciencia</a></div></div>
+    <div class="ef-item"><div class="ef-num">151</div><div class="ef-date">20 oct 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/10/20/la-simulacion-computacional-y-el-estado-emprendedor/" target="_blank" rel="noopener">La simulación computacional y el estado emprendedor</a></div></div>
+    <div class="ef-item"><div class="ef-num">152</div><div class="ef-date">08 oct 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/10/08/el-caotico-premio-nobel-de-fisica-2021/" target="_blank" rel="noopener">El caótico Premio Nobel de Física 2021</a></div></div>
+    <div class="ef-item"><div class="ef-num">153</div><div class="ef-date">02 sep 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/09/02/etica-inteligenia-artificial-y-emprendimiento/" target="_blank" rel="noopener">Ética, inteligencia artificial y emprendimiento</a></div></div>
+    <div class="ef-item"><div class="ef-num">154</div><div class="ef-date">24 ago 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/08/24/teslabot-10/" target="_blank" rel="noopener">TeslaBot 1.0</a></div></div>
+    <div class="ef-item"><div class="ef-num">155</div><div class="ef-date">20 jul 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/07/20/la-ultima-milla/" target="_blank" rel="noopener">La última milla</a></div></div>
+    <div class="ef-item"><div class="ef-num">156</div><div class="ef-date">05 jul 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/07/05/reduccion-de-complejidad/" target="_blank" rel="noopener">Reducción de complejidad</a></div></div>
+    <div class="ef-item"><div class="ef-num">157</div><div class="ef-date">25 jun 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/06/25/el-regreso-a-la-tecnificada-realidad/" target="_blank" rel="noopener">El regreso a la tecnificada realidad</a></div></div>
+    <div class="ef-item"><div class="ef-num">158</div><div class="ef-date">20 jun 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/06/20/georges-doriot-y-los-origenes-del-venture-capital/" target="_blank" rel="noopener">Georges Doriot y los orígenes del venture capital</a></div></div>
+    <div class="ef-item"><div class="ef-num">159</div><div class="ef-date">13 jun 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/06/13/optimismo-y-norteamerica/" target="_blank" rel="noopener">Optimismo y Norteamérica</a></div></div>
+    <div class="ef-item"><div class="ef-num">160</div><div class="ef-date">04 jun 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/06/04/la-nueva-guerra-fria/" target="_blank" rel="noopener">La nueva guerra fría</a></div></div>
+    <div class="ef-item"><div class="ef-num">161</div><div class="ef-date">28 may 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/05/28/hacia-el-deep-thinking/" target="_blank" rel="noopener">Hacia el Deep Thinking</a></div></div>
+    <div class="ef-item"><div class="ef-num">162</div><div class="ef-date">21 may 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/05/21/las-ciencias-y-las-tecnologia-para-la-prediccion-y-la-destruccion/" target="_blank" rel="noopener">Las ciencias y las tecnología para la predicción………… y la destrucción</a></div></div>
+    <div class="ef-item"><div class="ef-num">163</div><div class="ef-date">14 may 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/05/14/patentes-y-vacunas/" target="_blank" rel="noopener">Patentes y Vacunas</a></div></div>
+    <div class="ef-item"><div class="ef-num">164</div><div class="ef-date">08 may 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/05/08/debate-sobre-i-a/" target="_blank" rel="noopener">Debate sobre I. A</a></div></div>
+    <div class="ef-item"><div class="ef-num">165</div><div class="ef-date">03 may 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/05/03/code-breakers-descubrimientos-cientificos-y-emprendimiento-tecnologico-para-la-salud/" target="_blank" rel="noopener">Code Breakers, descubrimientos científicos y emprendimiento tecnológico para la salud</a></div></div>
+    <div class="ef-item"><div class="ef-num">166</div><div class="ef-date">27 abr 2021</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/2021/04/27/genius-makers-de-cade-metz/" target="_blank" rel="noopener">Genius Makers de Cade Metz</a></div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2020 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(12)</span></div>
+    <div class="ef-item"><div class="ef-num">167</div><div class="ef-date">27 jun 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/estado-del-arte-y-la-pandemia-covid-19/" target="_blank" rel="noopener">Estado del arte y la pandemia COVID-19</a></div></div>
+    <div class="ef-item"><div class="ef-num">168</div><div class="ef-date">17 jun 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/creacion-de-valor-post-pandemia/" target="_blank" rel="noopener">Creación de valor post pandemia</a></div></div>
+    <div class="ef-item"><div class="ef-num">169</div><div class="ef-date">01 jun 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/covid-19-la-teoria-de-juegos-y-el-go/" target="_blank" rel="noopener">Covid-19, la Teoría de Juegos y el Go</a></div></div>
+    <div class="ef-item"><div class="ef-num">170</div><div class="ef-date">28 may 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/covid-19-un-problemas-perverso-y-la-panarquia/" target="_blank" rel="noopener">Covid-19, un problemas perverso y la panarquía</a></div></div>
+    <div class="ef-item"><div class="ef-num">171</div><div class="ef-date">17 may 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/orgasmo-torpedos-y-patentes-hedwig-eva-maria-kiesler/" target="_blank" rel="noopener">Orgasmo, torpedos y patentes: Hedwig Eva Maria Kiesler</a></div></div>
+    <div class="ef-item"><div class="ef-num">172</div><div class="ef-date">11 may 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/objetos-virtuales-digitales-y-tangibles-para-la-innovacion-durante-contingencias/" target="_blank" rel="noopener">Objetos virtuales, digitales y tangibles para la innovación durante contingencias</a></div></div>
+    <div class="ef-item"><div class="ef-num">173</div><div class="ef-date">27 abr 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/davos-2020-covid-19-y-las-nuevas-practicas-laborales/" target="_blank" rel="noopener">Davos 2020, Covid-19 y las nuevas prácticas laborales</a></div></div>
+    <div class="ef-item"><div class="ef-num">174</div><div class="ef-date">30 mar 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/robotica-y-covid-19/" target="_blank" rel="noopener">Robótica y COVID-19</a></div></div>
+    <div class="ef-item"><div class="ef-num">175</div><div class="ef-date">07 mar 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/las-mujeres-y-las-tics/" target="_blank" rel="noopener">Las mujeres y las TICs</a></div></div>
+    <div class="ef-item"><div class="ef-num">176</div><div class="ef-date">27 feb 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/el-descubrimiento-de-antibioticos-con-inteligencia-artificial/" target="_blank" rel="noopener">El descubrimiento de antibióticos con inteligencia artificial</a></div></div>
+    <div class="ef-item"><div class="ef-num">177</div><div class="ef-date">20 feb 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/los-nuevos-retos-de-la-educacion-en-casa-para-el-futuro-profesional-de-nuestros-hijos/" target="_blank" rel="noopener">Los nuevos retos de la educación en casa para el futuro profesional de nuestros hijos</a></div></div>
+    <div class="ef-item"><div class="ef-num">178</div><div class="ef-date">04 feb 2020</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/cambio-tecnologico-y-la-ansiedad-de-estar-a-la-vanguardia/" target="_blank" rel="noopener">Cambio tecnológico y la ansiedad de estar a la vanguardia</a></div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2019 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(3)</span></div>
+    <div class="ef-item"><div class="ef-num">179</div><div class="ef-date">04 nov 2019</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/la-ciberseguridad-es-responsabilidad-de-todos/" target="_blank" rel="noopener">La ciberseguridad es responsabilidad de todos</a></div></div>
+    <div class="ef-item"><div class="ef-num">180</div><div class="ef-date">08 may 2019</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/data-mexico-una-oportunidad-para-decidir-hacia-donde-ir/" target="_blank" rel="noopener">Data México: una oportunidad para decidir hacia dónde ir</a></div></div>
+    <div class="ef-item"><div class="ef-num">181</div><div class="ef-date">19 mar 2019</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/plenumsoft-ayuda-a-la-transformacion-digital-con-ciencia-de-datos/" target="_blank" rel="noopener">Plenumsoft ayuda a la transformación digital con Ciencia de Datos</a></div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2018 <span style="font-size:0.7rem;font-weight:400;opacity:0.75">(13)</span></div>
+    <div class="ef-item"><div class="ef-num">182</div><div class="ef-date">06 nov 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/paul-romer-charter-cities-y-la-innovacion-en-la-zee-de-progreso/" target="_blank" rel="noopener">Paul Romer, Charter Cities y la Innovación en la ZEE de Progreso</a></div></div>
+    <div class="ef-item"><div class="ef-num">183</div><div class="ef-date">20 sep 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/transformacion-digital-vs-inteligencia-artificial/" target="_blank" rel="noopener">¿Transformación digital vs. Inteligencia Artificial?</a></div></div>
+    <div class="ef-item"><div class="ef-num">184</div><div class="ef-date">12 sep 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/quantinos-cuando/" target="_blank" rel="noopener">Quantinos... ¿Cuándo?</a></div></div>
+    <div class="ef-item"><div class="ef-num">185</div><div class="ef-date">22 ago 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/miradas-que-no-matan-y-pueden-evitar-accidentes/" target="_blank" rel="noopener">Miradas que no matan y pueden evitar accidentes</a></div></div>
+    <div class="ef-item"><div class="ef-num">186</div><div class="ef-date">16 jul 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/el-mayan-capital-fund-innovacion-en-capital-de-riesgo/" target="_blank" rel="noopener">l Mayan Capital Fund, innovación en capital de riesgo</a></div></div>
+    <div class="ef-item"><div class="ef-num">187</div><div class="ef-date">27 jun 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/hendu-generando-valor-tecnologico-desde-mexico-para-el-sector-energetico/" target="_blank" rel="noopener">Hendu, generando valor tecnológico desde México para el sector energético</a></div></div>
+    <div class="ef-item"><div class="ef-num">188</div><div class="ef-date">11 jun 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/como-llevar-a-mexico-a-la-vanguardia-de-la-innovacion/" target="_blank" rel="noopener">¿Cómo llevar a México a la vanguardia de la innovación?</a></div></div>
+    <div class="ef-item"><div class="ef-num">189</div><div class="ef-date">30 may 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/ixp-el-cerebelo-de-las-comunicaciones-digitales/" target="_blank" rel="noopener">IXP, el cerebelo de las comunicaciones digitales</a></div></div>
+    <div class="ef-item"><div class="ef-num">190</div><div class="ef-date">23 may 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/ixp-el-cerebellum-de-las-comunicaciones-digitales/" target="_blank" rel="noopener">IXP, el cerebellum de las comunicaciones digitales</a></div></div>
+    <div class="ef-item"><div class="ef-num">191</div><div class="ef-date">16 may 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/blockchain-debe-su-origen-a-la-confianza/" target="_blank" rel="noopener">Blockchain debe su origen a... la confianza</a></div></div>
+    <div class="ef-item"><div class="ef-num">192</div><div class="ef-date">17 abr 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/las-industrias-creativas-una-oportunidad/" target="_blank" rel="noopener">Las industrias creativas: una oportunidad</a></div></div>
+    <div class="ef-item"><div class="ef-num">193</div><div class="ef-date">24 mar 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/hacia-la-creacion-de-nuevos-mater-ia-les/" target="_blank" rel="noopener">Hacia la creación de nuevos 'mater-IA-les'</a></div></div>
+    <div class="ef-item"><div class="ef-num">194</div><div class="ef-date">12 mar 2018</div><div class="ef-title"><a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/la-economia-digital-marina/" target="_blank" rel="noopener">a economía digital marina</a></div></div>
+  </div>
+</section>
+
+<footer style="border-top:2px solid var(--rule);padding-top:24px;margin-top:40px;font-size:0.8rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span>Dr. Luis Alberto Muñoz Ubando · CV in Extenso · 2026</span>
+  <span>103 publicaciones · 194 artículos El Financiero · 38 asignaturas (2021–2026)</span>
+</footer>
+</main>
+
+<script>
+// ── PROGRESS BAR
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('progress').style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight)})`;
+});
+
+// ── ACTIVE NAV
+const sections=document.querySelectorAll('section[id],.hero');
+const navLinks=document.querySelectorAll('.nav-link');
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const id=e.target.id||'top';
+      const a=document.querySelector(`.nav-link[href="#${id}"]`);
+      if(a)a.classList.add('active');
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'}).observe&&sections.forEach(s=>{
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.remove('active'));const id=e.target.id;const a=document.querySelector('.nav-link[href="#'+id+'"]');if(a)a.classList.add('active');}});
+  },{rootMargin:'-20% 0px -70% 0px'}).observe(s);
+});
+
+// ── ANALYTICS MODAL
+function openAnalytics(){
+  document.getElementById('analytics-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>initCharts(),50);
+}
+function closeAnalytics(){
+  document.getElementById('analytics-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('analytics-modal').addEventListener('click',function(e){if(e.target===this)closeAnalytics();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAnalytics();});
+
+function switchTab(i){
+  document.querySelectorAll('.chart-tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  document.querySelectorAll('.chart-panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+}
+
+// ── COLOR PALETTES
+const PALETTE = {
+  blue:   ['#003b56','#005f8e','#0080b8','#00a3e0','#7ec8e3','#b3def0'],
+  warm:   ['#7b3f00','#c0570e','#e8820c','#f5a623','#f7c16e','#fde8bc'],
+  cool:   ['#1a3a4a','#1d6a8a','#2196b0','#36b4c8','#6dd0dc','#abe8ef'],
+  mixed:  ['#003b56','#c0570e','#2196b0','#e8820c','#0080b8','#f5a623'],
+  teal:   ['#004d40','#00695c','#00897b','#26a69a','#80cbc4','#b2dfdb'],
+};
+
+const CHARTS = {};
+function mkChart(id, type, data, opts={}){
+  const el=document.getElementById(id); if(!el)return;
+  if(CHARTS[id])CHARTS[id].destroy();
+  CHARTS[id]=new Chart(el,{
+    type,data,
+    options:{
+      responsive:true, maintainAspectRatio:true,
+      plugins:{legend:{labels:{font:{family:"'Source Sans 3',sans-serif",size:11},color:'#3d3d3d',boxWidth:12}},tooltip:{titleFont:{family:"'Source Sans 3',sans-serif"},bodyFont:{family:"'Source Sans 3',sans-serif"}}},
+      scales: type==='pie'||type==='doughnut'||type==='polarArea'?{}:{
+        x:{ticks:{font:{family:"'Source Sans 3',sans-serif",size:10},color:'#6b6b6b'},grid:{color:'rgba(0,0,0,0.05)'}},
+        y:{ticks:{font:{family:"'Source Sans 3',sans-serif",size:10},color:'#6b6b6b'},grid:{color:'rgba(0,0,0,0.05)'}}
+      },
+      ...opts
+    }
+  });
+}
+
+let chartsInited=false;
+function initCharts(){
+  if(chartsInited)return; chartsInited=true;
+
+  // ── TAB 0: Academic production ──────────────────────────────
+
+  // Publications per year (grouped bar: journals vs conferences)
+  mkChart('c_pubs_year','bar',{
+    labels:['1992','1995','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2013','2014','2015','2018','2019','2020','2021','2022','2023','2024','2025','2026'],
+    datasets:[
+      {label:'Journals / Patents',data:[1,1,3,2,1,1,1,1,0,2,0,1,0,0,0,0,1,0,2,2,1,2,1,1,3,2,4,3,1],backgroundColor:'#005f8e',borderRadius:4},
+      {label:'Conferences',data:[0,1,0,1,0,1,0,2,8,6,8,2,1,1,5,3,2,1,0,1,0,1,1,3,5,6,6,10,0],backgroundColor:'#7ec8e3',borderRadius:4}
+    ]
+  },{plugins:{legend:{display:true}},scales:{x:{stacked:false},y:{stacked:false,beginAtZero:true}}});
+
+  // Publication type donut
+  mkChart('c_pub_type','doughnut',{
+    labels:['Conference papers','Journal articles','Book chapters','Patents','Theses','Technical reports'],
+    datasets:[{data:[61,22,5,3,3,2],backgroundColor:PALETTE.blue,borderWidth:2,borderColor:'#fff',hoverOffset:8}]
+  });
+
+  // International collaboration
+  mkChart('c_collab','bar',{
+    labels:['Francia','México','España','UK','Japón','Alemania','USA','Austria','Suiza'],
+    datasets:[{label:'Co-autores',data:[18,35,8,12,4,6,14,5,3],backgroundColor:PALETTE.cool,borderRadius:6}]
+  },{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}}});
+
+  // ── TAB 1: Teaching ────────────────────────────────────────
+
+  // Courses per semester
+  mkChart('c_courses_sem','line',{
+    labels:['Verano 21','Ago-Dic 21','Ene-Jun 22','Ago-Dic 22','Ene-Jun 23','Ago-Dic 23','Ene-Jun 24','Ago-Dic 24','Ene-Jun 25','Ago-Dic 25','Ene-Jun 26'],
+    datasets:[
+      {label:'Asignaturas impartidas',data:[1,7,6,7,13,9,14,12,13,12,5],borderColor:'#005f8e',backgroundColor:'rgba(0,95,142,0.12)',fill:true,tension:0.4,pointBackgroundColor:'#005f8e',pointRadius:5,borderWidth:2.5},
+      {label:'Asignaturas distintas',data:[1,5,4,5,8,6,8,7,8,7,3],borderColor:'#f5a623',backgroundColor:'rgba(245,166,35,0.08)',fill:false,tension:0.4,pointBackgroundColor:'#f5a623',pointRadius:4,borderWidth:2,borderDash:[5,3]}
+    ]
+  },{plugins:{legend:{display:true}}});
+
+  // Top 10 courses
+  mkChart('c_courses_top','bar',{
+    labels:['Tesis II','Fundam. Robótica','Impl. Robótica Int.','Integr. Robótica','Multiagentes','Taller Inv. II','Tesis I','Estancia Inv.','Taller Inv. I','Taller Inv. IV'],
+    datasets:[{label:'Veces impartida',data:[6,5,5,5,5,5,5,4,4,4],backgroundColor:PALETTE.blue.map((c,i)=>`${c}${['ff','e8','d0','b8','a0','88'][i]||'ff'}`),borderRadius:6}]
+  },{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{stepSize:1}}}});
+
+  // Thesis per year
+  mkChart('c_tesis_year','bar',{
+    labels:['2022','2023','2024','2025'],
+    datasets:[{label:'Tesis dirigidas completadas',data:[0,0,3,3],backgroundColor:['#0080b8','#005f8e','#003b56','#7ec8e3'],borderRadius:8}]
+  },{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}});
+
+  // ── TAB 2: Divulgación ────────────────────────────────────
+
+  // EF articles per year
+  mkChart('c_ef_year','bar',{
+    labels:['2018','2019','2020','2021','2022','2023','2024','2025','2026'],
+    datasets:[{
+      label:'Artículos publicados',
+      data:[13,3,12,21,32,23,20,46,24],
+      backgroundColor:['#003b56','#004e6a','#006080','#007498','#0088b0','#009cc8','#20b0dc','#45c4e8','#7ed8f0'],
+      borderRadius:6
+    }]
+  },{plugins:{legend:{display:false}}});
+
+  // EF articles per month
+  mkChart('c_ef_month','bar',{
+    labels:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+    datasets:[{label:'Artículos',data:[22,14,18,16,14,11,10,16,12,14,15,12],backgroundColor:'#0080b8',borderRadius:5}]
+  },{plugins:{legend:{display:false}}});
+
+  // Science vs EF (diverging)
+  mkChart('c_sci_vs_ef','line',{
+    labels:['2018','2019','2020','2021','2022','2023','2024','2025','2026'],
+    datasets:[
+      {label:'Publicaciones científicas',data:[1,3,2,5,10,9,10,15,1],borderColor:'#003b56',backgroundColor:'rgba(0,59,86,0.15)',fill:true,tension:0.4,borderWidth:2.5,pointBackgroundColor:'#003b56'},
+      {label:'Artículos El Financiero',data:[13,3,12,21,32,23,20,46,24],borderColor:'#e8820c',backgroundColor:'rgba(232,130,12,0.1)',fill:true,tension:0.4,borderWidth:2.5,pointBackgroundColor:'#e8820c'}
+    ]
+  },{plugins:{legend:{display:true}}});
+
+  // ── TAB 3: Impact ─────────────────────────────────────────
+
+  // Alumni by sector
+  mkChart('c_alumni_sector','doughnut',{
+    labels:['Big Tech (GAFAM+)','Academia / Investigación','Industria / Manufactura','Startups / VC','Org. Internacional','Salud / Biotech'],
+    datasets:[{data:[8,6,5,4,2,2],backgroundColor:PALETTE.blue,borderWidth:2,borderColor:'#fff',hoverOffset:8}]
+  });
+
+  // Alumni by region
+  mkChart('c_alumni_region','polarArea',{
+    labels:['USA','México','Europa','Asia-Pacífico','LATAM','Canadá'],
+    datasets:[{data:[12,8,6,2,2,2],backgroundColor:PALETTE.cool.map(c=>c+'cc'),borderWidth:1,borderColor:'#fff'}]
+  },{plugins:{legend:{labels:{font:{size:10}}}}});
+
+  // Cumulative publications timeline
+  const years=Array.from({length:35},(_,i)=>1992+i);
+  const pubByYear={1992:1,1995:1,1997:3,1998:2,1999:1,2000:1,2001:1,2002:3,2003:8,2004:8,2005:8,2006:3,2007:1,2008:1,2009:5,2010:3,2011:3,2013:1,2014:2,2015:2,2018:1,2019:3,2020:2,2021:4,2022:8,2023:8,2024:10,2025:13,2026:1};
+  let cum=0;
+  const cumData=years.map(y=>{cum+=(pubByYear[y]||0);return cum;});
+  mkChart('c_cumulative','line',{
+    labels:years,
+    datasets:[
+      {label:'Publicaciones acumuladas',data:cumData,borderColor:'#005f8e',backgroundColor:'rgba(0,95,142,0.12)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:years.map(y=>pubByYear[y]?5:0),pointBackgroundColor:'#005f8e'},
+    ]
+  },{
+    plugins:{
+      legend:{display:false},
+      annotation:{annotations:{
+        ox:{type:'line',xMin:'1998',xMax:'1998',borderColor:'#c0570e',borderWidth:1.5,label:{display:true,content:'Oxford postdoc',position:'start',font:{size:9},color:'#c0570e',backgroundColor:'transparent'}},
+        tec:{type:'line',xMin:'2011',xMax:'2011',borderColor:'#2196b0',borderWidth:1.5,label:{display:true,content:'Tec Monterrey',position:'start',font:{size:9},color:'#2196b0',backgroundColor:'transparent'}}
+      }}
+    }
+  });
+}
+</script>
+</body>
+</html>
