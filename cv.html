@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Luis Alberto Muñoz Ubando — CV in Extenso</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a1a;
+  --ink2: #3d3d3d;
+  --muted: #6b6b6b;
+  --rule: #d0ccc5;
+  --accent: #005f8e;
+  --accent2: #003b56;
+  --bg: #faf8f5;
+  --card: #ffffff;
+  --tag-bg: #eef5fa;
+  --tag: #005f8e;
+  --year-bg: #f0f4f8;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── SIDEBAR NAV ── */
+#sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 220px;
+  height: 100vh;
+  background: var(--accent2);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0 24px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-name {
+  padding: 0 24px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 16px;
+}
+.sidebar-name h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  line-height: 1.3;
+}
+.sidebar-name p {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.nav-link {
+  display: block;
+  padding: 9px 24px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all 0.18s;
+  border-left: 3px solid transparent;
+}
+.nav-link:hover, .nav-link.active {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  border-left-color: #7ec8e3;
+}
+.nav-sep {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 10px 24px;
+}
+.sidebar-links {
+  margin-top: auto;
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-links a {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  margin-bottom: 6px;
+  transition: color 0.15s;
+}
+.sidebar-links a:hover { color: rgba(255,255,255,0.9); }
+
+/* ── MAIN CONTENT ── */
+main {
+  margin-left: 220px;
+  padding: 0 64px 80px;
+  max-width: 1060px;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 64px 0 48px;
+  border-bottom: 2px solid var(--rule);
+  margin-bottom: 56px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.hero .title-line {
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.hero-meta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  padding: 5px 12px;
+  border-radius: 100px;
+  transition: all 0.15s;
+}
+.hero-meta a:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--tag-bg);
+  color: var(--tag);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 60px;
+  scroll-margin-top: 24px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent2);
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 22px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ── EDUCATION / TIMELINE ── */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+  padding-top: 2px;
+  white-space: nowrap;
+}
+.tl-content strong {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+.tl-content span {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ── LIST ITEMS ── */
+.cv-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cv-list li {
+  padding-left: 18px;
+  position: relative;
+  font-size: 0.9rem;
+  color: var(--ink2);
+}
+.cv-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 12px 24px;
+}
+.skill-label {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--accent2);
+  padding-top: 2px;
+}
+.skill-val {
+  font-size: 0.88rem;
+  color: var(--ink2);
+}
+
+/* ── PUBLICATIONS ── */
+.pub-year-group { margin-bottom: 28px; }
+.pub-year-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--accent);
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+}
+.pub-item {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 0 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-item:last-child { border-bottom: none; }
+.pub-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding-top: 2px;
+  text-align: right;
+}
+.pub-body {}
+.pub-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+.pub-authors {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+.pub-authors strong { color: var(--accent2); }
+.pub-venue {
+  font-size: 0.8rem;
+  color: var(--ink2);
+  font-style: italic;
+}
+.pub-venue a { color: var(--accent); text-decoration: none; }
+.pub-venue a:hover { text-decoration: underline; }
+
+/* ── EL FINANCIERO ── */
+.ef-item {
+  display: grid;
+  grid-template-columns: 36px 110px 1fr;
+  gap: 0 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.ef-item:last-child { border-bottom: none; }
+.ef-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: right;
+  padding-top: 2px;
+}
+.ef-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+.ef-title {
+  font-size: 0.88rem;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ── SUPERVISION ── */
+.thesis-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.thesis-item:last-child { border-bottom: none; }
+.thesis-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.thesis-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ── FORMER TEAM ── */
+.team-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.team-tag {
+  background: var(--tag-bg);
+  color: var(--tag);
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,95,142,0.15);
+}
+
+/* ── TEACHING ── */
+.teaching-item {
+  padding: 10px 16px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 0.88rem;
+  color: var(--ink2);
+}
+.teaching-item a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.teaching-item a:hover { text-decoration: underline; }
+
+/* ── STAT CARDS ── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 18px;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── PRINT / RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  main { margin-left: 0; padding: 24px 20px 60px; }
+}
+@media print {
+  #sidebar { display: none; }
+  main { margin-left: 0; padding: 0; }
+  .section { break-inside: avoid; }
+}
+
+/* Scroll progress bar */
+#progress {
+  position: fixed;
+  top: 0; left: 220px; right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform-origin: left;
+  z-index: 200;
+}
+</style>
+</head>
+<body>
+
+<div id="progress" style="transform:scaleX(0);transition:transform 0.1s linear;"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-name">
+    <h2>Dr. Luis Alberto<br>Muñoz Ubando</h2>
+    <p>CV in Extenso · 2026</p>
+  </div>
+
+  <a href="#top" class="nav-link active">Overview</a>
+  <a href="#interests" class="nav-link">Research Interests</a>
+  <a href="#education" class="nav-link">Education</a>
+  <a href="#appointments" class="nav-link">Appointments</a>
+  <a href="#awards" class="nav-link">Awards</a>
+  <a href="#activities" class="nav-link">Activities</a>
+  <a href="#supervision" class="nav-link">Supervision</a>
+  <a href="#team" class="nav-link">Former Team</a>
+  <a href="#teaching" class="nav-link">Teaching</a>
+  <div class="nav-sep"></div>
+  <a href="#publications" class="nav-link">Publications</a>
+  <a href="#elfinanciero" class="nav-link">El Financiero</a>
+
+  <div class="sidebar-links">
+    <a href="https://orcid.org/0000-0002-5845-6663" target="_blank">ORCID →</a>
+    <a href="https://www.scopus.com/authid/detail.uri?authorId=35096500500" target="_blank">SCOPUS →</a>
+    <a href="https://scholar.google.com.mx/citations?hl=en&user=3o9-OssAAAAJ" target="_blank">Google Scholar →</a>
+    <a href="https://www.linkedin.com/in/luisalbertomunozubando/" target="_blank">LinkedIn →</a>
+    <a href="https://github.com/LuisAlbertoMunozUbando" target="_blank">GitHub →</a>
+    <a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/" target="_blank">El Financiero →</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <h1>Dr. Luis Alberto<br>Muñoz Ubando</h1>
+  <p class="title-line">Tec de Monterrey &nbsp;·&nbsp; School of Engineering and Sciences</p>
+  <div class="hero-meta">
+    <a href="mailto:amunoz@tec.mx">✉ amunoz@tec.mx</a>
+    <a href="https://orcid.org/0000-0002-5845-6663" target="_blank">ORCID: 0000-0002-5845-6663</a>
+    <a href="https://www.scopus.com/authid/detail.uri?authorId=35096500500" target="_blank">SCOPUS: 35096500500</a>
+    <a href="https://scholar.google.com.mx/citations?hl=en&user=3o9-OssAAAAJ" target="_blank">Google Scholar</a>
+    <a href="https://www.linkedin.com/in/luisalbertomunozubando/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/LuisAlbertoMunozUbando" target="_blank">GitHub</a>
+  </div>
+  <div>
+    <span class="hero-badge">SNI · CONAHCYT 2022–2025</span>
+    <span class="hero-badge">NVIDIA Ambassador</span>
+    <span class="hero-badge">IEEE · ACM Member</span>
+    <span class="hero-badge">México · +52 999 297 3327</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stat-row">
+  <div class="stat-card"><div class="stat-num">103</div><div class="stat-label">Publications</div></div>
+  <div class="stat-card"><div class="stat-num">194</div><div class="stat-label">El Financiero artículos</div></div>
+  <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">Tech Conferences</div></div>
+  <div class="stat-card"><div class="stat-num">14K+</div><div class="stat-label">Coursera Learners</div></div>
+</div>
+
+<!-- RESEARCH INTERESTS -->
+<section class="section" id="interests">
+  <h2 class="section-title">Research Interests</h2>
+  <div class="team-cloud">
+    <span class="team-tag">Scientific Computing</span>
+    <span class="team-tag">Robotics — Dexterous &amp; Humanoid Manipulation</span>
+    <span class="team-tag">Computer Vision — Tracking</span>
+    <span class="team-tag">Hardware Design Innovation</span>
+    <span class="team-tag">Artificial Intelligence</span>
+    <span class="team-tag">Deep Learning</span>
+    <span class="team-tag">LLMs</span>
+    <span class="team-tag">Reinforcement Learning</span>
+    <span class="team-tag">Surgical Robotics</span>
+    <span class="team-tag">Brain-Computer Interfaces</span>
+    <span class="team-tag">Autonomous Navigation</span>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <h2 class="section-title">Education &amp; Training</h2>
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-year">2005–2006</span><div class="tl-content"><strong>Senior Research Scientist</strong><span>TU Wien, Austria</span></div></div>
+    <div class="tl-item"><span class="tl-year">2000–2002</span><div class="tl-content"><strong>M.Sc. Science Outreach</strong><span>Universum, UNAM, México</span></div></div>
+    <div class="tl-item"><span class="tl-year">1998–2000</span><div class="tl-content"><strong>PostDoctoral Training, Senior Scientist</strong><span>University of Oxford, UK</span></div></div>
+    <div class="tl-item"><span class="tl-year">1994–1998</span><div class="tl-content"><strong>Ph.D. in Vision and Robotics</strong><span>INRIA / ENSIMAG, Grenoble, France</span></div></div>
+    <div class="tl-item"><span class="tl-year">1993–1994</span><div class="tl-content"><strong>M.Sc. Intelligent Robotics</strong><span>INRIA / ENSIMAG, Grenoble, France</span></div></div>
+    <div class="tl-item"><span class="tl-year">1988–1993</span><div class="tl-content"><strong>B.S. Electronic Systems Engineering</strong><span>Tec de Monterrey, México</span></div></div>
+  </div>
+</section>
+
+<!-- APPOINTMENTS -->
+<section class="section" id="appointments">
+  <h2 class="section-title">Academic Appointments &amp; Work History</h2>
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-year">2011–present</span><div class="tl-content"><strong>Faculty at EIC — Tec de Monterrey</strong><span>Robotics, Computer Vision, Data Science, Intelligent Systems</span></div></div>
+    <div class="tl-item"><span class="tl-year">2005–2008</span><div class="tl-content"><strong>Faculty — UNAM</strong><span>Faculty of Sciences</span></div></div>
+    <div class="tl-item"><span class="tl-year">2002–2005</span><div class="tl-content"><strong>Faculty — UADY</strong><span>Mathematics Faculty</span></div></div>
+    <div class="tl-item"><span class="tl-year">2000–2002</span><div class="tl-content"><strong>Senior Program Officer — CONACYT</strong><span>México</span></div></div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="section" id="awards">
+  <h2 class="section-title">Achievements, Honours &amp; Awards</h2>
+  <ul class="cv-list">
+    <li>NVIDIA Ambassador, Certificate of Competency</li>
+    <li>2025 NVIDIA — Computer Vision for Industrial Inspection</li>
+    <li>2025 ANYBOTICS Certificate of Completion on Anymal Robotics Safety Inspection</li>
+    <li>2024 International funding competition DIGIT CFP through AI at Meta, in partnership with GelSight Inc.</li>
+    <li>2023 Distinguished ROS-Industrial Americas Chapter Founder for México at TEC de Monterrey</li>
+    <li>2022 7th place at XPrize ANA Avatar Challenge</li>
+    <li>2022 TEC Monterrey + NVIDIA + University of Manchester: Jetson AI Labs</li>
+    <li>2022 5th place at Interactive Service Robot Competition in the Cyberspace (IROS 2022)</li>
+    <li>2021 AirLab Robotics Challenge — "The Most Consistent Solution"</li>
+    <li>2015 Offshore Technology Conference — First place Startup-University R&amp;D Showcase Video Contest</li>
+    <li>2022–2025 Member of the Mexican System of Researchers (SNI — CONAHCYT)</li>
+  </ul>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="section" id="activities">
+  <h2 class="section-title">Research &amp; Professional Activities</h2>
+  <ul class="cv-list">
+    <li>Consultant for the World Bank and IDB (Inter-American Development Bank)</li>
+    <li>Active member of IEEE, ACM, THA (Triple Helix Association), Nature, Science, The Futurist</li>
+    <li>Scientific Review Committee for IEEE Transactions on Systems, Man and Cybernetics; IEEE Transactions on Robotics; IEEE ICRA; IEEE IROS</li>
+    <li>Patent Evaluation for IMPI, OMPI, European Patents Office</li>
+  </ul>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--accent2);margin:24px 0 12px;">National &amp; International Activities</h3>
+  <ul class="cv-list">
+    <li>Global Innovation Index advisor for México &amp; LATAM (2012–2018)</li>
+    <li>Active Member of the Steering Committee of N2N Gulf of Mexico — Data Science Team Lead</li>
+    <li>Texas A&amp;M – Yucatan initiative steering committee</li>
+    <li>Startup México board of advisors</li>
+  </ul>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--accent2);margin:24px 0 12px;">Academic Initiatives</h3>
+  <ul class="cv-list">
+    <li>Former President of the Board of Directors — Heuristic Innovation Center</li>
+    <li>VP for Digital Agenda, CANIETI Chamber</li>
+    <li>VP for Innovation and Tech Transfer, CANIETI Chamber</li>
+    <li>Academic Advisor for the creation of The Robotics Institute of Yucatán</li>
+    <li>Board of Directors at The Polytechnical University of Yucatán</li>
+  </ul>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--accent2);margin:24px 0 12px;">Science &amp; Technology Outreach</h3>
+  <ul class="cv-list">
+    <li>&gt; 30 Automation Development Projects since 1992</li>
+    <li>&gt; 500 Technical Conferences</li>
+    <li>&gt; 200 Newspaper Articles — <a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/" target="_blank" style="color:var(--accent)">El Financiero</a></li>
+    <li>&gt; 11,000 Robot Units sold by <a href="http://www.andromie.com/" target="_blank" style="color:var(--accent)">Andromie Robotics</a></li>
+    <li>&gt; 3,000 Users of Vitadat created by Cytron Medical</li>
+    <li>&gt; 300 MVPs Supported by <a href="http://www.mvpinabox.com.mx/" target="_blank" style="color:var(--accent)">MVP in a Box</a></li>
+    <li>&gt; 14,000 on-line Coursera learners in <a href="https://www.coursera.org/learn/introduccion-a-la-robotica-e-industria-4" target="_blank" style="color:var(--accent)">Robotics course</a></li>
+  </ul>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--accent2);margin:24px 0 12px;">Skills</h3>
+  <div class="skills-grid">
+    <span class="skill-label">Innovation</span><span class="skill-val">TRL, CRISP-DM, Design Sprint, Customer Development, Miró</span>
+    <span class="skill-label">Programming</span><span class="skill-val">Matlab, Python, C++, Rust, LaTeX, Dataiku</span>
+    <span class="skill-label">OS / Tools</span><span class="skill-val">ROS 1–2, Linux, MacOS, Windows; Docker; matplotlib, gnuplot, numpy, scipy, pandas</span>
+    <span class="skill-label">Languages</span><span class="skill-val">English, French, Italian, German, Japanese, Mandarin</span>
+  </div>
+</section>
+
+<!-- SUPERVISION -->
+<section class="section" id="supervision">
+  <h2 class="section-title">Master Thesis / PhD Supervision (2022–2025)</h2>
+
+  <div class="thesis-item">
+    <div class="thesis-title">"Validating Immersive Technologies for Enhanced Decision-Making Data in Surgical Robotics via Agent-Based Learning"</div>
+    <div class="thesis-meta">Nezih Nieto Gutiérrez — Monterrey, 2025</div>
+  </div>
+  <div class="thesis-item">
+    <div class="thesis-title">"Brain-Computer Gaming Control through Imagined Speech Commands in Single-Player"</div>
+    <div class="thesis-meta">Alma Cuevas — Monterrey, 2025</div>
+  </div>
+  <div class="thesis-item">
+    <div class="thesis-title">"Evaluating Pre-trained Neural Networks in Deep Learning for Early Detection and Enhanced Screening of Cervical Pathology"</div>
+    <div class="thesis-meta">Orlando Gutiérrez — Monterrey, 2025</div>
+  </div>
+  <div class="thesis-item">
+    <div class="thesis-title">"Decoding Imagined Speech from Electroencephalography Signals: The Role of Paradigm Design"</div>
+    <div class="thesis-meta">Edgar Aguilera Rodríguez — Monterrey, 2024</div>
+  </div>
+  <div class="thesis-item">
+    <div class="thesis-title">"3-D Detection &amp; Tracking for Semi-deformable Objects"</div>
+    <div class="thesis-meta">Gustavo De Los Ríos Alatorre — Monterrey, 2024</div>
+  </div>
+  <div class="thesis-item">
+    <div class="thesis-title">"American-Option Pricing Using Deep Learning"</div>
+    <div class="thesis-meta">Juan Pablo Licona Luque — Monterrey, 2024</div>
+  </div>
+  <div class="thesis-item">
+    <div class="thesis-title">"Biomechanical and Machine Learning Integration for the Detection of Knee Injuries"</div>
+    <div class="thesis-meta">Diana Sofía Milagros Rosales Gurmendi — Monterrey, 2024</div>
+  </div>
+</section>
+
+<!-- FORMER TEAM -->
+<section class="section" id="team">
+  <h2 class="section-title">Former Team Members &amp; Research Students</h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">Current positions of former students and collaborators (selection)</p>
+  <div class="team-cloud">
+    <span class="team-tag">Iván Fuentes · Google, USA</span>
+    <span class="team-tag">Ian de la Garza · Microsoft, USA</span>
+    <span class="team-tag">José Cisneros · Microsoft, USA</span>
+    <span class="team-tag">Edison Altamirano · ZF, Germany</span>
+    <span class="team-tag">François Boux de Casson · Wright Medical, France</span>
+    <span class="team-tag">Anton Deguet · JHU, USA</span>
+    <span class="team-tag">Richard Thompson · Matlab, UK</span>
+    <span class="team-tag">Eric Haynman · ChironHego, Sweden</span>
+    <span class="team-tag">Patricia Ortegón · IBM, USA</span>
+    <span class="team-tag">Ricardo Pérez Alcocer · IPN, Mexico</span>
+    <span class="team-tag">Annlyn McFee · United Nations, NY</span>
+    <span class="team-tag">Alonso Patron · Velodyne, USA</span>
+    <span class="team-tag">Jorge Rios Martinez · UADY, México</span>
+    <span class="team-tag">Pablo Marrufo · Apple, USA</span>
+    <span class="team-tag">Monir Mikati · Eurowind Energy, Sweden</span>
+    <span class="team-tag">Ulsa Urea Mariño · Texas A&amp;M, USA</span>
+    <span class="team-tag">Andrea Mestre · Amazon, France</span>
+    <span class="team-tag">Ana Martinez · Slack, USA</span>
+    <span class="team-tag">Oyuki Chian · U. New Brunswick, Canada</span>
+    <span class="team-tag">José Devesa · HSBC, HK</span>
+    <span class="team-tag">Gandhi Hernández · CentroGEO, México</span>
+    <span class="team-tag">Elvis Duran · MD-Anderson, USA</span>
+    <span class="team-tag">Joaquín Esquivel · Electronic Arts, Vancouver</span>
+    <span class="team-tag">Olmo Moreno · ITT, Italy</span>
+    <span class="team-tag">Andres Vargas · Visto AI, Canada</span>
+    <span class="team-tag">Javier Aldana · Avast, Czech Republic</span>
+    <span class="team-tag">Adrián Ramos · B. Brown New Ventures, Germany</span>
+    <span class="team-tag">Daniel Rios Pavia · Shopify, Berlin</span>
+    <span class="team-tag">Fabian Schwarzer · ITK Engineering, UK</span>
+    <span class="team-tag">Rafael Rivera López · UV, México</span>
+    <span class="team-tag">Diego Martinez · JPL/NASA, USA</span>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section class="section" id="teaching">
+  <h2 class="section-title">Teaching &amp; Resources</h2>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1ZPmQVwgweT_Ya7sfZVRd53Dh0ouv875Td0NSJBENllY/" target="_blank">Comprehensive Professional Profile in Innovation and Technological Development</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1v7rpiqVqLaXkWu9obdOaIxgMXaU6yBrVa_H8PuH0DiI/" target="_blank">Robot Kinematics, Dynamics, and Control with ROS</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/15NMpBfy60E3k2z7DOyM9qfZTP7genEY9OOn25NLh6tI/" target="_blank">Computer Vision, Machine Learning</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1TFy5_xpnnfqlfDmhXYLyz7EMCeWzVURLcXEiCDbyXgU/" target="_blank">Autonomous Vehicles and Computer Vision</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1v5LOMMV66lciJdKOZ-NbnZQrKjgfExzTSltD2Uy4LQw/" target="_blank">Multi-Agents: Principles</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1z4PCliudozeVfp5Jz_SGlcAcTsPnV9rHd-pQ6_sAk94/" target="_blank">Multi-Agents: Advanced Modelling</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1q9xTSggQEOBgG9SuFEY2Kj6iehzRzbqayak75DdwNNc/" target="_blank">Software Engineering for Robotics</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1zY9ilEKp3wmitq-Nx3MGObTz5szEU9OewVgTgereAfI/" target="_blank">Innovation Principles for Autonomous Driving and Computational Electromobility</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/1GHuTtl3lLdlXscFCZYyroUNvg994AdtfAOfyyyI2seg/" target="_blank">Emerging Technologies</a></div>
+  <div class="teaching-item"><a href="https://docs.google.com/presentation/d/13ExLQWX45qao3InmTEiPmvcuZk88G2an8jmsdDh_bwk/" target="_blank">AI &amp; GenAI for Business</a></div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="section" id="publications">
+  <h2 class="section-title">Complete List of Publications</h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:28px;">103 publications listed in reverse chronological order. Author name in bold: <strong>Muñoz Ubando, L.A.</strong></p>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2026</div>
+    <div class="pub-item"><div class="pub-num">1</div><div class="pub-body"><div class="pub-title">Taming the LLM: Reliable Task Planning for Robotics Using Parsing and Grounding</div><div class="pub-authors">Flores-Ramírez, A., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">Advances in Soft Computing. MICAI 2025. LNCS, vol. 16221. Springer, Cham. <a href="https://doi.org/10.1007/978-3-032-09037-9_24" target="_blank">doi:10.1007/978-3-032-09037-9_24</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2025</div>
+    <div class="pub-item"><div class="pub-num">2</div><div class="pub-body"><div class="pub-title">LLMs for Embodied Robotics: A comparative analysis on augmentation methods between an embedded AI computer and consumer-grade hardware for Autonomous Navigation</div><div class="pub-authors">Acevedo, A.S., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">2025 Latin American Robotics Symposium (LARS), 1–6</div></div></div>
+    <div class="pub-item"><div class="pub-num">3</div><div class="pub-body"><div class="pub-title">An EEG-based Imagined Speech Database for Comparing Paradigm Designs</div><div class="pub-authors">Aguilera-Rodríguez, E., Cuevas-Romero, A., Mendoza-Franco, S., et al., <strong>Muñoz-Ubando, L.A.</strong>, Ibarra-Zárate, D., Alonso-Valerdi, L.M.</div><div class="pub-venue"><em>Scientific Data,</em> 12(1), 1644. <a href="https://doi.org/10.1038/s41597-025-05926-5" target="_blank">doi:10.1038/s41597-025-05926-5</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">4</div><div class="pub-body"><div class="pub-title">Tracking a Small Oil Pan with xArm Using RGB-D Data and Deep Pose Estimation</div><div class="pub-authors">Cruz, R.J.H., Barba, J.J.J., De Los Ríos Alatorre, G., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Advances in Soft Computing. MICAI 2025 Posters. CCIS, vol. 2712. Springer. <a href="https://doi.org/10.1007/978-3-032-08704-1_3" target="_blank">doi:10.1007/978-3-032-08704-1_3</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">5</div><div class="pub-body"><div class="pub-title">Brain-Computer Gaming Control through Imagined Speech Commands in Single-player</div><div class="pub-authors">Cuevas-Romero, A.R., et al., <strong>Muñoz, L.A.</strong>, Alonso-Valerdi, L.M.</div><div class="pub-venue">11th International BCI Meeting, Banff, AB, Canada, June 2–5</div></div></div>
+    <div class="pub-item"><div class="pub-num">6</div><div class="pub-body"><div class="pub-title">Deep Mutual Information Meets Segmentation: Enhancing Neural Network Segmentation via Mutual Information Regularization</div><div class="pub-authors">de Jesús Félix Arredondo, F., Nieto Gutiérrez, N., et al., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Advances in Soft Computing. MICAI 2025 Posters. CCIS, vol. 2712. Springer. <a href="https://doi.org/10.1007/978-3-032-08704-1_22" target="_blank">doi:10.1007/978-3-032-08704-1_22</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">7</div><div class="pub-body"><div class="pub-title">TeleSign: A Flexible and Intuitive Gesture-Based Teleoperation Framework</div><div class="pub-authors">Hernandez Rios, J.C., Coronado, E., Molina Daniel, J.I., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Best Student Paper nominee, IEEE ARSO, Osaka, Japan, July 17–19</div></div></div>
+    <div class="pub-item"><div class="pub-num">8</div><div class="pub-body"><div class="pub-title">American-Option Pricing Using Deep Learning: A Binomial Tree Methodology and MLP Comparison</div><div class="pub-authors">Licona-Luque, J.P., <strong>Muñoz-Ubando, L.A.</strong>, de Golferichs-García, J.</div><div class="pub-venue">International Congress on Information and Communication Technology (ICICT 2025), London, 129–139</div></div></div>
+    <div class="pub-item"><div class="pub-num">9</div><div class="pub-body"><div class="pub-title">Biomechanical evaluation as basis for the development of predictive models in microsurgery robots</div><div class="pub-authors">Morales López, Z.B., et al., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">31st Congress of the European Society of Biomechanics (ESB 2025), Zürich, Switzerland</div></div></div>
+    <div class="pub-item"><div class="pub-num">10</div><div class="pub-body"><div class="pub-title">Intelligent Robotics, Autonomous Navigation, Grasping, and Object Manipulation for Undergraduates: From Theory to Practice</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">2025 IEEE Global Engineering Education Conference (EDUCON 2025), London, UK, April 22–25</div></div></div>
+    <div class="pub-item"><div class="pub-num">11</div><div class="pub-body"><div class="pub-title">Unveiling Deep Tech: Insights From an Engineering Sciences Perspective to Attend For-Profit and Non-For-Profit Innovation Requirements</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">2025 IEEE Global Engineering Education Conference (EDUCON 2025), London, UK, April 22–25</div></div></div>
+    <div class="pub-item"><div class="pub-num">12</div><div class="pub-body"><div class="pub-title">Computer simulation and hands-on labs: A case study of teaching robotics and AI</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong>, Amigud, A., Sirazitdinova, E.</div><div class="pub-venue"><em>International Journal of Mechanical Engineering Education,</em> 53(2), 451–469. <a href="https://doi.org/10.1177/03064190241240416" target="_blank">doi:10.1177/03064190241240416</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">13</div><div class="pub-body"><div class="pub-title">Leveraging Conditional Diffusion-Policy for trajectory convergence in 6-DoF Robot Manipulation with Mutual Information Estimation Lower Bound</div><div class="pub-authors">Nieto, N., De Los Ríos, G., Murra, A., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">2025 Latin American Robotics Symposium (LARS), 1–6</div></div></div>
+    <div class="pub-item"><div class="pub-num">14</div><div class="pub-body"><div class="pub-title">Are GAFs All you Need for BCIs?</div><div class="pub-authors">Nieto, N., Podesta, M.O., Felix, F., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">2025 IEEE 22nd International Symposium on Biomedical Imaging (ISBI), Houston, TX, 1–4</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2024</div>
+    <div class="pub-item"><div class="pub-num">15</div><div class="pub-body"><div class="pub-title">Using Classical Vision and 3-D Registration for a Successful Pose Estimation of a Bell Pepper</div><div class="pub-authors">De Los Rios Alatorre, G., Nieto Gutierrez, N., Murra López, A.J., <strong>Muñoz Ubando, L.A.</strong>, et al.</div><div class="pub-venue">40th Anniversary of IEEE ICRA (ICRA@40), Rotterdam, Netherlands, Sept. 23–26</div></div></div>
+    <div class="pub-item"><div class="pub-num">16</div><div class="pub-body"><div class="pub-title">Multimodal Emotion Recognition on RAVDESS Dataset using Transfer Learning</div><div class="pub-authors">Flores Couoh, S.N., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 153(5), 11–25. <a href="https://doi.org/10.13053/rcs-153-5-2" target="_blank">doi:10.13053/rcs-153-5-2</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">17</div><div class="pub-body"><div class="pub-title">Soft GelSight Sensor: Tactile Simulation using Finite Element Methods</div><div class="pub-authors">Ucan-Puc, M.A., Nieto Gutierrez, N., De Los Ríos Alatorre, G., Murra López, A.J., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2024 Poster. CCIS, vol. 2213. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_12" target="_blank">doi:10.1007/978-3-031-75543-9_12</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">18</div><div class="pub-body"><div class="pub-title">Benchmarking Open-Source LLMs as Coding Assistants Using HumanEval</div><div class="pub-authors">Rivera-Cerros, E., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">MICAI 2024 Poster. CCIS, vol. 2213. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_13" target="_blank">doi:10.1007/978-3-031-75543-9_13</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">19</div><div class="pub-body"><div class="pub-title">Visual Tracking of an Oil Pan Using Semi-Direct Visual Odometry</div><div class="pub-authors">Murra López, A.J., De Los Ríos Alatorre, G., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2024 Workshop. CCIS, vol. 2213. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_8" target="_blank">doi:10.1007/978-3-031-75543-9_8</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">20</div><div class="pub-body"><div class="pub-title">Industrial Terrain Classification for a Spot-Like Quadruped Robot Using Deep Learning Techniques</div><div class="pub-authors">Ávila-Ortega, A., Nieto Gutiérrez, N., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2024. LNCS, vol. 15210. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_21" target="_blank">doi:10.1007/978-3-031-75543-9_21</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">21</div><div class="pub-body"><div class="pub-title">Deep Learning for Knee Injury Detection through Biomechanical Signals</div><div class="pub-authors">Rosales Gurmendi, D.S.M., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">MICAI 2024. LNCS, vol. 15210. Springer. <a href="https://doi.org/10.1007/978-3-031-75543-9_22" target="_blank">doi:10.1007/978-3-031-75543-9_22</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">22</div><div class="pub-body"><div class="pub-title">Neuromotor Control via Imagined Speech</div><div class="pub-authors">Aguilera-Rodríguez, E., et al. (incl. <strong>Muñoz-Ubando, L.A.</strong>)</div><div class="pub-venue">10th International BCI Meeting, Brussels, Belgium, June 18–21</div></div></div>
+    <div class="pub-item"><div class="pub-num">23</div><div class="pub-body"><div class="pub-title">Parametric analysis of Operational Amplifier's gain using SPICE</div><div class="pub-authors">Canche-Cab, J.F., Vargas-Treviño, M., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">Ingeniería e Investigación, 44(2). <a href="https://doi.org/10.15446/ing.investig.100568" target="_blank">doi:10.15446/ing.investig.100568</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">24</div><div class="pub-body"><div class="pub-title">A 3D Pose Estimation Benchmark for the CORSMAL Challenge</div><div class="pub-authors">Donaher, S., et al. (incl. <strong>Muñoz, L.A.</strong>)</div><div class="pub-venue">IEEE Transactions on Human-Machine Systems. <a href="https://doi.org/10.1109/THMS.2024.3370629" target="_blank">doi:10.1109/THMS.2024.3370629</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2023</div>
+    <div class="pub-item"><div class="pub-num">25</div><div class="pub-body"><div class="pub-title">Neuromotor Decoding of Imagined Speech for Spelling and Control</div><div class="pub-authors">Aguilera-Rodríguez, E., et al., <strong>Muñoz-Ubando, L.A.</strong>, Alonso-Valerdi, L.M.</div><div class="pub-venue">Brain-Computer Interfaces, 10(2–4), 52–73. <a href="https://doi.org/10.1080/2326263X.2023.2257905" target="_blank">doi:10.1080/2326263X.2023.2257905</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">26</div><div class="pub-body"><div class="pub-title">Detection and Extraction of Oil Pan on a Robotic Arm using Deep Learning</div><div class="pub-authors">Rios Alatorre, G., et al. (incl. <strong>Muñoz Ubando, L.A.</strong>)</div><div class="pub-venue">MICAI 2023 Workshop. CCIS, vol. 1838. Springer. <a href="https://doi.org/10.1007/978-3-031-51940-6_22" target="_blank">doi:10.1007/978-3-031-51940-6_22</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">27</div><div class="pub-body"><div class="pub-title">Evaluating Imagined Speech as a BCI Paradigm: A Comparison of Language Decoding Approaches</div><div class="pub-authors">Aguilera-Rodríguez, E., et al. (incl. <strong>Muñoz-Ubando, L.A.</strong>)</div><div class="pub-venue">9th Graz Brain-Computer Interface Conference, Graz, Austria, Sept. 18–22</div></div></div>
+    <div class="pub-item"><div class="pub-num">28</div><div class="pub-body"><div class="pub-title">Evaluating Decoding of Imagined Speech EEG Paradigm</div><div class="pub-authors">Aguilera-Rodríguez, E., Mendoza-Franco, S.A., <strong>Muñoz-Ubando, L.A.</strong>, Alonso-Valerdi, L.M.</div><div class="pub-venue">IEEE EMBC 2023, Sydney, Australia. <a href="https://doi.org/10.1109/EMBC40787.2023.10340827" target="_blank">doi:10.1109/EMBC40787.2023.10340827</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">29</div><div class="pub-body"><div class="pub-title">Leveraging Teleoperation Gestures as Natural Communication Interface</div><div class="pub-authors">Hernandez Rios, J.C., Coronado, E., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">IEEE ARSO 2023. <a href="https://doi.org/10.1109/ARSO56563.2023.10187573" target="_blank">doi:10.1109/ARSO56563.2023.10187573</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">30</div><div class="pub-body"><div class="pub-title">Option Pricing using machine learning tools for the assessment of financial risk and decision making</div><div class="pub-authors">Licona-Luque, J.P., <strong>Muñoz-Ubando, L.A.</strong>, de Golferichs-García, J.</div><div class="pub-venue">MICAI 2023. LNCS, vol. 14502. Springer. <a href="https://doi.org/10.1007/978-3-031-47640-2_7" target="_blank">doi:10.1007/978-3-031-47640-2_7</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">31</div><div class="pub-body"><div class="pub-title">Towards surgical robotics task planning: A survey of AI methods and their applications</div><div class="pub-authors">Nieto Gutiérrez, N., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">MICAI 2023. LNCS, vol. 14502. Springer. <a href="https://doi.org/10.1007/978-3-031-47640-2_2" target="_blank">doi:10.1007/978-3-031-47640-2_2</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">32</div><div class="pub-body"><div class="pub-title">Grasp and Motion planning for manipulation tasks in unstructured environments</div><div class="pub-authors">Robles-Ruiz, A., Nieto, N., De Los Rios, G., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">MICAI 2023 Workshop. CCIS, vol. 1838. Springer. <a href="https://doi.org/10.1007/978-3-031-51940-6_21" target="_blank">doi:10.1007/978-3-031-51940-6_21</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2022</div>
+    <div class="pub-item"><div class="pub-num">33</div><div class="pub-body"><div class="pub-title">Interactive Service Robot in Cyberspace: System and Design Description</div><div class="pub-authors">Coronado, E., et al. (incl. <strong>Muñoz, L.A.</strong>)</div><div class="pub-venue">IROS 2022, Kyoto, Japan. IEEE.</div></div></div>
+    <div class="pub-item"><div class="pub-num">34</div><div class="pub-body"><div class="pub-title">Skin Lesion Classification with Tensorflow using CNN and Transfer Learning</div><div class="pub-authors">Del Risco Ríos, I., Blanco, J.H., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 151(6). <a href="https://doi.org/10.13053/rcs-151-6-9" target="_blank">doi:10.13053/rcs-151-6-9</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">35</div><div class="pub-body"><div class="pub-title">Classification of EEG Imagined Speech Tasks using LDA, SVM and ANN</div><div class="pub-authors">Diaz-Varela, I.O., Aguilera-Rodríguez, E., <strong>Muñoz Ubando, L.A.</strong>, Alonso-Valerdi, L.M.</div><div class="pub-venue">Research in Computing Science, 151(6). <a href="https://doi.org/10.13053/rcs-151-6-12" target="_blank">doi:10.13053/rcs-151-6-12</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">36</div><div class="pub-body"><div class="pub-title">Interactive service robots in cyberspace: Perspectives on system design for the IROS competition (paper proposal)</div><div class="pub-authors">Coronado, E., <strong>Muñoz, L.A.</strong>, et al.</div><div class="pub-venue">Companion of the 2022 ACM/IEEE HRI Conference, Sapporo, Japan. <a href="https://doi.org/10.1109/HRI53351.2022.9889453" target="_blank">doi:10.1109/HRI53351.2022.9889453</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">37</div><div class="pub-body"><div class="pub-title">Perceiving, analyzing and understanding the meaning of gestures from the real world for a service robot</div><div class="pub-authors">Hernandez Rios, J.C., <strong>Muñoz, L.A.</strong>, Coronado, E.</div><div class="pub-venue">Companion of the 2022 ACM/IEEE HRI Conference, Sapporo, Japan. <a href="https://doi.org/10.1109/HRI53351.2022.9889406" target="_blank">doi:10.1109/HRI53351.2022.9889406</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">38</div><div class="pub-body"><div class="pub-title">Vision-Based Detection and Tracking of a Moving Target on a Robotic Platform</div><div class="pub-authors">Leal-Garcia, P., et al., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">MICAI 2022. LNCS, vol. 13613. Springer. <a href="https://doi.org/10.1007/978-3-031-19493-1_13" target="_blank">doi:10.1007/978-3-031-19493-1_13</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2021</div>
+    <div class="pub-item"><div class="pub-num">39</div><div class="pub-body"><div class="pub-title">Combining Deep Learning and Classical Computer Vision for Waste-Container Detection and Tracking</div><div class="pub-authors">Morales Hernández, L.E., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 150(8), 229–242. <a href="https://doi.org/10.13053/rcs-150-8-18" target="_blank">doi:10.13053/rcs-150-8-18</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">40</div><div class="pub-body"><div class="pub-title">Evaluating Multimodal Imagined Speech Classification: EEG Paradigms Comparison</div><div class="pub-authors">Aguilera-Rodríguez, E., <strong>Muñoz-Ubando, L.A.</strong>, Alonso-Valerdi, L.M., Ibarra-Zárate, D.</div><div class="pub-venue">8th Graz BCI Conference, Graz, Austria, Sept. 6–10</div></div></div>
+    <div class="pub-item"><div class="pub-num">41</div><div class="pub-body"><div class="pub-title">AirLab Robotics Challenge — Consistent Solution</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong> et al.</div><div class="pub-venue">AirLab Robotics Challenge, 2021</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2020</div>
+    <div class="pub-item"><div class="pub-num">42</div><div class="pub-body"><div class="pub-title">Towards a Model-free Control for Unmanned Aerial Vehicles (UAVs)</div><div class="pub-authors">Sosa-Ceron, A., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2020. LNCS, vol. 12469. Springer. <a href="https://doi.org/10.1007/978-3-030-60887-3_19" target="_blank">doi:10.1007/978-3-030-60887-3_19</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">43</div><div class="pub-body"><div class="pub-title">Multivariate Temporal Convolutional Network: A Deep Neural Architecture for Multivariate Time Series Forecasting</div><div class="pub-authors">Wan, R., Mei, S., Wang, J., Liu, M., Yang, F.</div><div class="pub-venue"><em>Electronics,</em> 8(8), 876. <a href="https://doi.org/10.3390/electronics8080876" target="_blank">doi:10.3390/electronics8080876</a> (cited)</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2019</div>
+    <div class="pub-item"><div class="pub-num">44</div><div class="pub-body"><div class="pub-title">Embedded Control System: Software Architecture and Artificial Vision for Autonomous Navigation</div><div class="pub-authors">Canche-Cab, J.F., Vargas-Treviño, M., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 148(2), 21–35. <a href="https://doi.org/10.13053/rcs-148-2-2" target="_blank">doi:10.13053/rcs-148-2-2</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">45</div><div class="pub-body"><div class="pub-title">Breast Cancer Detection and Classification via Shallow and Deep Learning</div><div class="pub-authors">Soberanis Mukul, M.I., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 148(11), 29–41. <a href="https://doi.org/10.13053/rcs-148-11-3" target="_blank">doi:10.13053/rcs-148-11-3</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">46</div><div class="pub-body"><div class="pub-title">Emotion Recognition from Physiological Signals Using Deep Learning</div><div class="pub-authors">Flores-Díaz, D., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 148(11), 53–66. <a href="https://doi.org/10.13053/rcs-148-11-5" target="_blank">doi:10.13053/rcs-148-11-5</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">47</div><div class="pub-body"><div class="pub-title">RGBD-based Non-linear Tracking of Deformable Objects for Robot Grasping</div><div class="pub-authors">Gonzalez-Morales, E.A., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">MICAI 2019. LNCS, vol. 11835. Springer. <a href="https://doi.org/10.1007/978-3-030-33749-0_7" target="_blank">doi:10.1007/978-3-030-33749-0_7</a></div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2018</div>
+    <div class="pub-item"><div class="pub-num">48</div><div class="pub-body"><div class="pub-title">Artificial Vision System for a Mobile Robot using Deep Learning: Object Detection and Distance Estimation</div><div class="pub-authors">May Dzul, R.A., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Research in Computing Science, 147(12), 11–24. <a href="https://doi.org/10.13053/rcs-147-12-2" target="_blank">doi:10.13053/rcs-147-12-2</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">49</div><div class="pub-body"><div class="pub-title">A Novel Approach for Solving the Black Scholes Equation</div><div class="pub-authors">Cocom, L.D.B., Gonzalez, A.G.E., Vales, E.J.A.</div><div class="pub-venue"><em>International Journal of Applied Mathematical Research,</em> 2018</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2017</div>
+    <div class="pub-item"><div class="pub-num">50</div><div class="pub-body"><div class="pub-title">Sharing healthcare information on private collaborative networks</div><div class="pub-authors">Cabrera, R.G.E., Canto, H.L.V., <strong>Ubando, L.A.M.</strong>, Ku, J.C.B., Caamal, J.A.M.</div><div class="pub-venue">US Patent App. 15/291,868 (2017)</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2015</div>
+    <div class="pub-item"><div class="pub-num">51</div><div class="pub-body"><div class="pub-title">Control Libre de Modelo basado en Modos Deslizantes Integrales para Robots Submarinos Subactuados</div><div class="pub-authors">Raygosa-Barahona, R., Olguín-Díaz, E., Parra-Vega, V., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue"><em>Revista Iberoamericana de Automática e Informática Industrial (RIAI),</em> 12(3), 313–324. <a href="https://doi.org/10.1016/j.riai.2015.04.004" target="_blank">doi:10.1016/j.riai.2015.04.004</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">52</div><div class="pub-body"><div class="pub-title">A cooperative genetic approach for calculating trajectories of robotic hand fingers</div><div class="pub-authors">Rivera-López, R., Ramos-Quintana, F., <strong>Muñoz, L.A.</strong></div><div class="pub-venue"><em>Programación Matemática y Software,</em> 6(2), 26–35. ISSN: 2007-3283</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2014</div>
+    <div class="pub-item"><div class="pub-num">53</div><div class="pub-body"><div class="pub-title">Sharing healthcare information on private collaborative networks</div><div class="pub-authors">Cabrera, R.G.E., et al., <strong>Ubando, L.A.M.</strong></div><div class="pub-venue">US Patent App. 13/800,619 (2014)</div></div></div>
+    <div class="pub-item"><div class="pub-num">54</div><div class="pub-body"><div class="pub-title">Collecting and transferring physiological data</div><div class="pub-authors">Cabrera, R.G.E., Canto, H.L.V., <strong>Ubando, L.A.M.</strong>, et al.</div><div class="pub-venue">US Patent App. 13/800,659 (2014)</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2013</div>
+    <div class="pub-item"><div class="pub-num">55</div><div class="pub-body"><div class="pub-title">Diagnosis and Prognosis Analysis of Ecological Management under Varying Climate Change Scenarios</div><div class="pub-authors">Varela, P., Medina-Cetina, Z., Fox, B., Angerer, J., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">SIAM Conference on Computational Science and Engineering, Boston, MA</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2011</div>
+    <div class="pub-item"><div class="pub-num">56</div><div class="pub-body"><div class="pub-title">A model-free backstepping with integral sliding mode control for underactuated ROVs</div><div class="pub-authors">Raygosa-Barahona, R., Parra-Vega, V., Olguin-Diaz, E., <strong>Muñoz-Ubando, L.A.</strong></div><div class="pub-venue">8th Int. Conf. on Electrical Engineering, Computing Science and Automatic Control, Merida, Mexico. <a href="https://doi.org/10.1109/ICEEE.2011.6106577" target="_blank">doi:10.1109/ICEEE.2011.6106577</a></div></div></div>
+    <div class="pub-item"><div class="pub-num">57</div><div class="pub-body"><div class="pub-title">Control Libre de Modelo Para una clase de Sistemas Mecánicos Subactuados</div><div class="pub-authors">Raygosa, R., Parra-Vega, V., Olguín-Díaz, E., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Congreso Nacional AMC, Saltillo, Coahuila, 2011</div></div></div>
+    <div class="pub-item"><div class="pub-num">58</div><div class="pub-body"><div class="pub-title">Análisis sobre riesgos y accidentes en pesquerías artesanales en el sureste de México</div><div class="pub-authors">Salas, S., Euan-Ávila, J.I., Coronado, E., Palomo-Cortés, L.E., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Seminario Internacional sobre Estudios de Pesca, Villahermosa, Tabasco, 2011</div></div></div>
+    <div class="pub-item"><div class="pub-num">59</div><div class="pub-body"><div class="pub-title">Solución a la ecuación de Black-Scholes a través del método de descomposición de Adomian</div><div class="pub-authors">Cocom, L.B., Vales, E.J.A., Estrella, Á.G.</div><div class="pub-venue"><em>Ecorfan Journal,</em> 2(5), 48–69, 2011</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2010</div>
+    <div class="pub-item"><div class="pub-num">60</div><div class="pub-body"><div class="pub-title">Haptic immersion: a method for high dimension visualization and local-minima avoidance on water studies</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Jerónimo, G., Arcega-Cabrera, F., Garza, R., Noreña</div><div class="pub-venue">XVIII Int. Conf. of Computational Methods in Water Resources, Barcelona, Spain, 2010</div></div></div>
+    <div class="pub-item"><div class="pub-num">61</div><div class="pub-body"><div class="pub-title">Cubic Satellites, Vanguard Technology Integration, an Educational Opportunity of Modernization in México</div><div class="pub-authors">Moreno, O., <strong>Muñoz, L.A.</strong>, Moreno, P., Vargas, E.</div><div class="pub-venue">WSKS 2010, Part I, CCIS 111, pp. 289–296. ISBN 978-3-642-16317-0</div></div></div>
+    <div class="pub-item"><div class="pub-num">62</div><div class="pub-body"><div class="pub-title">El Estándar CubeSat: Generación de Recursos Humanos para Aplicaciones Aeroespaciales</div><div class="pub-authors">Moreno, O., <strong>Muñoz, L.A.</strong>, Atoche, J.R.</div><div class="pub-venue">X Congreso Nacional de Ingeniería Eléctrica y Electrónica del Mayab, Mérida, 2010</div></div></div>
+    <div class="pub-item"><div class="pub-num">63</div><div class="pub-body"><div class="pub-title">Análisis Cinemático de la Mordedura del Mero</div><div class="pub-authors">Valenzuela, K., Renán, X., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Avances en Informática y Sistemas Computacionales, Tomo V. ISBN 978-607-7557-71-5</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2009</div>
+    <div class="pub-item"><div class="pub-num">64</div><div class="pub-body"><div class="pub-title">Procesamiento Digital de Secuencias de Imágenes usando Puntos de Interés Dinámicos</div><div class="pub-authors">Cárdenas, J.M., <strong>Muñoz, L.A.</strong>, Moreno, H.</div><div class="pub-venue">XIV STSIVA, Pereira, Colombia, 2009</div></div></div>
+    <div class="pub-item"><div class="pub-num">65</div><div class="pub-body"><div class="pub-title">On the design of a 2DOF nanorobot</div><div class="pub-authors">Dominguez, R., Avalos, J., <strong>Muñoz, L.A.</strong>, Anaya, A.</div><div class="pub-venue">XXIV SOMI Instrumentation Conference, Mérida, Yucatán, 2009</div></div></div>
+    <div class="pub-item"><div class="pub-num">66</div><div class="pub-body"><div class="pub-title">Educatronics, New Technologies and Knowledge Society: A Critical Approach</div><div class="pub-authors">Moreno, O., Moreno, P., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">WSKS 2009, Chania, Crete, Greece. LNAI, vol. 5736. ISBN 978-3-642-04753-4</div></div></div>
+    <div class="pub-item"><div class="pub-num">67</div><div class="pub-body"><div class="pub-title">A novel communications platform to enable the collaboration of Autonomous Underwater Vehicles</div><div class="pub-authors">Urzaiz, G., Villa, D., et al., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">ICWN'09, Int. Conf. on Wireless Networks, Las Vegas, Nevada, 2009</div></div></div>
+    <div class="pub-item"><div class="pub-num">68</div><div class="pub-body"><div class="pub-title">Cognitive Vision (book contribution)</div><div class="pub-authors">Vincze, M. (incl. <strong>Muñoz, L.A.</strong>)</div><div class="pub-venue">Book chapter, 2009</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2008</div>
+    <div class="pub-item"><div class="pub-num">69</div><div class="pub-body"><div class="pub-title">An Advanced Model and its Control System for Fast and Precise Maneuvering of an UAV+Robotic Arm</div><div class="pub-authors">Alvarez, R., Parra, V., Ramos Aparicio, A., <strong>Muñoz, L.A.</strong>, Olguin, E.</div><div class="pub-venue">2nd Latin American UV/S Conference, Panama City, Aug. 5–7, 2008</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2007</div>
+    <div class="pub-item"><div class="pub-num">70</div><div class="pub-body"><div class="pub-title">Procesado de imágenes para la visión por ordenador, aplicado al registro en tiempo real de objetos a partir de modelos 3D y de imágenes 2D</div><div class="pub-authors">Atoche Enseñat, J.R. (Director: <strong>Muñoz, L.A.</strong>)</div><div class="pub-venue">PhD thesis, Universitat Politècnica de València, 2007</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2006</div>
+    <div class="pub-item"><div class="pub-num">71</div><div class="pub-body"><div class="pub-title">Motion tracking and Segmentation using FPGAs</div><div class="pub-authors">Atoche, R., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">XII Iberchip Workshop (IWS 2006), San José, Costa Rica</div></div></div>
+    <div class="pub-item"><div class="pub-num">72</div><div class="pub-body"><div class="pub-title">A Cognitive Model of Gaze Following and Object Permanence</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Vincze, M.</div><div class="pub-venue">EpirRob 2006, Sixth Int. Conf. on Epigenetic Robotics, Paris</div></div></div>
+    <div class="pub-item"><div class="pub-num">73</div><div class="pub-body"><div class="pub-title">Enhanced Real-Time Execution of Modular Control Software based on IEC 61499</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Technical Report, TU Wien, 2006</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2005</div>
+    <div class="pub-item"><div class="pub-num">74</div><div class="pub-body"><div class="pub-title">Automatic pose computation via registration: ICP using FPGAs</div><div class="pub-authors">Atoche Enseñat, J.R., <strong>Muñoz, L.A.</strong>, Espinosa, A., Sebastia, C.</div><div class="pub-venue">IASTED Int. Conf. on Robotics and Applications (RA 2005), Cambridge, USA</div></div></div>
+    <div class="pub-item"><div class="pub-num">75</div><div class="pub-body"><div class="pub-title">Towards the Automatic pose computation via registration: New results on Computing edges using FPGAs</div><div class="pub-authors">Atoche Enseñat, J.R., <strong>Muñoz, L.A.</strong>, Espinosa, A., Sebastia, C.</div><div class="pub-venue">8th Int. Symp. on Laser Metrology, Mérida, Yucatán — Third Prize, Best Student Poster</div></div></div>
+    <div class="pub-item"><div class="pub-num">76</div><div class="pub-body"><div class="pub-title">FPGAs based Visual Servoing of a 2-d.o.f. planar camera-in-hand Robot with Cartesian Control even at Singular Configurations</div><div class="pub-authors">Brito-Loeza, C., Atoche-Enseñat, J.R., Pérez, R., <strong>Muñoz, L.A.</strong>, Navarro-Soza, M.</div><div class="pub-venue">9th WMSCI, Orlando, Florida, 2005</div></div></div>
+    <div class="pub-item"><div class="pub-num">77</div><div class="pub-body"><div class="pub-title">Quantum Search for Dexterous Manipulation Planning</div><div class="pub-authors">Venegas-Andraca, S.E., <strong>Muñoz, L.A.</strong>, Espinosa, A.</div><div class="pub-venue">VII Congreso Mexicano de Robótica, 1–4, 2005</div></div></div>
+    <div class="pub-item"><div class="pub-num">78</div><div class="pub-body"><div class="pub-title">Localización y seguimiento de la mano humana usando visión por computadora</div><div class="pub-authors">Berzunza, G., Espinosa, A., <strong>Muñoz, L.A.</strong>, Rojas, M.</div><div class="pub-venue">Séptimo Congreso Nacional de Robótica, Ciudad de México, 2005</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2004</div>
+    <div class="pub-item"><div class="pub-num">79</div><div class="pub-body"><div class="pub-title">On the control of Cooperative Robots Without velocity measurements</div><div class="pub-authors">Gudiño-Lau, J., Arteaga, M.A., <strong>Muñoz, L.A.</strong>, Parra-Vega, V.</div><div class="pub-venue"><em>IEEE Transactions on Control Systems Technology,</em> 12(4), 600–608. DOI: 10.1109/TCST.2004.824965</div></div></div>
+    <div class="pub-item"><div class="pub-num">80</div><div class="pub-body"><div class="pub-title">Las tecnologías de la información y la comunicación y la formación en entornos virtuales</div><div class="pub-authors"><strong>Muñoz, L.A.</strong></div><div class="pub-venue"><em>Revista Complutense de Educación,</em> 15(1), 51–74, 2004</div></div></div>
+    <div class="pub-item"><div class="pub-num">81</div><div class="pub-body"><div class="pub-title">Control Visual de Un Sistema de Extracción para Hornos Giratorios</div><div class="pub-authors">Sandoval, M., Espinosa, A., Dean, E., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Sexto Congreso Nacional de Robótica, Torreón, pp. 111–116, 2004</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2002–2003</div>
+    <div class="pub-item"><div class="pub-num">82</div><div class="pub-body"><div class="pub-title">Control of cooperative robots without velocity measurements</div><div class="pub-authors">Arteaga, M., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">IEEE/RSJ Int. Conf. on Intelligent Robots and Systems, Lausanne, Switzerland, 3, 2837–2842, 2002</div></div></div>
+    <div class="pub-item"><div class="pub-num">83</div><div class="pub-body"><div class="pub-title">Providing synthetic Views for Teleoperation Using Visual Pose Tracking in Multiple Cameras</div><div class="pub-authors">Thompson, R.L., Reid, I.D., <strong>Muñoz, L.A.</strong>, Murray, D.W.</div><div class="pub-venue"><em>IEEE Trans. on Systems, Man and Cybernetics: Part A,</em> 31(1), 43–54. DOI: 10.1109/3468.903865, 2002</div></div></div>
+    <div class="pub-item"><div class="pub-num">84</div><div class="pub-body"><div class="pub-title">Robótica y visión: de computación y matemáticas hacia las ciencias</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Espinosa, A.</div><div class="pub-venue">Avances en Ciencias de la Computación. ISBN 970-36-0098-0, 2003</div></div></div>
+    <div class="pub-item"><div class="pub-num">85</div><div class="pub-body"><div class="pub-title">Cultura Digital para la Zona Arqueológica de Uxmal</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Huchim, J., Rojas, M., Briceño, A., Gómez, J.</div><div class="pub-venue">CONACULTA-INAH &amp; National Park Service, Oaxaca, 2003</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">1999–2001</div>
+    <div class="pub-item"><div class="pub-num">86</div><div class="pub-body"><div class="pub-title">Ciencia en México: casos de éxito</div><div class="pub-authors">Deutsch, G., Morales, C., <strong>Muñoz Ubando, L.A.</strong>, Marín, B.</div><div class="pub-venue">Consejo Nacional de Ciencia y Tecnología, México, 2001</div></div></div>
+    <div class="pub-item"><div class="pub-num">87</div><div class="pub-body"><div class="pub-title">The effects of bias in pose recovery on teleoperator performance in systems with haptic and visual feedback</div><div class="pub-authors">Thompson, R.L., McAree, R., <strong>Muñoz, L.A.</strong>, Murray, D.W.</div><div class="pub-venue">IEEE IROS, San Francisco, USA, Oct. 13–17, 2000</div></div></div>
+    <div class="pub-item"><div class="pub-num">88</div><div class="pub-body"><div class="pub-title">Vers la manipulation autonome avec main articulée (Doctoral Thesis)</div><div class="pub-authors"><strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">Grenoble INPG, France, 1999</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">1995–1998</div>
+    <div class="pub-item"><div class="pub-num">89</div><div class="pub-body"><div class="pub-title">Robust Dexterous Manipulation: A Methodology using Visual Servoing</div><div class="pub-authors"><strong>Muñoz, L.A.</strong></div><div class="pub-venue">IEEE IROS, Victoria, Canada, Oct. 13–17, 1998</div></div></div>
+    <div class="pub-item"><div class="pub-num">90</div><div class="pub-body"><div class="pub-title">Robust Dexterous Manipulation using Visual Servoing</div><div class="pub-authors"><strong>Muñoz, L.A.</strong></div><div class="pub-venue">SIRS – Int. Symp. on Intelligent Robotics Systems, Edinburgh, UK, July 21–23, 1998</div></div></div>
+    <div class="pub-item"><div class="pub-num">91</div><div class="pub-body"><div class="pub-title">A study on multifingered gripper control</div><div class="pub-authors">Doersam, T., Hammerschmidt, O., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">Proc. of Int. Conf. on Robotics and Automation, 2, 1112–1117, 1997</div></div></div>
+    <div class="pub-item"><div class="pub-num">92</div><div class="pub-body"><div class="pub-title">Simple Controllers for Multifingered Grippers</div><div class="pub-authors">Hammerschmidt, O., Doersam, Th., <strong>Muñoz, L.A.</strong></div><div class="pub-venue">IEEE ICRA, Albuquerque, USA, April 20–23, 1997</div></div></div>
+    <div class="pub-item"><div class="pub-num">93</div><div class="pub-body"><div class="pub-title">Simple Object Manipulation with dexterous hands</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Doersam, Th.</div><div class="pub-venue">IFAC Int. Conf. of Industrial Systems, Belfort, France, May 20–22, 1997</div></div></div>
+    <div class="pub-item"><div class="pub-num">94</div><div class="pub-body"><div class="pub-title">Simple controllers for dexterous hands</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Doersam, T.</div><div class="pub-venue">World Scientific Publishing, Advances in Robotics, 71–79, 1996</div></div></div>
+    <div class="pub-item"><div class="pub-num">95</div><div class="pub-body"><div class="pub-title">Dexterous Manipulation: A Geometrical Reasoning Point of View</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Bard, Ch., Nájera, J.</div><div class="pub-venue">IEEE ICRA, Nagoya, Japan, May 20–24, 1995</div></div></div>
+    <div class="pub-item"><div class="pub-num">96</div><div class="pub-body"><div class="pub-title">Robotic hands: modelisation, control and grasping strategies</div><div class="pub-authors">Doersam, T., <strong>Muñoz Ubando, L.A.</strong></div><div class="pub-venue">IAR Annual Meeting, Grenoble, France, Nov. 23–24, 1995</div></div></div>
+  </div>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">1992–1994</div>
+    <div class="pub-item"><div class="pub-num">97</div><div class="pub-body"><div class="pub-title">Spécification et contrôle d'exécution de stratégies de mouvements fins d'assemblage avec une main articulée (Master's thesis)</div><div class="pub-authors"><strong>Muñoz, L.A.</strong></div><div class="pub-venue">ENSIMAG, Grenoble, France, 1994</div></div></div>
+    <div class="pub-item"><div class="pub-num">98</div><div class="pub-body"><div class="pub-title">Ah Tok: El desarrollo de un robot experimental de 6 grados de libertad</div><div class="pub-authors"><strong>Muñoz, L.A.</strong>, Trejo, R., Chacón, R.</div><div class="pub-venue">2do Congreso Interuniversitario de Electrónica, Computación y Eléctrica (IEEE/CIECE), Guanajuato, México, 1992</div></div></div>
+  </div>
+</section>
+
+<!-- EL FINANCIERO -->
+<section class="section" id="elfinanciero">
+  <h2 class="section-title">El Financiero — Opinion Column (2018–2026)</h2>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:24px;">
+    194 artículos en orden cronológico inverso. Columna: <a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/" target="_blank" style="color:var(--accent)">elfinanciero.com.mx/opinion/alberto-munoz</a>
+  </p>
+
+  <div class="pub-year-group">
+    <div class="pub-year-header">2026 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(24 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">1</div><div class="ef-date">21 abr 2026</div><div class="ef-title">Mythos, Gödel y el precio estructural de la ciberseguridad</div></div>
+    <div class="ef-item"><div class="ef-num">2</div><div class="ef-date">13 abr 2026</div><div class="ef-title">Del Pleistoceno a la IA: la larga historia de anticipar</div></div>
+    <div class="ef-item"><div class="ef-num">3</div><div class="ef-date">03 abr 2026</div><div class="ef-title">Finalmente, las patentes provisionales llegan a México</div></div>
+    <div class="ef-item"><div class="ef-num">4</div><div class="ef-date">01 abr 2026</div><div class="ef-title">Popol Vuh, Leonardo y la obligación de pensar: cuando la tecnología ve más de lo que la sociedad comprende</div></div>
+    <div class="ef-item"><div class="ef-num">5</div><div class="ef-date">25 mar 2026</div><div class="ef-title">La tokenización como instrumento de una urgente nueva política industrial.para México y LATAM</div></div>
+    <div class="ef-item"><div class="ef-num">6</div><div class="ef-date">17 mar 2026</div><div class="ef-title">La siguiente frontera de la inteligencia artificial no está en el texto, sino en cómo modelamos la realidad</div></div>
+    <div class="ef-item"><div class="ef-num">7</div><div class="ef-date">09 mar 2026</div><div class="ef-title">Asuntos financieros en la Inteligencia Artificial, algunas lecciones del debate entre OpenAI y Anthropic</div></div>
+    <div class="ef-item"><div class="ef-num">8</div><div class="ef-date">02 mar 2026</div><div class="ef-title">De OpenAI a Anthropic: la familia que terminó en el Pentágono</div></div>
+    <div class="ef-item"><div class="ef-num">9</div><div class="ef-date">23 feb 2026</div><div class="ef-title">Unicornios tecnológicos: Cuando la ciencia que se toma en serio para la innovación en IA Generativa y Robótica</div></div>
+    <div class="ef-item"><div class="ef-num">10</div><div class="ef-date">16 feb 2026</div><div class="ef-title">¿Quién se queda con el excedente en la era de la IA? Una lectura Ricardiana del shock tecnológico</div></div>
+    <div class="ef-item"><div class="ef-num">11</div><div class="ef-date">06 feb 2026</div><div class="ef-title">Cuando todo es cómputo: el humano al centro… y la máquina también</div></div>
+    <div class="ef-item"><div class="ef-num">12</div><div class="ef-date">03 feb 2026</div><div class="ef-title">Pinocho con wallet, agentes, Molt y la ilusión de la inteligencia autónoma</div></div>
+    <div class="ef-item"><div class="ef-num">13</div><div class="ef-date">30 ene 2026</div><div class="ef-title">Cuando la IA desafía la formación de skills: una interpretación del Capabilities Outlook de la WIPO</div></div>
+    <div class="ef-item"><div class="ef-num">14</div><div class="ef-date">30 ene 2026</div><div class="ef-title">América Latina: inteligencia artificial, colaboración regional y la oportunidad de convertir la diversidad en ventaja</div></div>
+    <div class="ef-item"><div class="ef-num">15</div><div class="ef-date">28 ene 2026</div><div class="ef-title">Lo que Machines Can Think 2026 revela sobre la nueva economía de la inteligencia artificial</div></div>
+    <div class="ef-item"><div class="ef-num">16</div><div class="ef-date">26 ene 2026</div><div class="ef-title">Carney en Davos, lecciones para el ecosistema de Innovación en México</div></div>
+    <div class="ef-item"><div class="ef-num">17</div><div class="ef-date">24 ene 2026</div><div class="ef-title">Seguridad, industria y educación: el triángulo estratégico que define el futuro</div></div>
+    <div class="ef-item"><div class="ef-num">18</div><div class="ef-date">23 ene 2026</div><div class="ef-title">México y América Latina: el software como brújula de la complejidad económica</div></div>
+    <div class="ef-item"><div class="ef-num">19</div><div class="ef-date">21 ene 2026</div><div class="ef-title">Ingeniería emocional: la ventaja competitiva que México sí puede construir</div></div>
+    <div class="ef-item"><div class="ef-num">20</div><div class="ef-date">16 ene 2026</div><div class="ef-title">Del storytelling a la ingeniería: cómo se fabrica un ecosistema real</div></div>
+    <div class="ef-item"><div class="ef-num">21</div><div class="ef-date">16 ene 2026</div><div class="ef-title">La guerra por desarrollo de software: cuando la herramienta es el taller (y el taller es la herramienta)</div></div>
+    <div class="ef-item"><div class="ef-num">22</div><div class="ef-date">13 ene 2026</div><div class="ef-title">Menos show, más capacidad: la IA exige instituciones, no slogans</div></div>
+    <div class="ef-item"><div class="ef-num">23</div><div class="ef-date">12 ene 2026</div><div class="ef-title">La consolidación de la perdurable hegemonía China en el mundo, según Foreign Affairs</div></div>
+    <div class="ef-item"><div class="ef-num">24</div><div class="ef-date">02 ene 2026</div><div class="ef-title">Menos magia, más ingeniería: el verdadero punto de inflexión de la IA en 2026</div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2025 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(46 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">25</div><div class="ef-date">27 dic 2025</div><div class="ef-title">El vibe coding : IA, open source, GPUs y por qué las necesidades del desarrollo de software no desaparecen (y por qué importa más que nunca)</div></div>
+    <div class="ef-item"><div class="ef-num">26</div><div class="ef-date">25 dic 2025</div><div class="ef-title">La brecha PyME en IA: el verdadero ‘cuello de botella’ del G7 (y de México)</div></div>
+    <div class="ef-item"><div class="ef-num">27</div><div class="ef-date">19 dic 2025</div><div class="ef-title">Semana de aprendizajes para startups tecnológicas: crecer no es lo mismo que sobrevivir</div></div>
+    <div class="ef-item"><div class="ef-num">28</div><div class="ef-date">17 dic 2025</div><div class="ef-title">Nemotron 3 Nano para robots multiagentes inteligentes</div></div>
+    <div class="ef-item"><div class="ef-num">29</div><div class="ef-date">15 dic 2025</div><div class="ef-title">Regular la IA no es contenerla: Es convertir la regulación en un habilitador de innovación y desarrollo</div></div>
+    <div class="ef-item"><div class="ef-num">30</div><div class="ef-date">12 dic 2025</div><div class="ef-title">La F1 del supercómputo y la Inteligencia Artificial: de Mónaco al taller de la esquina</div></div>
+    <div class="ef-item"><div class="ef-num">31</div><div class="ef-date">08 dic 2025</div><div class="ef-title">La épica del paralelismo: De los molinos de viento al lenguaje de los NVIDIA CUDA Tile</div></div>
+    <div class="ef-item"><div class="ef-num">32</div><div class="ef-date">01 dic 2025</div><div class="ef-title">El verdadero “iceberg” de la IA no son los empleos perdidos, sino lo que no estamos midiendo</div></div>
+    <div class="ef-item"><div class="ef-num">33</div><div class="ef-date">29 nov 2025</div><div class="ef-title">México Desconocido, la geograf-I.A. y el futuro</div></div>
+    <div class="ef-item"><div class="ef-num">34</div><div class="ef-date">25 nov 2025</div><div class="ef-title">De la ciencia ficción aplicada a la economía ficción humanoides, México y el futuro del trabajo en Norteamérica</div></div>
+    <div class="ef-item"><div class="ef-num">35</div><div class="ef-date">21 nov 2025</div><div class="ef-title">México en el Outlook sobre ciencia, tecnología e innovación 2025: Retos y oportunidades</div></div>
+    <div class="ef-item"><div class="ef-num">36</div><div class="ef-date">12 nov 2025</div><div class="ef-title">El estado de la IA en la industria, según la consultora McKinsey</div></div>
+    <div class="ef-item"><div class="ef-num">37</div><div class="ef-date">11 nov 2025</div><div class="ef-title">Inteligencia Artificial al servicio de la creatividad</div></div>
+    <div class="ef-item"><div class="ef-num">38</div><div class="ef-date">07 nov 2025</div><div class="ef-title">Robots vs. millones en software: La batalla silenciosa entre China y Estados Unidos</div></div>
+    <div class="ef-item"><div class="ef-num">39</div><div class="ef-date">31 oct 2025</div><div class="ef-title">De la infraestructura al ecosistema: el plan de NVIDIA para liderar la IA abierta</div></div>
+    <div class="ef-item"><div class="ef-num">40</div><div class="ef-date">24 oct 2025</div><div class="ef-title">La nueva civilización en construcción: La criatura del nuevo Estado y el poder global de la IA</div></div>
+    <div class="ef-item"><div class="ef-num">41</div><div class="ef-date">18 oct 2025</div><div class="ef-title">China y Estados Unidos, inteligiendo el futuro robotizado en América</div></div>
+    <div class="ef-item"><div class="ef-num">42</div><div class="ef-date">15 oct 2025</div><div class="ef-title">La urgente y necesaria inversión privada en I+D, lecciones de la visión de Aghion y Howitt ante la evidencia latinoamericana</div></div>
+    <div class="ef-item"><div class="ef-num">43</div><div class="ef-date">10 oct 2025</div><div class="ef-title">México ante la gran reconfiguración industrial: De la oportunidad a la consolidación del valor agregado</div></div>
+    <div class="ef-item"><div class="ef-num">44</div><div class="ef-date">03 oct 2025</div><div class="ef-title">Arturo Rosenblueth, ‘el mexicano de la cibernética’</div></div>
+    <div class="ef-item"><div class="ef-num">45</div><div class="ef-date">26 sep 2025</div><div class="ef-title">La hardwarizarización urgente para México</div></div>
+    <div class="ef-item"><div class="ef-num">46</div><div class="ef-date">24 sep 2025</div><div class="ef-title">Volteando el calcetín: La IA y el riesgo del nuevo libertinaje regulatorio</div></div>
+    <div class="ef-item"><div class="ef-num">47</div><div class="ef-date">12 sep 2025</div><div class="ef-title">Privacidad, patentes y poder: Lecciones del juicio contra Google para la era de la GenAI</div></div>
+    <div class="ef-item"><div class="ef-num">48</div><div class="ef-date">03 sep 2025</div><div class="ef-title">Clusters globales, asimetrías locales: reflexiones en torno al GII 2025</div></div>
+    <div class="ef-item"><div class="ef-num">49</div><div class="ef-date">25 ago 2025</div><div class="ef-title">Los nuevos retos tecnológicos por el Nobel de EconomIA</div></div>
+    <div class="ef-item"><div class="ef-num">50</div><div class="ef-date">20 ago 2025</div><div class="ef-title">Disrupciones veraniegas en Inteligencia Artificial</div></div>
+    <div class="ef-item"><div class="ef-num">51</div><div class="ef-date">11 ago 2025</div><div class="ef-title">La ley CHIPS en 2025: entre el debate y la pertinencia</div></div>
+    <div class="ef-item"><div class="ef-num">52</div><div class="ef-date">05 ago 2025</div><div class="ef-title">De la Fiebre del Código al Imperio de la IA: Cómo se Redibuja el Mapa Global del Talento</div></div>
+    <div class="ef-item"><div class="ef-num">53</div><div class="ef-date">04 jul 2025</div><div class="ef-title">Lo que no es IA, aunque lo parezca, aunque la vendan, aunque la quieran regular</div></div>
+    <div class="ef-item"><div class="ef-num">54</div><div class="ef-date">27 jun 2025</div><div class="ef-title">Ciencia de datos vs. inteligencia artificial: Una frontera más política que técnica</div></div>
+    <div class="ef-item"><div class="ef-num">55</div><div class="ef-date">06 jun 2025</div><div class="ef-title">Un lunes tricolor en el mundo de los emprendimientos tecnológicos en IA</div></div>
+    <div class="ef-item"><div class="ef-num">56</div><div class="ef-date">28 may 2025</div><div class="ef-title">México frente a la seguridad técnica en IA: una estrategia desde la neutralidad activa</div></div>
+    <div class="ef-item"><div class="ef-num">57</div><div class="ef-date">17 may 2025</div><div class="ef-title">Automate 2025 en Detroit: Los Humanoides se acercan discretamente a la industria</div></div>
+    <div class="ef-item"><div class="ef-num">58</div><div class="ef-date">08 may 2025</div><div class="ef-title">El renacimiento industrial necesita robots y a México</div></div>
+    <div class="ef-item"><div class="ef-num">59</div><div class="ef-date">01 may 2025</div><div class="ef-title">Evidencia convergente vs. convergente evidencia: AI, automatización y el espejismo de la mejora laboral</div></div>
+    <div class="ef-item"><div class="ef-num">60</div><div class="ef-date">14 abr 2025</div><div class="ef-title">AI Index 2025: La Inteligencia Artificial como Palanca Geoestratégica para México en un Mundo Multipolar</div></div>
+    <div class="ef-item"><div class="ef-num">61</div><div class="ef-date">24 mar 2025</div><div class="ef-title">NVIDIA y el Futuro de la IA: GTC 2025, un Punto de Inflexión</div></div>
+    <div class="ef-item"><div class="ef-num">62</div><div class="ef-date">19 mar 2025</div><div class="ef-title">China, en una nueva etapa de su desarrollo, afianza su compromiso con el sector privado</div></div>
+    <div class="ef-item"><div class="ef-num">63</div><div class="ef-date">12 mar 2025</div><div class="ef-title">De los Videojuegos al Premio Nobel: La Revolución del Aprendizaje por Refuerzo</div></div>
+    <div class="ef-item"><div class="ef-num">64</div><div class="ef-date">07 mar 2025</div><div class="ef-title">Si no aprendemos a pensar con la IA, dejaremos que la IA piense por nosotros</div></div>
+    <div class="ef-item"><div class="ef-num">65</div><div class="ef-date">28 feb 2025</div><div class="ef-title">El futuro de la Economía del Trabajo con la llegada de IA, según Anthropic</div></div>
+    <div class="ef-item"><div class="ef-num">66</div><div class="ef-date">08 feb 2025</div><div class="ef-title">De la Piedra al Silicio: México y su Oportunidad Intelectual en la Revolución de los Semiconductores</div></div>
+    <div class="ef-item"><div class="ef-num">67</div><div class="ef-date">28 ene 2025</div><div class="ef-title">DeepSeek R1, desenredando la especulación y la realidad</div></div>
+    <div class="ef-item"><div class="ef-num">68</div><div class="ef-date">21 ene 2025</div><div class="ef-title">Los retos de la Inteligencia Artificial en la nueva era Trump</div></div>
+    <div class="ef-item"><div class="ef-num">69</div><div class="ef-date">11 ene 2025</div><div class="ef-title">Cómo la Inteligencia Artificial aprende y desaprende</div></div>
+    <div class="ef-item"><div class="ef-num">70</div><div class="ef-date">08 ene 2025</div><div class="ef-title">NVIDIA en el CES 2025: Entre Nemotron y Thor por la batalla por la conducción autónoma</div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2024 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(20 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">71</div><div class="ef-date">27 dic 2024</div><div class="ef-title">De la mirada de Elon Musk a la acción del México desconocido: Innovación, riesgo y alianzas estratégicas para un 2025 transformador</div></div>
+    <div class="ef-item"><div class="ef-num">72</div><div class="ef-date">26 dic 2024</div><div class="ef-title">Alondra de la Parra - Gershwin, la vida en azul</div></div>
+    <div class="ef-item"><div class="ef-num">73</div><div class="ef-date">13 dic 2024</div><div class="ef-title">Francia y México hacia el futuro de la IA</div></div>
+    <div class="ef-item"><div class="ef-num">74</div><div class="ef-date">04 nov 2024</div><div class="ef-title">Gary Gereffi y el nearshoring: Oportunidades y desafíos para México</div></div>
+    <div class="ef-item"><div class="ef-num">75</div><div class="ef-date">01 oct 2024</div><div class="ef-title">La oportunidad de México en el desarrollo de ‘software’ avanzado y automatización con IA generativa</div></div>
+    <div class="ef-item"><div class="ef-num">76</div><div class="ef-date">17 sep 2024</div><div class="ef-title">´Nearshoring’ y oportunidades para México: el potencial de fusión entre robótica y ‘hardware’ en la era de la manufactura inteligente</div></div>
+    <div class="ef-item"><div class="ef-num">77</div><div class="ef-date">31 ago 2024</div><div class="ef-title">Synergy Forum 2024 del Tec de Monterrey</div></div>
+    <div class="ef-item"><div class="ef-num">78</div><div class="ef-date">29 ago 2024</div><div class="ef-title">nicia la carrera I.A.rmamentista universitaria en EU</div></div>
+    <div class="ef-item"><div class="ef-num">79</div><div class="ef-date">16 ago 2024</div><div class="ef-title">La inversión privada en investigación básica. Un imperativo para la competitividad de México</div></div>
+    <div class="ef-item"><div class="ef-num">80</div><div class="ef-date">25 jul 2024</div><div class="ef-title">Llama 3.1: Comprendiendo el potencial y las limitaciones</div></div>
+    <div class="ef-item"><div class="ef-num">81</div><div class="ef-date">18 jul 2024</div><div class="ef-title">Celebrando el futuro: Reflexiones durante una graduación</div></div>
+    <div class="ef-item"><div class="ef-num">82</div><div class="ef-date">21 jun 2024</div><div class="ef-title">a 4ta. transformación del Conacyt: De Conahcyt a secretaría de Estado</div></div>
+    <div class="ef-item"><div class="ef-num">83</div><div class="ef-date">07 jun 2024</div><div class="ef-title">Está la IA redefiniendo la investigación científica? El rol de los ciudadanos y la interdependencia entre empresarios e investigadores</div></div>
+    <div class="ef-item"><div class="ef-num">84</div><div class="ef-date">31 may 2024</div><div class="ef-title">Elecciones e Inteligencia Artificial</div></div>
+    <div class="ef-item"><div class="ef-num">85</div><div class="ef-date">24 may 2024</div><div class="ef-title">Inteligencia artificial, no solo generativa</div></div>
+    <div class="ef-item"><div class="ef-num">86</div><div class="ef-date">08 may 2024</div><div class="ef-title">Wayve escapa a la sobrerregulación en IA y asegura su posición como unicornio</div></div>
+    <div class="ef-item"><div class="ef-num">87</div><div class="ef-date">27 abr 2024</div><div class="ef-title">Innovación y Legado Celebrando 60 Años de Tecnología Computacional en el Tec de Monterrey</div></div>
+    <div class="ef-item"><div class="ef-num">88</div><div class="ef-date">13 abr 2024</div><div class="ef-title">El lenguaje como posible capital (¿Político?) Significados Simbólicos en el Relato de la Innovación</div></div>
+    <div class="ef-item"><div class="ef-num">89</div><div class="ef-date">19 mar 2024</div><div class="ef-title">Nvidia GTC: la conferencia de la era de inteligencia artificial</div></div>
+    <div class="ef-item"><div class="ef-num">90</div><div class="ef-date">02 feb 2024</div><div class="ef-title">Freud y la GenAI</div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2023 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(23 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">91</div><div class="ef-date">22 dic 2023</div><div class="ef-title">2024 : Cómo la IA, la cuántica, la robótica y tras tecnologías dejarán su huella</div></div>
+    <div class="ef-item"><div class="ef-num">92</div><div class="ef-date">13 nov 2023</div><div class="ef-title">ChatGPT apenas cumple un año y cada vez escribe mejor y ya dibuja</div></div>
+    <div class="ef-item"><div class="ef-num">93</div><div class="ef-date">27 oct 2023</div><div class="ef-title">‘OTIS’: La era digital y la imperante necesidad de científicos de datos ciudadanos</div></div>
+    <div class="ef-item"><div class="ef-num">94</div><div class="ef-date">03 oct 2023</div><div class="ef-title">La ciencia y la IA en la voz de ‘Nature’</div></div>
+    <div class="ef-item"><div class="ef-num">95</div><div class="ef-date">21 sep 2023</div><div class="ef-title">vaya semana para el aprendizaje con refuerzo a nivel mundial</div></div>
+    <div class="ef-item"><div class="ef-num">96</div><div class="ef-date">06 sep 2023</div><div class="ef-title">Felices 80 años al Tec de Monterrey</div></div>
+    <div class="ef-item"><div class="ef-num">97</div><div class="ef-date">01 sep 2023</div><div class="ef-title">Drones inteligentes derrotan a pilotos humanos gracias al aprendizaje profundo con refuerzo</div></div>
+    <div class="ef-item"><div class="ef-num">98</div><div class="ef-date">19 ago 2023</div><div class="ef-title">La automatización inteligente es urgente</div></div>
+    <div class="ef-item"><div class="ef-num">99</div><div class="ef-date">28 jul 2023</div><div class="ef-title">Acción afirmativa y diversidad en el mundo académico de USA</div></div>
+    <div class="ef-item"><div class="ef-num">100</div><div class="ef-date">18 jul 2023</div><div class="ef-title">¿ Por qué le llaman ‘Luna de Miel’?</div></div>
+    <div class="ef-item"><div class="ef-num">101</div><div class="ef-date">05 jul 2023</div><div class="ef-title">Amazon quiere comprar iRobot y los organismos antimonopolio reaccionan</div></div>
+    <div class="ef-item"><div class="ef-num">102</div><div class="ef-date">24 jun 2023</div><div class="ef-title">Titán: algunas experiencias cercanas en robótica submarina</div></div>
+    <div class="ef-item"><div class="ef-num">103</div><div class="ef-date">21 jun 2023</div><div class="ef-title">FAO reconoció la Milpa Maya Peninsular como un sistema del Patrimonio Agrícola Mundial</div></div>
+    <div class="ef-item"><div class="ef-num">104</div><div class="ef-date">07 jun 2023</div><div class="ef-title">Visitando Laguna Verde con Rubén Mares (RIP)</div></div>
+    <div class="ef-item"><div class="ef-num">105</div><div class="ef-date">26 may 2023</div><div class="ef-title">Ahí vienen las ciencias cognitivas</div></div>
+    <div class="ef-item"><div class="ef-num">106</div><div class="ef-date">02 may 2023</div><div class="ef-title">Preparando a nuestros jóvenes para incursionar competencias internacionales de robótica</div></div>
+    <div class="ef-item"><div class="ef-num">107</div><div class="ef-date">22 abr 2023</div><div class="ef-title">Wizeline aterriza en el mundo académico de Monterrey</div></div>
+    <div class="ef-item"><div class="ef-num">108</div><div class="ef-date">13 abr 2023</div><div class="ef-title">ChatGPTeando el desarrollo de software</div></div>
+    <div class="ef-item"><div class="ef-num">109</div><div class="ef-date">07 mar 2023</div><div class="ef-title">Nuevo presidente del Consejo del Tec de Monterrey</div></div>
+    <div class="ef-item"><div class="ef-num">110</div><div class="ef-date">22 feb 2023</div><div class="ef-title">Japón y la automatización en la vida diaria</div></div>
+    <div class="ef-item"><div class="ef-num">111</div><div class="ef-date">28 ene 2023</div><div class="ef-title">ChatGPT, el dilema de la innovación y los despidos masivos</div></div>
+    <div class="ef-item"><div class="ef-num">112</div><div class="ef-date">11 ene 2023</div><div class="ef-title">El Cómputo Evolutivo gana un lugar en el Colegio Nacional</div></div>
+    <div class="ef-item"><div class="ef-num">113</div><div class="ef-date">09 ene 2023</div><div class="ef-title">Transportes digitales en la era del conocimiento</div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2022 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(32 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">114</div><div class="ef-date">14 dic 2022</div><div class="ef-title">Mobileye, del paper al I.P.O. para salvar vidas</div></div>
+    <div class="ef-item"><div class="ef-num">115</div><div class="ef-date">01 dic 2022</div><div class="ef-title">2022 cierra el año con recortes de personal (downsizing) en empresas basadas en conocimiento</div></div>
+    <div class="ef-item"><div class="ef-num">116</div><div class="ef-date">09 nov 2022</div><div class="ef-title">Datathon y los retos en el Tec21 ante la pertinencia social y empresarial</div></div>
+    <div class="ef-item"><div class="ef-num">117</div><div class="ef-date">26 oct 2022</div><div class="ef-title">Las finanzas de los coches del futuro y las patentes</div></div>
+    <div class="ef-item"><div class="ef-num">118</div><div class="ef-date">15 oct 2022</div><div class="ef-title">Hardware de México para EU y el mundo</div></div>
+    <div class="ef-item"><div class="ef-num">119</div><div class="ef-date">04 oct 2022</div><div class="ef-title">El humanoide Optimus de Tesla y el robot Robbie Musk</div></div>
+    <div class="ef-item"><div class="ef-num">120</div><div class="ef-date">28 sep 2022</div><div class="ef-title">Team Science, hacer ciencia (y goles) en equipo</div></div>
+    <div class="ef-item"><div class="ef-num">121</div><div class="ef-date">23 sep 2022</div><div class="ef-title">ZF y el futuro de la industria automotriz en Nuevo León</div></div>
+    <div class="ef-item"><div class="ef-num">122</div><div class="ef-date">22 ago 2022</div><div class="ef-title">Michael Dell y el futuro de la electrónica de consumo</div></div>
+    <div class="ef-item"><div class="ef-num">123</div><div class="ef-date">13 ago 2022</div><div class="ef-title">El futuro uso eficiente de la energía depende de la ingeniería de control</div></div>
+    <div class="ef-item"><div class="ef-num">124</div><div class="ef-date">04 ago 2022</div><div class="ef-title">Los límites de lo posible, la última milla</div></div>
+    <div class="ef-item"><div class="ef-num">125</div><div class="ef-date">21 jul 2022</div><div class="ef-title">‘Ideas con Impacto’, felicidades al Harvard Business Review por sus 100 años</div></div>
+    <div class="ef-item"><div class="ef-num">126</div><div class="ef-date">13 jul 2022</div><div class="ef-title">El Covid en primera persona</div></div>
+    <div class="ef-item"><div class="ef-num">127</div><div class="ef-date">27 jun 2022</div><div class="ef-title">La batalla por el talento internacional en la industria del software</div></div>
+    <div class="ef-item"><div class="ef-num">128</div><div class="ef-date">21 jun 2022</div><div class="ef-title">LaMDA y la conciencia</div></div>
+    <div class="ef-item"><div class="ef-num">129</div><div class="ef-date">16 jun 2022</div><div class="ef-title">La inteligencia artificial en el Ejército de EU</div></div>
+    <div class="ef-item"><div class="ef-num">130</div><div class="ef-date">07 jun 2022</div><div class="ef-title">México y la Robótica Humanoide como innovación abierta</div></div>
+    <div class="ef-item"><div class="ef-num">131</div><div class="ef-date">27 may 2022</div><div class="ef-title">La Web 3.0 y el ‘blockchain’</div></div>
+    <div class="ef-item"><div class="ef-num">132</div><div class="ef-date">24 may 2022</div><div class="ef-title">Necesitamos más desarrollo tecnológico sobre el internet del futuro</div></div>
+    <div class="ef-item"><div class="ef-num">133</div><div class="ef-date">24 may 2022</div><div class="ef-title">Del cómputo cuántico dependerá nuestra resiliencia en telecomunicaciones</div></div>
+    <div class="ef-item"><div class="ef-num">134</div><div class="ef-date">08 may 2022</div><div class="ef-title">Necesitamos aumentar la participación de las mujeres en la innovación</div></div>
+    <div class="ef-item"><div class="ef-num">135</div><div class="ef-date">22 abr 2022</div><div class="ef-title">Desmitificando las redes neuronales convolucionales</div></div>
+    <div class="ef-item"><div class="ef-num">136</div><div class="ef-date">11 abr 2022</div><div class="ef-title">Fronteras de la innovación y la legalidad</div></div>
+    <div class="ef-item"><div class="ef-num">137</div><div class="ef-date">05 abr 2022</div><div class="ef-title">Morín, Piketty y el capital digital</div></div>
+    <div class="ef-item"><div class="ef-num">138</div><div class="ef-date">25 mar 2022</div><div class="ef-title">¿Qué tan inteligentes son actualmente los algoritmos?</div></div>
+    <div class="ef-item"><div class="ef-num">139</div><div class="ef-date">08 mar 2022</div><div class="ef-title">Mexicanas expertas en robótica en las grandes ligas</div></div>
+    <div class="ef-item"><div class="ef-num">140</div><div class="ef-date">02 mar 2022</div><div class="ef-title">Metaverso, guerra y madurez tecnológica</div></div>
+    <div class="ef-item"><div class="ef-num">141</div><div class="ef-date">22 feb 2022</div><div class="ef-title">Los retos de la educación progresiva</div></div>
+    <div class="ef-item"><div class="ef-num">142</div><div class="ef-date">08 feb 2022</div><div class="ef-title">Realidad aunque sea artificial</div></div>
+    <div class="ef-item"><div class="ef-num">143</div><div class="ef-date">28 ene 2022</div><div class="ef-title">La composición cognitiva computacional de las palabras</div></div>
+    <div class="ef-item"><div class="ef-num">144</div><div class="ef-date">18 ene 2022</div><div class="ef-title">Neuronas y máquinas</div></div>
+    <div class="ef-item"><div class="ef-num">145</div><div class="ef-date">07 ene 2022</div><div class="ef-title">Emprendimiento y unicornios de plastilina</div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2021 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(21 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">146</div><div class="ef-date">23 dic 2021</div><div class="ef-title">Vehículos autónomos y edición ‘online’</div></div>
+    <div class="ef-item"><div class="ef-num">147</div><div class="ef-date">03 dic 2021</div><div class="ef-title">Sistemas multiagentes en circunstancias extremas</div></div>
+    <div class="ef-item"><div class="ef-num">148</div><div class="ef-date">03 dic 2021</div><div class="ef-title">Sistemas multiagentes en circunstancias extremas</div></div>
+    <div class="ef-item"><div class="ef-num">149</div><div class="ef-date">23 nov 2021</div><div class="ef-title">Software para robótica de servicio, la nueva herramienta de educación tecnológica</div></div>
+    <div class="ef-item"><div class="ef-num">150</div><div class="ef-date">15 nov 2021</div><div class="ef-title">El algoritmo, la percepción pública de la ciencia</div></div>
+    <div class="ef-item"><div class="ef-num">151</div><div class="ef-date">20 oct 2021</div><div class="ef-title">La simulación computacional y el estado emprendedor</div></div>
+    <div class="ef-item"><div class="ef-num">152</div><div class="ef-date">08 oct 2021</div><div class="ef-title">El caótico Premio Nobel de Física 2021</div></div>
+    <div class="ef-item"><div class="ef-num">153</div><div class="ef-date">02 sep 2021</div><div class="ef-title">Ética, inteligencia artificial y emprendimiento</div></div>
+    <div class="ef-item"><div class="ef-num">154</div><div class="ef-date">24 ago 2021</div><div class="ef-title">TeslaBot 1.0</div></div>
+    <div class="ef-item"><div class="ef-num">155</div><div class="ef-date">20 jul 2021</div><div class="ef-title">La última milla</div></div>
+    <div class="ef-item"><div class="ef-num">156</div><div class="ef-date">05 jul 2021</div><div class="ef-title">Reducción de complejidad</div></div>
+    <div class="ef-item"><div class="ef-num">157</div><div class="ef-date">25 jun 2021</div><div class="ef-title">El regreso a la tecnificada realidad</div></div>
+    <div class="ef-item"><div class="ef-num">158</div><div class="ef-date">20 jun 2021</div><div class="ef-title">Georges Doriot y los orígenes del venture capital</div></div>
+    <div class="ef-item"><div class="ef-num">159</div><div class="ef-date">13 jun 2021</div><div class="ef-title">Optimismo y Norteamérica</div></div>
+    <div class="ef-item"><div class="ef-num">160</div><div class="ef-date">04 jun 2021</div><div class="ef-title">La nueva guerra fría</div></div>
+    <div class="ef-item"><div class="ef-num">161</div><div class="ef-date">28 may 2021</div><div class="ef-title">Hacia el Deep Thinking</div></div>
+    <div class="ef-item"><div class="ef-num">162</div><div class="ef-date">21 may 2021</div><div class="ef-title">Las ciencias y las tecnología para la predicción………… y la destrucción</div></div>
+    <div class="ef-item"><div class="ef-num">163</div><div class="ef-date">14 may 2021</div><div class="ef-title">Patentes y Vacunas</div></div>
+    <div class="ef-item"><div class="ef-num">164</div><div class="ef-date">08 may 2021</div><div class="ef-title">Debate sobre I. A</div></div>
+    <div class="ef-item"><div class="ef-num">165</div><div class="ef-date">03 may 2021</div><div class="ef-title">Code Breakers, descubrimientos científicos y emprendimiento tecnológico para la salud</div></div>
+    <div class="ef-item"><div class="ef-num">166</div><div class="ef-date">27 abr 2021</div><div class="ef-title">Genius Makers de Cade Metz</div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2020 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(12 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">167</div><div class="ef-date">27 jun 2020</div><div class="ef-title">Estado del arte y la pandemia COVID-19</div></div>
+    <div class="ef-item"><div class="ef-num">168</div><div class="ef-date">17 jun 2020</div><div class="ef-title">Creación de valor post pandemia</div></div>
+    <div class="ef-item"><div class="ef-num">169</div><div class="ef-date">01 jun 2020</div><div class="ef-title">Covid-19, la Teoría de Juegos y el Go</div></div>
+    <div class="ef-item"><div class="ef-num">170</div><div class="ef-date">28 may 2020</div><div class="ef-title">Covid-19, un problemas perverso y la panarquía</div></div>
+    <div class="ef-item"><div class="ef-num">171</div><div class="ef-date">17 may 2020</div><div class="ef-title">Orgasmo, torpedos y patentes: Hedwig Eva Maria Kiesler</div></div>
+    <div class="ef-item"><div class="ef-num">172</div><div class="ef-date">11 may 2020</div><div class="ef-title">Objetos virtuales, digitales y tangibles para la innovación durante contingencias</div></div>
+    <div class="ef-item"><div class="ef-num">173</div><div class="ef-date">27 abr 2020</div><div class="ef-title">Davos 2020, Covid-19 y las nuevas prácticas laborales</div></div>
+    <div class="ef-item"><div class="ef-num">174</div><div class="ef-date">30 mar 2020</div><div class="ef-title">Robótica y COVID-19</div></div>
+    <div class="ef-item"><div class="ef-num">175</div><div class="ef-date">07 mar 2020</div><div class="ef-title">Las mujeres y las TICs</div></div>
+    <div class="ef-item"><div class="ef-num">176</div><div class="ef-date">27 feb 2020</div><div class="ef-title">El descubrimiento de antibióticos con inteligencia artificial</div></div>
+    <div class="ef-item"><div class="ef-num">177</div><div class="ef-date">20 feb 2020</div><div class="ef-title">Los nuevos retos de la educación en casa para el futuro profesional de nuestros hijos</div></div>
+    <div class="ef-item"><div class="ef-num">178</div><div class="ef-date">04 feb 2020</div><div class="ef-title">Cambio tecnológico y la ansiedad de estar a la vanguardia</div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2019 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(3 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">179</div><div class="ef-date">04 nov 2019</div><div class="ef-title">La ciberseguridad es responsabilidad de todos</div></div>
+    <div class="ef-item"><div class="ef-num">180</div><div class="ef-date">08 may 2019</div><div class="ef-title">Data México: una oportunidad para decidir hacia dónde ir</div></div>
+    <div class="ef-item"><div class="ef-num">181</div><div class="ef-date">19 mar 2019</div><div class="ef-title">Plenumsoft ayuda a la transformación digital con Ciencia de Datos</div></div>
+  </div>
+  <div class="pub-year-group">
+    <div class="pub-year-header">2018 <span style="font-size:0.7rem;font-weight:400;opacity:0.7">(13 artículos)</span></div>
+    <div class="ef-item"><div class="ef-num">182</div><div class="ef-date">06 nov 2018</div><div class="ef-title">Paul Romer, Charter Cities y la Innovación en la ZEE de Progreso</div></div>
+    <div class="ef-item"><div class="ef-num">183</div><div class="ef-date">20 sep 2018</div><div class="ef-title">¿Transformación digital vs. Inteligencia Artificial?</div></div>
+    <div class="ef-item"><div class="ef-num">184</div><div class="ef-date">12 sep 2018</div><div class="ef-title">Quantinos... ¿Cuándo?</div></div>
+    <div class="ef-item"><div class="ef-num">185</div><div class="ef-date">22 ago 2018</div><div class="ef-title">Miradas que no matan y pueden evitar accidentes</div></div>
+    <div class="ef-item"><div class="ef-num">186</div><div class="ef-date">16 jul 2018</div><div class="ef-title">El Mayan Capital Fund, innovación en capital de riesgo</div></div>
+    <div class="ef-item"><div class="ef-num">187</div><div class="ef-date">27 jun 2018</div><div class="ef-title">Hendu, generando valor tecnológico desde México para el sector energético</div></div>
+    <div class="ef-item"><div class="ef-num">188</div><div class="ef-date">11 jun 2018</div><div class="ef-title">¿Cómo llevar a México a la vanguardia de la innovación?</div></div>
+    <div class="ef-item"><div class="ef-num">189</div><div class="ef-date">30 may 2018</div><div class="ef-title">IXP, el cerebelo de las comunicaciones digitales</div></div>
+    <div class="ef-item"><div class="ef-num">190</div><div class="ef-date">23 may 2018</div><div class="ef-title">IXP, el cerebellum de las comunicaciones digitales</div></div>
+    <div class="ef-item"><div class="ef-num">191</div><div class="ef-date">16 may 2018</div><div class="ef-title">Blockchain debe su origen a... la confianza</div></div>
+    <div class="ef-item"><div class="ef-num">192</div><div class="ef-date">17 abr 2018</div><div class="ef-title">Las industrias creativas: una oportunidad</div></div>
+    <div class="ef-item"><div class="ef-num">193</div><div class="ef-date">24 mar 2018</div><div class="ef-title">Hacia la creación de nuevos 'mater-IA-les'</div></div>
+    <div class="ef-item"><div class="ef-num">194</div><div class="ef-date">12 mar 2018</div><div class="ef-title">La economía digital marina</div></div>
+  </div>
+
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:16px;font-style:italic;">
+    Lista completa documentada del archivo SNI 2016–2026. Columna publicada en 
+    <a href="https://www.elfinanciero.com.mx/opinion/alberto-munoz/" target="_blank" style="color:var(--accent)">El Financiero</a>.
+  </p>
+</section>
+
+ style="border-top:2px solid var(--rule);padding-top:24px;margin-top:40px;font-size:0.8rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span>Dr. Luis Alberto Muñoz Ubando · CV in Extenso · Compiled 2026</span>
+  <span>103 publications · 83 El Financiero articles documented</span>
+</footer>
+
+</main>
+
+<script>
+// Scroll progress
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+  document.getElementById('progress').style.transform = `scaleX(${pct})`;
+});
+
+// Active nav link
+const sections = document.querySelectorAll('section[id], .hero');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const id = e.target.id || 'top';
+      const active = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

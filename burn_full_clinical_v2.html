@@ -1,0 +1,585 @@
+
+<div style="padding:1rem 0;font-family:var(--font-sans)">
+<h2 class="sr-only">Analizador clínico completo de quemaduras con referencias científicas</h2>
+<div id="app" style="max-width:940px;margin:0 auto">
+
+<!-- PACIENTE -->
+<div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:10px">
+<p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px">Datos del paciente</p>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px">
+<div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Edad (años)</label><input type="number" id="p-age" value="35" min="0" max="120" style="width:100%" oninput="updatePatient()"></div>
+<div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Peso (kg)</label><input type="number" id="p-weight" value="70" min="1" max="300" style="width:100%" oninput="updatePatient()"></div>
+<div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Estatura (cm)</label><input type="number" id="p-height" value="170" min="30" max="250" style="width:100%" oninput="updatePatient()"></div>
+<div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Sexo</label><select id="p-sex" style="width:100%" onchange="updatePatient()"><option value="m">Masculino</option><option value="f">Femenino</option></select></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px">
+<div style="grid-column:span 2"><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Nombre del paciente (opcional)</label><input type="text" id="p-name" placeholder="Ej. Juan Pérez" style="width:100%"></div>
+<div style="grid-column:span 2"><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Clave de paciente (opcional)</label><input type="text" id="p-key" placeholder="Ej. QMD-001" style="width:100%"></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">IMC</div><div style="font-size:16px;font-weight:500" id="bmi-val">—</div></div>
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">BSA total (cm²)</div><div style="font-size:16px;font-weight:500" id="bsa-val">—</div></div>
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">Clasificación IMC</div><div style="font-size:13px;font-weight:500" id="bmi-cls">—</div></div>
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">Grupo etario</div><div style="font-size:13px;font-weight:500" id="age-grp">—</div></div>
+</div>
+</div>
+
+<!-- CARGA DE IMAGEN -->
+<div style="display:grid;grid-template-columns:3fr 2fr;gap:10px;margin-bottom:10px">
+<div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem">
+<p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px">Fotografía de la quemadura</p>
+<label style="display:block;border:1.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-md);padding:1.2rem;text-align:center;cursor:pointer;color:var(--color-text-secondary);font-size:12px">
+<span id="upload-lbl">Clic o arrastra la imagen aquí</span>
+<input type="file" accept="image/*" id="img-in" style="display:none" onchange="loadImg(event)">
+</label>
+</div>
+<div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem">
+<p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 6px">Tonalidad analizada</p>
+<div id="swatch" style="height:36px;border-radius:var(--border-radius-md);background:#ddd;border:0.5px solid var(--color-border-tertiary);margin-bottom:6px"></div>
+<div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:6px" id="tone-desc">—</div>
+<div id="tone-badge" style="font-size:12px;font-weight:500;padding:4px 8px;border-radius:var(--border-radius-md);display:inline-block;background:#eee">—</div>
+</div>
+</div>
+
+<!-- REGIONES -->
+<div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:10px">
+<p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px">Región corporal afectada — <span style="font-weight:400">el color indica gravedad anatómica intrínseca</span></p>
+<div id="region-grid" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px"></div>
+<div id="region-info" style="display:none;padding:10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary)">
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+<div><div style="font-size:10px;color:var(--color-text-secondary)">Gravedad anat.</div><div style="font-size:14px;font-weight:500" id="ri-grav">—</div></div>
+<div><div style="font-size:10px;color:var(--color-text-secondary)">Cicatrización base</div><div style="font-size:14px;font-weight:500" id="ri-heal">—</div></div>
+<div><div style="font-size:10px;color:var(--color-text-secondary)">Riesgo funcional</div><div style="font-size:14px;font-weight:500" id="ri-func">—</div></div>
+<div><div style="font-size:10px;color:var(--color-text-secondary)">Riesgo estético</div><div style="font-size:14px;font-weight:500" id="ri-est">—</div></div>
+<div><div style="font-size:10px;color:var(--color-text-secondary)">Vascularización</div><div style="font-size:14px;font-weight:500" id="ri-vasc">—</div></div>
+</div>
+<div style="margin-top:8px;font-size:12px;color:var(--color-text-secondary)" id="ri-note"></div>
+</div>
+</div>
+
+<!-- LEYENDA -->
+<div style="display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
+<span style="font-size:11px;color:var(--color-text-secondary)">Gravedad anatómica:</span>
+<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#e8f5e9;color:#2e7d32;border:0.5px solid #a5d6a7">Baja</span>
+<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff3e0;color:#e65100;border:0.5px solid #ffcc80">Moderada</span>
+<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fce4ec;color:#b71c1c;border:0.5px solid #f48fb1">Alta</span>
+<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#4a0010;color:#ffcdd2;border:0.5px solid #880022">Crítica</span>
+</div>
+
+<!-- CANVAS -->
+<div id="canvas-sec" style="display:none;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:10px">
+<p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px">Ajustar wireframe y delimitar área</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+<div><label style="font-size:10px;color:var(--color-text-secondary)">Escala (<span id="sc-out">100</span>%)</label><input type="range" id="wf-sc" min="20" max="300" value="100" step="1" oninput="document.getElementById('sc-out').textContent=this.value;renderWF()" style="width:100%"></div>
+<div><label style="font-size:10px;color:var(--color-text-secondary)">Rotación (<span id="rt-out">0</span>°)</label><input type="range" id="wf-rt" min="-180" max="180" value="0" step="1" oninput="document.getElementById('rt-out').textContent=this.value;renderWF()" style="width:100%"></div>
+<div><label style="font-size:10px;color:var(--color-text-secondary)">Opacidad (<span id="op-out">50</span>%)</label><input type="range" id="wf-op" min="10" max="100" value="50" step="1" oninput="document.getElementById('op-out').textContent=this.value;renderWF()" style="width:100%"></div>
+</div>
+<div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center">
+<button onclick="setMode('move')" id="btn-mv" style="font-size:11px;padding:4px 10px;font-weight:500">Mover wireframe</button>
+<button onclick="setMode('draw')" id="btn-dr" style="font-size:11px;padding:4px 10px">Dibujar quemadura</button>
+<button onclick="doAnalyze()" style="font-size:11px;padding:4px 10px">Analizar tonalidad</button>
+<button onclick="clearD()" style="font-size:11px;padding:4px 10px">Borrar</button>
+<span style="font-size:11px;color:var(--color-text-secondary)" id="mode-lbl">Modo: mover wireframe</span>
+</div>
+<div style="position:relative;display:inline-block;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden;max-width:100%">
+<canvas id="pc" style="display:block;max-width:100%"></canvas>
+<canvas id="wc" style="position:absolute;top:0;left:0;pointer-events:none"></canvas>
+<canvas id="dc" style="position:absolute;top:0;left:0;cursor:grab"></canvas>
+</div>
+</div>
+
+<!-- RESULTADOS -->
+<div id="res-sec" style="display:none;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:10px">
+<p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 10px">Valoración clínica integral</p>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px">
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">Área quemada</div><div style="font-size:18px;font-weight:500" id="r-area">—</div></div>
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">% SCQ</div><div style="font-size:18px;font-weight:500" id="r-pct">—</div></div>
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">Grado estimado</div><div style="font-size:18px;font-weight:500" id="r-deg">—</div></div>
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">Índice Baux</div><div style="font-size:18px;font-weight:500" id="r-baux">—</div></div>
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px;text-align:center"><div style="font-size:10px;color:var(--color-text-secondary)">Gravedad global</div><div style="font-size:14px;font-weight:500" id="r-grav">—</div></div>
+</div>
+<div id="prog-box" style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px"></div>
+<div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+<button onclick="saveInference()" style="font-size:12px;padding:6px 12px;font-weight:500">Guardar inferencia del paciente</button>
+<span id="save-status" style="font-size:11px;color:var(--color-text-secondary)">Guarda para seguimiento evolutivo.</span>
+</div>
+</div>
+<!-- CONSULTAS EVOLUTIVAS -->
+<div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:10px">
+<p style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin:0 0 8px">Consultas y comparativo por paciente</p>
+<div style="display:grid;grid-template-columns:2fr 2fr auto;gap:8px;align-items:end;margin-bottom:10px">
+<div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Nombre del paciente</label><input type="text" id="q-name" placeholder="Buscar por nombre" style="width:100%"></div>
+<div><label style="font-size:11px;color:var(--color-text-secondary);display:block;margin-bottom:3px">Clave del paciente</label><input type="text" id="q-key" placeholder="Buscar por clave" style="width:100%"></div>
+<div><button onclick="loadPatientHistory()" style="font-size:12px;padding:6px 12px;font-weight:500">Consultar</button></div>
+</div>
+<div id="query-status" style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px">Consulta el histórico para ver evolución diaria.</div>
+<div id="query-results" style="display:flex;flex-direction:column;gap:8px"></div>
+</div>
+
+<!-- COMENTARIO FINAL -->
+<div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:10px">
+<label for="final-comment" style="font-size:12px;font-weight:500;color:var(--color-text-secondary);display:block;margin:0 0 8px">Comentario final (opcional)</label>
+<textarea id="final-comment" rows="4" maxlength="600" placeholder="Escribe aquí observaciones adicionales del caso..." style="width:100%;resize:vertical;font-family:inherit;font-size:12px;padding:10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary)"></textarea>
+<div style="font-size:10px;color:var(--color-text-secondary);margin-top:6px">Este comentario se guarda localmente mientras mantengas abierta esta página.</div>
+</div>
+<!-- DESCARGO -->
+<div style="font-size:10px;color:var(--color-text-secondary);padding:6px 8px;border-radius:var(--border-radius-md);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);margin-bottom:12px">Herramienta educativa. No reemplaza la valoración médica profesional.</div>
+
+<!-- BOTÓN REFERENCIAS -->
+<div style="text-align:center;margin-bottom:10px">
+<button onclick="toggleRefs()" id="refs-btn" style="font-size:13px;padding:8px 24px;font-weight:500;border-radius:var(--border-radius-lg)">Referencias científicas</button>
+</div>
+
+<!-- PANEL DE REFERENCIAS -->
+<div id="refs-panel" style="display:none;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.2rem;margin-bottom:16px">
+<p style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin:0 0 4px">Base bibliográfica</p>
+<p style="font-size:11px;color:var(--color-text-secondary);margin:0 0 16px">Fuentes científicas que respaldan cada elemento clínico de esta herramienta</p>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px">
+<div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.04em">Índice de Baux y predicción de mortalidad</div>
+<div style="font-size:12px;line-height:1.7;color:var(--color-text-primary)">
+<div style="margin-bottom:4px">[1] Baux S. (1961). <em>Contribution à l'étude du traitement local des brûlures thermiques étendues.</em> Thèse, Paris. — Score original edad + %SCQ.</div>
+<div style="margin-bottom:4px">[2] Osler T. et al. (2010). Simplified estimates of the probability of death after burn injuries. <em>J Trauma.</em> PMID: 20065766. — Revisión que añade lesión por inhalación.</div>
+<div style="margin-bottom:4px">[3] Revisión sistemática rBaux (2010–2022), 21 estudios. <em>J Burn Care Res</em>, 2023. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10185079/" style="color:var(--color-text-info)">PMC10185079</a></div>
+<div style="margin-bottom:4px">[4] Metaanálisis 9 modelos de riesgo, 34 estudios, 98,610 pacientes. <em>PRS Global Open</em>, 2022. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9760622/" style="color:var(--color-text-info)">PMC9760622</a></div>
+<div style="margin-bottom:4px">[5] Comparación ABSI, rBaux, BOBI, FLAMES. <em>MDPI IJERPH</em>, 2022. <a href="https://www.mdpi.com/1660-4601/19/19/12321" style="color:var(--color-text-info)">DOI:10.3390/ijerph191912321</a></div>
+<div>[6] Validación rBaux en Uganda (101 pacientes, AUC 0.943). <em>Ann Med Surg</em>, 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11305736/" style="color:var(--color-text-info)">PMC11305736</a></div>
+</div>
+</div>
+
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px">
+<div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.04em">Superficie corporal (BSA) y %SCQ</div>
+<div style="font-size:12px;line-height:1.7;color:var(--color-text-primary)">
+<div style="margin-bottom:4px">[7] Mosteller RD. (1987). Simplified calculation of body-surface area. <em>NEJM</em> 317:1098. PMID: 3657876. — Fórmula BSA = √(altura×peso/3600).</div>
+<div style="margin-bottom:4px">[8] Wallace AB. (1951). The exposure treatment of burns. <em>Lancet.</em> — Regla de los 9 original.</div>
+<div style="margin-bottom:4px">[9] Lund CC, Browder NC. (1944). The estimation of areas of burns. <em>Surg Gynecol Obstet.</em> — Tabla de Lund-Browder, estándar de oro pediátrico.</div>
+<div style="margin-bottom:4px">[10] Moore RA et al. (2024). Rule of Nines. <em>StatPearls, NCBI.</em> <a href="https://www.ncbi.nlm.nih.gov/books/NBK513287/" style="color:var(--color-text-info)">NBK513287</a></div>
+<div style="margin-bottom:4px">[11] Meevassana et al. (2022). 3D PED BURN app vs métodos convencionales. <em>Health Sci Reports.</em> <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/hsr2.694" style="color:var(--color-text-info)">DOI:10.1002/hsr2.694</a></div>
+<div>[12] Parkland formula. <em>StatPearls, NCBI.</em> <a href="https://www.ncbi.nlm.nih.gov/books/NBK537190/" style="color:var(--color-text-info)">NBK537190</a></div>
+</div>
+</div>
+
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px">
+<div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.04em">Cicatrización por grado de quemadura</div>
+<div style="font-size:12px;line-height:1.7;color:var(--color-text-primary)">
+<div style="margin-bottom:4px">[13] MSKTC. (2023). Wound Care After a Burn Injury. <a href="https://msktc.org/burn/factsheets/wound-care-after-burn-injury" style="color:var(--color-text-info)">msktc.org/burn</a> — 2.º grado: 1–3 semanas; 3.º grado: requiere injerto.</div>
+<div style="margin-bottom:4px">[14] Management of burn injuries of various depths. <em>BMJ</em>, 2004. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC478230/" style="color:var(--color-text-info)">PMC478230</a> — Cicatrización según densidad de anexos cutáneos.</div>
+<div style="margin-bottom:4px">[15] Greenhalgh DG. (2020). Management of facial burns. <em>Burns & Trauma</em> 8:tkaa023. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7336183/" style="color:var(--color-text-info)">PMC7336183</a> — Meta: cierre facial en menos de 2–3 semanas.</div>
+<div>[16] Wound Healing Phases. <em>StatPearls, NCBI.</em> <a href="https://www.ncbi.nlm.nih.gov/books/NBK470443/" style="color:var(--color-text-info)">NBK470443</a> — Heridas crónicas: no cicatrizan en 4–6 semanas; factores: hipoxia, isquemia, diabetes.</div>
+</div>
+</div>
+
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px">
+<div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.04em">Gravedad anatómica por región corporal</div>
+<div style="font-size:12px;line-height:1.7;color:var(--color-text-primary)">
+<div style="margin-bottom:4px">[17] Post-burn scars and scar contractures. <em>Indian J Plast Surg</em>, 2010. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3038392/" style="color:var(--color-text-info)">PMC3038392</a> — Contractura de cuello, mano, microstomía como las secuelas más graves.</div>
+<div style="margin-bottom:4px">[18] Scar Contractures. <em>Textbook on Scar Management</em>, Springer 2020. <a href="https://www.ncbi.nlm.nih.gov/books/NBK586056/" style="color:var(--color-text-info)">NBK586056</a> — Cuello, articulaciones, mano y cara: zonas de máximo riesgo de contractura.</div>
+<div style="margin-bottom:4px">[19] Burn Scar Contracture overview. <em>ScienceDirect Topics.</em> <a href="https://www.sciencedirect.com/topics/medicine-and-dentistry/burn-scar-contracture" style="color:var(--color-text-info)">sciencedirect.com</a> — Dorso de la mano: limitación severa sin rehabilitación precoz.</div>
+<div>[20] Epidemiology of Scars. <em>Textbook on Scar Management</em>, Springer 2020. <a href="https://link.springer.com/chapter/10.1007/978-3-030-44766-3_5" style="color:var(--color-text-info)">DOI:10.1007/978-3-030-44766-3_5</a> — Prevalencia de cicatrización hipertrófica: 8%–67%.</div>
+</div>
+</div>
+
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px">
+<div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.04em">Cicatriz hipertrófica — factores de riesgo</div>
+<div style="font-size:12px;line-height:1.7;color:var(--color-text-primary)">
+<div style="margin-bottom:4px">[21] Compression Therapy and Scar Management. <em>StatPearls/NCBI</em>, 2020. <a href="https://www.ncbi.nlm.nih.gov/books/NBK586113/" style="color:var(--color-text-info)">NBK586113</a> — Prevalencia 32–72%; factores: sexo femenino, edad joven, cara/cuello/MMSS, tiempo de cierre >3 semanas, TBSA >20%.</div>
+<div style="margin-bottom:4px">[22] Understanding Risk Factors for Burn Hypertrophic Scar. <em>Sunshine Training</em>, 2025. <a href="https://www.sunshinetraining.org/post/risk-factors-for-burn-hypertrophic-scar-development" style="color:var(--color-text-info)">sunshinetraining.org</a> — Articulaciones, cuello, axila, antebrazos, manos, tronco, rodillas, tobillos y pies: monitoreo especial.</div>
+<div style="margin-bottom:4px">[23] Hypertrophic Scar Formation Following Burns. <em>PLOS Medicine</em>, 2007. <a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.0040234" style="color:var(--color-text-info)">DOI:10.1371/journal.pmed.0040234</a> — Fenotipos de cicatriz varían por región corporal.</div>
+<div>[24] Burn scar contracture — Wikipedia (revisada 2025). <a href="https://en.wikipedia.org/wiki/Burn_scar_contracture" style="color:var(--color-text-info)">wikipedia.org</a> — Heridas que tardan >2–3 semanas: riesgo elevado de cicatriz hipertrófica.</div>
+</div>
+</div>
+
+<div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px">
+<div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.04em">Clasificación por tonalidad (análisis RGB)</div>
+<div style="font-size:12px;line-height:1.7;color:var(--color-text-primary)">
+<div style="margin-bottom:4px">[25] MSKTC. (2023). Understanding a Burn Injury. <a href="https://msktc.org/burn/factsheets/understanding-burn-injury" style="color:var(--color-text-info)">msktc.org</a> — Criterios visuales: rojo brillante (1.°), rojo/ampollas (2.° sup.), pálido/amarillento (2.° prof.), negro/carbón (3.°).</div>
+<div style="margin-bottom:4px">[26] The Burn Wound Healing Process: A Review. <em>IJPSAT</em>, 2023. <a href="https://ijpsat.org/index.php/ijpsat/article/download/5565/3466" style="color:var(--color-text-info)">ijpsat.org</a> — Fases inflamación, proliferación y remodelación; variabilidad según profundidad.</div>
+<div>[27] Burn Wound: How it differs from other wounds. <em>PMC</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3495387/" style="color:var(--color-text-info)">PMC3495387</a> — Clasificación clínica por capas afectadas.</div>
+</div>
+</div>
+
+<div style="margin-top:12px;padding:10px;border-radius:var(--border-radius-md);background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary)">
+<p style="font-size:11px;color:var(--color-text-secondary);margin:0 0 4px;font-weight:500">Nota metodológica</p>
+<p style="font-size:11px;color:var(--color-text-secondary);margin:0;line-height:1.6">El análisis de tonalidad por RGB es una aproximación heurística basada en semiología visual clínica estándar, no un sistema de diagnóstico validado de forma independiente. Los umbrales de color implementados derivan de la semiología descrita en las referencias [25–27]. La gravedad anatómica por región y los factores de cicatrización están respaldados por las referencias [17–24]. El Índice de Baux utilizado es la versión original (edad + %SCQ), no la revisada (que incluye lesión inhalación), por limitación del sistema de entrada de datos. Ningún elemento reemplaza la valoración médica especializada presencial.</p>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<style>
+#region-grid button{font-size:11px;padding:3px 8px;border-radius:20px;border:0.5px solid}
+#region-grid button.active{outline:2px solid #1a73e8;outline-offset:1px}
+</style>
+
+<script>
+const REGIONS=[
+  {id:'face',label:'Cara',base:175,f9:4.5,anatomicSeverity:'Crítica',sevScore:4,healBase:'3–6 sem',healMod:1.4,funcRisk:'Muy alto',estRisk:'Muy alto',vasc:'Excelente',note:'Zona de máxima gravedad estética y funcional. Afecta visión, respiración, alimentación. Alta tendencia a cicatriz hipertrófica periorbitaria y peribucal.'},
+  {id:'scalp',label:'Cuero cab.',base:600,f9:4.5,anatomicSeverity:'Alta',sevScore:3,healBase:'2–4 sem',healMod:1.1,funcRisk:'Bajo',estRisk:'Alto',vasc:'Excelente',note:'Alta vascularización favorece cicatrización rápida. La alopecia cicatricial es irreversible. Riesgo de osteítis si hay exposición ósea craneal.'},
+  {id:'neck',label:'Cuello',base:120,f9:1,anatomicSeverity:'Crítica',sevScore:4,healBase:'4–8 sem',healMod:1.5,funcRisk:'Muy alto',estRisk:'Muy alto',vasc:'Buena',note:'Región crítica por riesgo de contractura cervical que limita movilidad. Peligro de compromiso de vía aérea en quemaduras circunferenciales. Requiere fisioterapia intensiva.'},
+  {id:'chest',label:'Pecho',base:900,f9:9,anatomicSeverity:'Alta',sevScore:3,healBase:'3–5 sem',healMod:1.2,funcRisk:'Alto',estRisk:'Moderado',vasc:'Buena',note:'Quemaduras circunferenciales del tórax pueden comprometer la mecánica respiratoria (escarotomía urgente). Mama en mujeres: riesgo de retracción permanente.'},
+  {id:'abdomen',label:'Abdomen',base:850,f9:9,anatomicSeverity:'Moderada',sevScore:2,healBase:'2–4 sem',healMod:1.0,funcRisk:'Moderado',estRisk:'Moderado',vasc:'Buena',note:'Cicatrización relativamente favorable. Vigilar en obesos por pliegues cutáneos. El movimiento respiratorio retrasa la maduración cicatricial.'},
+  {id:'upperback',label:'Espalda sup.',base:950,f9:9,anatomicSeverity:'Moderada',sevScore:2,healBase:'2–4 sem',healMod:1.0,funcRisk:'Moderado',estRisk:'Moderado',vasc:'Buena',note:'Zona con piel gruesa: cicatriza mejor que zonas anteriores. Tensión muscular puede retrasar el cierre. Menor riesgo funcional salvo quemaduras muy extensas.'},
+  {id:'lowerback',label:'Espalda inf.',base:800,f9:9,anatomicSeverity:'Moderada',sevScore:2,healBase:'2–4 sem',healMod:1.0,funcRisk:'Moderado',estRisk:'Bajo',vasc:'Buena',note:'Similar a espalda superior. Zona de presión al decúbito: riesgo de maceración en pacientes encamados.'},
+  {id:'rarm',label:'Brazo der.',base:290,f9:4,anatomicSeverity:'Moderada',sevScore:2,healBase:'2–3 sem',healMod:1.0,funcRisk:'Moderado',estRisk:'Moderado',vasc:'Buena',note:'Quemaduras circunferenciales pueden comprometer circulación distal. Vigilar pulsos distales. Fisioterapia precoz previene contracturas.'},
+  {id:'larm',label:'Brazo izq.',base:290,f9:4,anatomicSeverity:'Moderada',sevScore:2,healBase:'2–3 sem',healMod:1.0,funcRisk:'Moderado',estRisk:'Moderado',vasc:'Buena',note:'Igual que brazo derecho. En lado dominante el impacto funcional es mayor.'},
+  {id:'rfore',label:'Antebrazo der.',base:161,f9:3,anatomicSeverity:'Alta',sevScore:3,healBase:'3–5 sem',healMod:1.2,funcRisk:'Alto',estRisk:'Alto',vasc:'Moderada',note:'Quemaduras profundas afectan tendones flexores/extensores. Cicatriz en cara volar causa contractura en flexión severa. Injerto frecuentemente necesario.'},
+  {id:'lfore',label:'Antebrazo izq.',base:161,f9:3,anatomicSeverity:'Alta',sevScore:3,healBase:'3–5 sem',healMod:1.2,funcRisk:'Alto',estRisk:'Alto',vasc:'Moderada',note:'Igual que antebrazo derecho. Especial atención a la cara anterior (volar) donde los tendones son superficiales.'},
+  {id:'rhand',label:'Mano der.',base:78,f9:2.5,anatomicSeverity:'Crítica',sevScore:4,healBase:'4–8 sem',healMod:1.6,funcRisk:'Muy alto',estRisk:'Alto',vasc:'Moderada',note:'Zona de máxima complejidad funcional. Tendones, articulaciones y estructuras neurovasculares muy superficiales. Quemaduras profundas comprometen la función de por vida.'},
+  {id:'lhand',label:'Mano izq.',base:78,f9:2.5,anatomicSeverity:'Crítica',sevScore:4,healBase:'4–8 sem',healMod:1.6,funcRisk:'Muy alto',estRisk:'Alto',vasc:'Moderada',note:'Igual gravedad que mano derecha. En mano dominante el impacto funcional es máximo (escritura, prensión fina).'},
+  {id:'rthigh',label:'Muslo der.',base:1400,f9:9.5,anatomicSeverity:'Moderada',sevScore:2,healBase:'2–4 sem',healMod:1.0,funcRisk:'Moderado',estRisk:'Moderado',vasc:'Excelente',note:'Zona con piel gruesa y buena vascularización. Cicatrización favorable. Zona donante habitual de injertos de piel.'},
+  {id:'lthigh',label:'Muslo izq.',base:1400,f9:9.5,anatomicSeverity:'Moderada',sevScore:2,healBase:'2–4 sem',healMod:1.0,funcRisk:'Moderado',estRisk:'Moderado',vasc:'Excelente',note:'Igual que muslo derecho. La cara interna es más susceptible a maceración.'},
+  {id:'rleg',label:'Pierna der.',base:600,f9:7,anatomicSeverity:'Alta',sevScore:3,healBase:'4–8 sem',healMod:1.4,funcRisk:'Alto',estRisk:'Moderado',vasc:'Mala',note:'Cicatrización más lenta del cuerpo por déficit vascular distal. En diabéticos o vasculopatía el pronóstico es muy desfavorable. Alta tasa de infección crónica.'},
+  {id:'lleg',label:'Pierna izq.',base:600,f9:7,anatomicSeverity:'Alta',sevScore:3,healBase:'4–8 sem',healMod:1.4,funcRisk:'Alto',estRisk:'Moderado',vasc:'Mala',note:'Igual que pierna derecha. Las quemaduras pretibiales (sobre el hueso) tienen pronóstico especialmente malo ya que el tejido subcutáneo es mínimo.'},
+  {id:'rfoot',label:'Pie der.',base:120,f9:3.5,anatomicSeverity:'Alta',sevScore:3,healBase:'5–10 sem',healMod:1.5,funcRisk:'Muy alto',estRisk:'Moderado',vasc:'Mala',note:'Cicatrización muy lenta por baja perfusión distal. La carga de peso retarda la epitelización. Las quemaduras plantares son especialmente graves por ser zona de apoyo.'},
+  {id:'lfoot',label:'Pie izq.',base:120,f9:3.5,anatomicSeverity:'Alta',sevScore:3,healBase:'5–10 sem',healMod:1.5,funcRisk:'Muy alto',estRisk:'Moderado',vasc:'Mala',note:'Igual que pie derecho.'},
+];
+
+const SEV_STYLE={
+  'Baja':    {bg:'#e8f5e9',fg:'#2e7d32',border:'#a5d6a7'},
+  'Moderada':{bg:'#fff3e0',fg:'#e65100',border:'#ffcc80'},
+  'Alta':    {bg:'#fce4ec',fg:'#b71c1c',border:'#f48fb1'},
+  'Crítica': {bg:'#4a0010',fg:'#ffcdd2',border:'#880022'},
+};
+
+const WF={
+  face:[[[60,10],[90,10],[100,30],[105,55],[100,75],[90,95],[70,110],[50,110],[30,95],[20,75],[15,55],[20,30],[30,10]]],
+  scalp:[[[55,5],[95,5],[110,25],[108,55],[95,70],[75,80],[55,80],[35,70],[22,55],[20,25]]],
+  neck:[[[45,5],[75,5],[85,10],[88,50],[85,65],[75,70],[45,70],[35,65],[32,50],[35,10]]],
+  chest:[[[20,5],[110,5],[125,15],[130,60],[125,100],[20,100],[15,60],[10,15]],[[50,25],[80,25],[80,55],[50,55]]],
+  abdomen:[[[25,5],[105,5],[115,50],[110,95],[80,100],[50,100],[20,95],[15,50]]],
+  upperback:[[[20,5],[110,5],[125,15],[130,70],[25,70],[10,15]]],
+  lowerback:[[[20,5],[110,5],[120,50],[115,95],[80,100],[50,100],[15,95],[10,50]]],
+  rarm:[[[30,5],[65,5],[75,25],[72,80],[60,110],[45,110],[30,80],[15,25]]],
+  larm:[[[30,5],[65,5],[75,25],[72,80],[60,110],[45,110],[30,80],[15,25]]],
+  rfore:[[[28,5],[60,5],[68,20],[65,90],[52,105],[35,105],[22,90],[18,20]]],
+  lfore:[[[28,5],[60,5],[68,20],[65,90],[52,105],[35,105],[22,90],[18,20]]],
+  rhand:[[[20,5],[68,5],[72,15],[75,35],[72,55],[68,75],[55,90],[50,100],[40,100],[25,85],[18,65],[15,45],[17,20]]],
+  lhand:[[[20,5],[68,5],[72,15],[75,35],[72,55],[68,75],[55,90],[50,100],[40,100],[25,85],[18,65],[15,45],[17,20]]],
+  rthigh:[[[25,5],[80,5],[90,30],[88,90],[80,120],[55,125],[35,120],[22,90],[18,30]]],
+  lthigh:[[[25,5],[80,5],[90,30],[88,90],[80,120],[55,125],[35,120],[22,90],[18,30]]],
+  rleg:[[[28,5],[65,5],[73,25],[70,90],[58,108],[40,108],[27,90],[22,25]]],
+  lleg:[[[28,5],[65,5],[73,25],[70,90],[58,108],[40,108],[27,90],[22,25]]],
+  rfoot:[[[5,25],[100,10],[110,25],[108,50],[95,65],[60,70],[20,68],[8,55],[5,35]]],
+  lfoot:[[[5,25],[100,10],[110,25],[108,50],[95,65],[60,70],[20,68],[8,55],[5,35]]],
+};
+
+let pc,wc,dc,pctx,wctx,dctx;
+let img=null,sel=null,bsa=0;
+let wfX=200,wfY=150,mode='move';
+let drawing=false,dragging=false;
+let pts=[],dsx,dsy,dwx,dwy;
+let siw=1,IW=0,IH=0;
+let burnResult=null;
+let currentImageDataUrl='';
+let currentImageName='';
+let latestComputed=null;
+
+function toggleRefs(){
+  const p=document.getElementById('refs-panel');
+  const b=document.getElementById('refs-btn');
+  if(p.style.display==='none'){p.style.display='block';b.textContent='Ocultar referencias';p.scrollIntoView({behavior:'smooth',block:'start'});}
+  else{p.style.display='none';b.textContent='Referencias científicas';}
+}
+
+function updatePatient(){
+  const age=+document.getElementById('p-age').value||35;
+  const w=+document.getElementById('p-weight').value||70;
+  const h=+document.getElementById('p-height').value||170;
+  const imc=w/((h/100)**2);
+  const bsaM2=Math.sqrt((h*w)/3600);
+  bsa=bsaM2*10000;
+  document.getElementById('bmi-val').textContent=imc.toFixed(1);
+  document.getElementById('bsa-val').textContent=Math.round(bsa).toLocaleString();
+  const cls=imc<18.5?'Bajo peso':imc<25?'Normal':imc<30?'Sobrepeso':imc<35?'Obesidad I':imc<40?'Obesidad II':'Obesidad III';
+  document.getElementById('bmi-cls').textContent=cls;
+  const grp=age<5?'Pediátrico (<5)':age<15?'Pediátrico':age<65?'Adulto':'Adulto mayor';
+  document.getElementById('age-grp').textContent=grp;
+  const bsaRef=18000;
+  REGIONS.forEach(r=>{r.adjArea=Math.round(r.base*(bsa/bsaRef));});
+}
+
+function init(){
+  const grid=document.getElementById('region-grid');
+  REGIONS.forEach(r=>{
+    const s=SEV_STYLE[r.anatomicSeverity]||SEV_STYLE['Moderada'];
+    const btn=document.createElement('button');
+    btn.textContent=r.label;btn.id='btn-'+r.id;
+    btn.style.background=s.bg;btn.style.color=s.fg;btn.style.borderColor=s.border;
+    btn.onclick=()=>selectR(r);
+    grid.appendChild(btn);
+  });
+  updatePatient();
+}
+
+function selectR(r){
+  document.querySelectorAll('#region-grid button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-'+r.id).classList.add('active');
+  sel=r;pts=[];burnResult=null;renderWF();renderD();
+  const ri=document.getElementById('region-info');ri.style.display='block';
+  const s=SEV_STYLE[r.anatomicSeverity];
+  document.getElementById('ri-grav').textContent=r.anatomicSeverity;
+  document.getElementById('ri-grav').style.color=s.fg;
+  document.getElementById('ri-heal').textContent=r.healBase;
+  document.getElementById('ri-func').textContent=r.funcRisk;
+  document.getElementById('ri-est').textContent=r.estRisk;
+  document.getElementById('ri-vasc').textContent=r.vasc;
+  document.getElementById('ri-note').textContent=r.note;
+  document.getElementById('res-sec').style.display='none';
+}
+
+function loadImg(e){
+  const f=e.target.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=ev=>{const im=new Image();im.onload=()=>{img=im;currentImageDataUrl=ev.target.result;currentImageName=f.name;document.getElementById('upload-lbl').textContent=f.name;document.getElementById('canvas-sec').style.display='block';setupC();};im.src=ev.target.result;};
+  rd.readAsDataURL(f);
+}
+
+function setupC(){
+  pc=document.getElementById('pc');wc=document.getElementById('wc');dc=document.getElementById('dc');
+  pctx=pc.getContext('2d');wctx=wc.getContext('2d');dctx=dc.getContext('2d');
+  const mw=Math.min(840,img.width);siw=Math.min(mw/img.width,560/img.height,1);
+  IW=Math.round(img.width*siw);IH=Math.round(img.height*siw);
+  [pc,wc,dc].forEach(c=>{c.width=IW;c.height=IH;c.style.width=IW+'px';c.style.height=IH+'px';});
+  pctx.drawImage(img,0,0,IW,IH);wfX=IW/2;wfY=IH/2;pts=[];renderWF();
+  dc.addEventListener('mousedown',onMD);dc.addEventListener('mousemove',onMM);dc.addEventListener('mouseup',onMU);dc.addEventListener('mouseleave',onMU);
+}
+
+function renderWF(){
+  if(!wctx)return;wctx.clearRect(0,0,wc.width,wc.height);if(!sel)return;
+  const wfPts=WF[sel.id];if(!wfPts)return;
+  const ws=+document.getElementById('wf-sc').value/100;
+  const rot=+document.getElementById('wf-rt').value*Math.PI/180;
+  const op=+document.getElementById('wf-op').value/100;
+  const s=SEV_STYLE[sel.anatomicSeverity];
+  wctx.save();wctx.globalAlpha=op;wctx.translate(wfX,wfY);wctx.rotate(rot);wctx.scale(ws,ws);
+  wfPts.forEach(poly=>{
+    const cx=poly.reduce((a,p)=>a+p[0],0)/poly.length;
+    const cy=poly.reduce((a,p)=>a+p[1],0)/poly.length;
+    wctx.beginPath();poly.forEach((p,i)=>{i===0?wctx.moveTo(p[0]-cx,p[1]-cy):wctx.lineTo(p[0]-cx,p[1]-cy);});
+    wctx.closePath();wctx.fillStyle=s.bg+'88';wctx.strokeStyle=s.fg;wctx.lineWidth=1.8/ws;wctx.fill();wctx.stroke();
+  });wctx.restore();
+}
+
+function renderD(){
+  if(!dctx)return;dctx.clearRect(0,0,dc.width,dc.height);if(pts.length<2)return;
+  dctx.beginPath();dctx.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>dctx.lineTo(p[0],p[1]));
+  if(!drawing)dctx.closePath();
+  dctx.fillStyle='rgba(220,50,30,0.25)';dctx.strokeStyle='rgba(180,20,10,0.85)';dctx.lineWidth=2;
+  if(!drawing)dctx.fill();dctx.stroke();
+}
+
+function onMD(e){
+  const r=dc.getBoundingClientRect();const mx=e.clientX-r.left,my=e.clientY-r.top;
+  if(mode==='move'){dragging=true;dsx=mx;dsy=my;dwx=wfX;dwy=wfY;dc.style.cursor='grabbing';}
+  else{drawing=true;pts=[[mx,my]];renderD();}
+}
+function onMM(e){
+  const r=dc.getBoundingClientRect();const mx=e.clientX-r.left,my=e.clientY-r.top;
+  if(mode==='move'&&dragging){wfX=dwx+(mx-dsx);wfY=dwy+(my-dsy);renderWF();}
+  else if(mode==='draw'&&drawing){pts.push([mx,my]);renderD();}
+}
+function onMU(){
+  if(mode==='move'){dragging=false;dc.style.cursor='grab';}
+  if(mode==='draw'&&drawing){drawing=false;renderD();}
+}
+
+function setMode(m){
+  mode=m;dc.style.cursor=m==='draw'?'crosshair':'grab';
+  document.getElementById('mode-lbl').textContent='Modo: '+(m==='draw'?'dibujar quemadura':'mover wireframe');
+  document.getElementById('btn-mv').style.fontWeight=m==='move'?'500':'400';
+  document.getElementById('btn-dr').style.fontWeight=m==='draw'?'500':'400';
+}
+
+function pxArea(points){
+  let a=0;const n=points.length;
+  for(let i=0;i<n;i++){const j=(i+1)%n;a+=points[i][0]*points[j][1]-points[j][0]*points[i][1];}
+  return Math.abs(a)/2;
+}
+
+function wfPxArea(){
+  if(!sel)return 1;
+  const wfPts=WF[sel.id][0];const ws=+document.getElementById('wf-sc').value/100;
+  const cx=wfPts.reduce((a,p)=>a+p[0],0)/wfPts.length;
+  const cy=wfPts.reduce((a,p)=>a+p[1],0)/wfPts.length;
+  const mp=wfPts.map(p=>[(p[0]-cx)*ws+wfX,(p[1]-cy)*ws+wfY]);
+  return pxArea(mp)||1;
+}
+
+function classifyColor(r,g,b){
+  const br=(r+g+b)/3;const rd=r-Math.max(g,b);
+  if(br<50)return{deg:'3.º grado',desc:'Carbonización/necrosis',col:'#2c1810',sev:4,w:[0,0],scar:'Cicatriz grave inevitable. Injerto obligatorio.'};
+  if(br>200&&rd<20)return{deg:'2.º grado prof.',desc:'Pálido/amarillento',col:'#b8860b',sev:3,w:[3,8],scar:'Alta prob. cicatriz hipertrófica. Evaluar injerto.'};
+  if(br<100&&rd>10)return{deg:'2.º grado prof.',desc:'Rojo oscuro',col:'#8b1a1a',sev:3,w:[3,6],scar:'Riesgo moderado-alto de secuela cicatricial.'};
+  if(rd>30&&br>120)return{deg:'2.º grado sup.',desc:'Rojo intenso/ampollas',col:'#c0392b',sev:2,w:[2,3],scar:'Cicatrización espontánea probable. Vigilar hiperpigmentación.'};
+  if(rd>15&&br>160)return{deg:'1.er grado',desc:'Eritema superficial',col:'#e05050',sev:1,w:[0.5,1],scar:'Resolución sin secuelas en 5–10 días.'};
+  return{deg:'Indeterminado',desc:'Tonalidad mixta',col:'#777',sev:0,w:[null,null],scar:'Valoración presencial necesaria.'};
+}
+
+function doAnalyze(){
+  if(pts.length<3||!img){alert('Dibuja primero el área quemada.');return;}
+  const off=document.createElement('canvas');off.width=IW;off.height=IH;
+  const oc=off.getContext('2d');oc.drawImage(img,0,0,IW,IH);
+  const mask=document.createElement('canvas');mask.width=IW;mask.height=IH;
+  const mc=mask.getContext('2d');
+  mc.beginPath();mc.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>mc.lineTo(p[0],p[1]));
+  mc.closePath();mc.fillStyle='#fff';mc.fill();
+  const md=mc.getImageData(0,0,IW,IH).data;
+  const id=oc.getImageData(0,0,IW,IH).data;
+  let r=0,g=0,b=0,n=0;
+  for(let i=0;i<md.length;i+=4){if(md[i]>128){r+=id[i];g+=id[i+1];b+=id[i+2];n++;}}
+  if(!n){alert('No se pudo analizar.');return;}
+  r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
+  burnResult=classifyColor(r,g,b);
+  document.getElementById('swatch').style.background=`rgb(${r},${g},${b})`;
+  document.getElementById('tone-desc').textContent=`RGB(${r},${g},${b}) — ${burnResult.desc}`;
+  const tb=document.getElementById('tone-badge');
+  tb.textContent=burnResult.deg;tb.style.background=burnResult.col+'22';tb.style.color=burnResult.col;tb.style.border='0.5px solid '+burnResult.col;
+  document.getElementById('r-deg').textContent=burnResult.deg;
+  showResults();
+}
+
+function showResults(){
+  if(!sel||pts.length<3)return;
+  const area=sel.adjArea||sel.base;
+  const cm2=pxArea(pts)*(area/wfPxArea());
+  const pct=(cm2/bsa)*100;
+  const age=+document.getElementById('p-age').value||35;
+  const baux=Math.round(age+pct);
+  document.getElementById('r-area').textContent=cm2.toFixed(1)+' cm²';
+  document.getElementById('r-pct').textContent=pct.toFixed(2)+'%';
+  document.getElementById('r-baux').textContent=baux;
+  const anSev=sel.sevScore||2;const burnSev=(burnResult||{sev:0}).sev||0;
+  const ageFactor=age<5||age>65?1:0;const bsaFactor=pct>20?2:pct>10?1:0;
+  const total=anSev+burnSev+ageFactor+bsaFactor;
+  const gravLabel=total>=9?'Crítica':total>=7?'Muy grave':total>=5?'Grave':total>=3?'Moderada':'Leve';
+  const gravColor={Crítica:'#4a0010','Muy grave':'#b71c1c',Grave:'#e65100',Moderada:'#e65100',Leve:'#2e7d32'}[gravLabel]||'#555';
+  const gEl=document.getElementById('r-grav');gEl.textContent=gravLabel;gEl.style.color=gravColor;
+  const burn=burnResult||{deg:'—',sev:0,w:[null,null],scar:'—',col:'#888'};
+  const hm=sel.healMod||1.0;
+  const healText=burn.w[0]!==null?`${(burn.w[0]*hm).toFixed(1)}–${(burn.w[1]*hm).toFixed(1)} semanas (ajustado por región ×${hm})`:'Indeterminado';
+  const baux_msg=baux>100?'Pronóstico vital muy grave (mortalidad elevada)':baux>80?'Pronóstico vital grave':baux>60?'Pronóstico moderadamente grave':'Pronóstico vital favorable';
+  const tx=burn.sev===1?'Hidratación tópica, protección solar. Sin apósito especial.':burn.sev===2?'Apósitos no adherentes, antisépticos (clorhexidina), control 48h. Fisioterapia precoz en '+sel.label+'.':burn.sev===3?'Desbridamiento, injerto anticipado. Prendas de compresión 12–18 meses. Fisioterapia intensiva.':burn.sev===4?'Escarectomía urgente. Injerto/colgajo. UCI quemados si SCQ>20%.':'Valoración presencial urgente.';
+  latestComputed={
+    region:sel,
+    cm2:+cm2.toFixed(1),
+    pct:+pct.toFixed(2),
+    baux,
+    gravLabel,
+    healText,
+    treatment:tx,
+    scarRisk:burn.scar,
+    tone:document.getElementById('tone-desc').textContent,
+    degree:burn.deg
+  };
+  document.getElementById('prog-box').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Cicatrización estimada</div><div style="font-size:13px;margin-bottom:10px">${healText}</div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Tratamiento recomendado</div><div style="font-size:13px;margin-bottom:10px">${tx}</div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Secuelas cicatriciales</div><div style="font-size:13px">${burn.scar}</div></div><div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Índice de Baux (${baux})</div><div style="font-size:13px;margin-bottom:10px">${baux_msg}</div><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:3px">Nota anatómica</div><div style="font-size:13px;margin-bottom:10px">${sel.note}</div>${age<5||age>65?`<div style="font-size:12px;font-weight:500;color:#b71c1c;padding:6px 8px;border-radius:var(--border-radius-md);background:#fce4ec;border:0.5px solid #f48fb1">Paciente en grupo de alto riesgo (edad: ${age} años).</div>`:''}</div></div><div style="margin-top:10px;font-size:11px;color:var(--color-text-secondary);padding-top:8px;border-top:0.5px solid var(--color-border-tertiary)">Puntuación compuesta: anatómica (${anSev}/4) + grado (${burnSev}/4) + edad (${ageFactor}/1) + SCQ (${bsaFactor}/2) = <strong>${total}</strong> → <strong style="color:${gravColor}">${gravLabel}</strong></div>`;
+  document.getElementById('res-sec').style.display='block';
+}
+
+function clearD(){
+  pts=[];burnResult=null;
+  if(dctx)dctx.clearRect(0,0,dc.width,dc.height);
+  document.getElementById('res-sec').style.display='none';
+  document.getElementById('swatch').style.background='#ddd';
+  document.getElementById('tone-desc').textContent='—';
+  document.getElementById('tone-badge').textContent='—';
+  document.getElementById('tone-badge').style.background='#eee';
+  document.getElementById('tone-badge').style.color='';
+  document.getElementById('tone-badge').style.border='';
+}
+
+
+function buildPatientIdentifier(){
+  const name=(document.getElementById('p-name')?.value||'').trim();
+  const key=(document.getElementById('p-key')?.value||'').trim();
+  if(!name&&!key)return null;
+  return {name,key};
+}
+
+async function saveInference(){
+  const status=document.getElementById('save-status');
+  if(!latestComputed||!currentImageDataUrl){status.textContent='Primero analiza una imagen antes de guardar.';status.style.color='#b71c1c';return;}
+  const patient=buildPatientIdentifier();
+  if(!patient){status.textContent='Captura al menos nombre o clave del paciente.';status.style.color='#b71c1c';return;}
+  status.textContent='Guardando inferencia...';status.style.color='var(--color-text-secondary)';
+  try{
+    const payload={
+      patientName:patient.name,
+      patientKey:patient.key,
+      imageDataUrl:currentImageDataUrl,
+      imageName:currentImageName||'quemadura.jpg',
+      inference:{
+        age:+document.getElementById('p-age').value||null,
+        sex:document.getElementById('p-sex').value,
+        region:latestComputed.region.label,
+        regionId:latestComputed.region.id,
+        areaCm2:latestComputed.cm2,
+        pctScq:latestComputed.pct,
+        baux:latestComputed.baux,
+        gravedad:latestComputed.gravLabel,
+        grado:latestComputed.degree,
+        tono:latestComputed.tone,
+        cicatrizacion:latestComputed.healText,
+        tratamiento:latestComputed.treatment,
+        riesgoCicatriz:latestComputed.scarRisk,
+        comentario:(document.getElementById('final-comment').value||'').trim()
+      }
+    };
+    const r=await fetch('/api/burn-inference',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Error guardando');
+    status.textContent=`Guardado exitoso. Registros del paciente: ${d.totalEntries}.`;
+    status.style.color='#2e7d32';
+    document.getElementById('q-name').value=patient.name;
+    document.getElementById('q-key').value=patient.key;
+  }catch(err){
+    status.textContent='No se pudo guardar: '+err.message;
+    status.style.color='#b71c1c';
+  }
+}
+
+function renderHistory(records){
+  const root=document.getElementById('query-results');
+  root.innerHTML='';
+  if(!records.length){root.innerHTML='<div style="font-size:11px;color:var(--color-text-secondary)">No hay registros para ese paciente.</div>';return;}
+  records.sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt));
+  const firstArea=records[0].areaCm2||0;
+  records.forEach((rec,idx)=>{
+    const delta=firstArea?(((rec.areaCm2-firstArea)/firstArea)*100):0;
+    const prev=idx>0?records[idx-1]:null;
+    const deltaPrev=prev&&prev.areaCm2?(((rec.areaCm2-prev.areaCm2)/prev.areaCm2)*100):0;
+    const card=document.createElement('div');
+    card.style.cssText='background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px';
+    card.innerHTML=`<div style="display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:start"><div>${rec.imageUrl?`<a href="${rec.imageUrl}" target="_blank" rel="noopener"><img src="${rec.imageUrl}" alt="Evolución" style="width:140px;height:105px;object-fit:cover;border-radius:6px;border:0.5px solid var(--color-border-tertiary)"></a>`:'Sin imagen'}</div><div><div style="font-size:12px;font-weight:500">${new Date(rec.createdAt).toLocaleString('es-MX')}</div><div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Región: ${rec.region||'—'} · Grado: ${rec.grado||'—'} · Gravedad: ${rec.gravedad||'—'}</div><div style="font-size:11px;margin-top:4px">Área: <strong>${rec.areaCm2||'—'} cm²</strong> · %SCQ: <strong>${rec.pctScq||'—'}%</strong> · Baux: <strong>${rec.baux||'—'}</strong></div><div style="font-size:11px;margin-top:4px">Δ vs primera: <strong style="color:${delta<=0?'#2e7d32':'#b71c1c'}">${delta.toFixed(1)}%</strong>${prev?` · Δ vs previa: <strong style="color:${deltaPrev<=0?'#2e7d32':'#b71c1c'}">${deltaPrev.toFixed(1)}%</strong>`:''}</div></div></div>`;
+    root.appendChild(card);
+  });
+}
+
+async function loadPatientHistory(){
+  const name=(document.getElementById('q-name').value||'').trim();
+  const key=(document.getElementById('q-key').value||'').trim();
+  const st=document.getElementById('query-status');
+  if(!name&&!key){st.textContent='Ingresa nombre o clave para consultar.';st.style.color='#b71c1c';return;}
+  st.textContent='Consultando histórico...';st.style.color='var(--color-text-secondary)';
+  try{
+    const params=new URLSearchParams();
+    if(name)params.set('name',name);
+    if(key)params.set('key',key);
+    const r=await fetch('/api/burn-consult?'+params.toString());
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Error de consulta');
+    st.textContent=`Registros encontrados: ${d.totalEntries}.`;
+    st.style.color='#2e7d32';
+    renderHistory(d.records||[]);
+  }catch(err){
+    st.textContent='No se pudo consultar: '+err.message;
+    st.style.color='#b71c1c';
+  }
+}
+
+init();setMode('move');
+</script>
+</div>
