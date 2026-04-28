@@ -810,11 +810,26 @@ async function enviarSolicitud() {
       body: JSON.stringify(registro)
     });
 
-    if (!res.ok) {
-      throw new Error('La respuesta de red no fue satisfactoria.');
+    const result = await res.json();
+
+    if (!res.ok || !result.ok) {
+      throw new Error(result?.error || 'La respuesta de red no fue satisfactoria.');
     }
 
-    // 2. Éxito: Ocultar paneles y mostrar success screen
+    // 2. Descargar el archivo .txt localmente
+    const contenidoTxt = Object.entries(registro).map(([k, v]) => `${k.toUpperCase()}: ${v}`).join('\n');
+    const blob = new Blob([contenidoTxt], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `solicitud_${code}.txt`;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    // 3. Éxito: Ocultar paneles y mostrar success screen
     document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
     document.getElementById('stepsNav').style.display = 'none';
     document.querySelector('.progress-bar').style.display = 'none';
@@ -827,7 +842,7 @@ async function enviarSolicitud() {
 
   } catch (error) {
     console.error('Error enviando la solicitud:', error);
-    // 3. Error: Restaurar botón y mostrar alerta
+    // 4. Error: Restaurar botón y mostrar alerta
     alert('Ocurrió un problema y la solicitud no pudo ser enviada. Por favor, inténtalo de nuevo más tarde.');
     btn.innerHTML = originalText;
     btn.disabled = false;
