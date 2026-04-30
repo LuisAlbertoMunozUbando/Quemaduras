@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo web de documentos - Plataforma IA Universitaria</title>
+<style>
+:root {
+  --bg:#07111f; --panel:#0d1b2d; --panel2:#10243c; --card:#102033;
+  --ink:#eef6ff; --muted:#aac0d6; --line:#284059;
+  --blue:#39bdf8; --violet:#a78bfa; --green:#34d399; --amber:#fbbf24; --rose:#fb7185;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(57,189,248,.20), transparent 30%),
+    radial-gradient(circle at 80% 0%, rgba(167,139,250,.18), transparent 35%),
+    linear-gradient(135deg, #07111f, #0b1324 45%, #111827);
+  color:var(--ink); line-height:1.55;
+}
+header {
+  padding: 64px min(7vw, 90px) 44px;
+  border-bottom:1px solid var(--line);
+}
+.eyebrow { color:var(--blue); text-transform:uppercase; letter-spacing:.16em; font-size:.8rem; font-weight:800; }
+h1 { font-size: clamp(2.3rem, 5vw, 5rem); line-height:.98; margin:14px 0 20px; max-width:1180px; }
+.lead { font-size: clamp(1.05rem, 1.7vw, 1.35rem); color:#d9e8f8; max-width:1100px; }
+nav {
+  position:sticky; top:0; z-index:20; padding:12px min(7vw, 90px); background:rgba(7,17,31,.88);
+  backdrop-filter: blur(14px); border-bottom:1px solid var(--line); display:flex; gap:10px; flex-wrap:wrap;
+}
+nav a { color:#dff6ff; text-decoration:none; font-size:.92rem; border:1px solid var(--line); padding:8px 12px; border-radius:999px; }
+nav a:hover { background:rgba(57,189,248,.15); border-color:var(--blue); }
+main { padding: 36px min(7vw, 90px) 80px; }
+section { margin: 0 0 70px; }
+h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); margin:0 0 18px; }
+h3 { margin:0 0 10px; color:#e0f2fe; }
+.grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:18px; }
+.card, .doc-card, .axis-card, .callout, .panel {
+  background:linear-gradient(180deg, rgba(16,32,51,.94), rgba(13,27,45,.94));
+  border:1px solid var(--line); border-radius:24px; padding:22px; box-shadow: 0 24px 55px rgba(0,0,0,.25);
+}
+.callout { border-color: rgba(57,189,248,.45); background:rgba(57,189,248,.07); }
+.warning { border-color: rgba(251,191,36,.45); background:rgba(251,191,36,.07); }
+.muted { color:var(--muted); }
+.kpi-wrap { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:22px; }
+.metric { border:1px solid var(--line); border-radius:20px; padding:18px; background:rgba(15,23,42,.58); }
+.metric strong { display:block; font-size:2rem; color:var(--green); line-height:1; }
+.metric span { display:block; margin-top:8px; }
+.metric small { color:var(--muted); }
+.flow { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; counter-reset:step; }
+.step { position:relative; padding:20px; border:1px solid var(--line); border-radius:22px; background:rgba(15,23,42,.54); }
+.step:before { counter-increment:step; content: counter(step); display:inline-grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--blue); color:#00111f; font-weight:900; margin-bottom:10px; }
+.toolbar { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:18px 0 22px; }
+input, select { background:#07111f; color:var(--ink); border:1px solid var(--line); border-radius:14px; padding:12px 14px; min-width:240px; }
+.doc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; }
+.doc-card { transition: transform .15s ease, border-color .15s ease; }
+.doc-card:hover { transform: translateY(-3px); border-color:rgba(57,189,248,.7); }
+.doc-top { display:flex; gap:14px; align-items:flex-start; }
+.num { flex:0 0 auto; width:44px; height:44px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg,var(--blue),var(--violet)); color:#06111f; font-weight:900; }
+.meta { color:var(--muted); margin:.15rem 0 1rem; font-size:.94rem; }
+details { margin:14px 0; padding:12px 14px; border:1px solid var(--line); border-radius:16px; background:rgba(7,17,31,.48); }
+summary { cursor:pointer; font-weight:800; color:#bae6fd; }
+li { margin:6px 0; }
+.tag { display:inline-block; margin:4px 6px 0 0; padding:4px 8px; border:1px solid var(--line); border-radius:999px; color:#dbeafe; font-size:.78rem; }
+table { width:100%; border-collapse:collapse; overflow:hidden; border-radius:18px; background:rgba(7,17,31,.5); }
+th, td { padding:13px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { text-align:left; background:rgba(57,189,248,.12); color:#e0f2fe; }
+tr:hover td { background:rgba(57,189,248,.05); }
+.table-wrap { overflow:auto; border:1px solid var(--line); border-radius:18px; }
+.term { display:grid; grid-template-columns:minmax(180px, 280px) 1fr; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); }
+dt { color:#fef3c7; font-weight:900; }
+dd { margin:0; color:#d8e6f4; }
+footer { padding:32px min(7vw, 90px); color:var(--muted); border-top:1px solid var(--line); }
+@media (max-width:720px) { .term { grid-template-columns:1fr; } input,select { min-width:100%; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Catálogo documental interactivo</div>
+  <h1>Plataforma para habilitar la IA en universidades</h1>
+  <p class="lead">
+    Esta página organiza los documentos cargados como una arquitectura institucional: visión, diagnóstico,
+    capacitación, ética, diseño curricular, pilotos, evidencia, agentes educativos, métricas e industria.
+    El objetivo es que puedas ver rápidamente qué contiene cada documento y qué papel juega en una plataforma universitaria de IA.
+  </p>
+  <p class="muted">Generado el 30/04/2026 · 20 documentos analizados · formato HTML autónomo</p>
+</header>
+
+<nav>
+  <a href="#resumen">Resumen</a>
+  <a href="#arquitectura">Arquitectura</a>
+  <a href="#catalogo">Catálogo</a>
+  <a href="#tabla">Tabla maestra</a>
+  <a href="#diccionario">Diccionario</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#fuentes">Fuentes</a>
+</nav>
+
+<main>
+<section id="resumen">
+  <h2>1. Resumen ejecutivo</h2>
+  <div class="callout">
+    <p><strong>Lectura estratégica:</strong> los documentos no son piezas sueltas; juntos forman un sistema completo para habilitar IA en una universidad. La plataforma resultante debería diagnosticar habilidades, formar docentes y estudiantes, normar el uso ético, rediseñar actividades y planes de estudio, desplegar herramientas, documentar pilotos, medir resultados y conectar a la comunidad con industria y ecosistemas de IA.</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Qué ya existe</h3><p>Un conjunto robusto de lineamientos, guías rápidas, autodiagnóstico, rutas de capacitación, mapas curriculares, portafolios de proyectos, dashboard de avances y evidencia de investigación educativa.</p></div>
+    <div class="card"><h3>Qué habilita</h3><p>Pasar de “usar IA” a gobernar, medir y escalar IA en docencia, investigación, gestión e integración disciplinar.</p></div>
+    <div class="card"><h3>Qué falta convertir en plataforma</h3><p>Unificar estos documentos en un portal con perfiles de usuario, rutas recomendadas, repositorio de actividades, analítica de avance, políticas declarativas y evidencia por programa.</p></div>
+  </div>
+  <div class="kpi-wrap">
+  <div class="metric"><strong>23</strong><span>actividades registradas</span><small>Proyectos.xlsx</small></div>
+  <div class="metric"><strong>17</strong><span>programas participantes</span><small>Proyectos.xlsx</small></div>
+  <div class="metric"><strong>58</strong><span>docentes implementadores</span><small>Proyectos.xlsx</small></div>
+  <div class="metric"><strong>1,929</strong><span>estudiantes alcanzados</span><small>Proyectos.xlsx</small></div>
+  <div class="metric"><strong>77</strong><span>grupos reportados</span><small>Proyectos.xlsx</small></div>
+  <div class="metric"><strong>32</strong><span>docentes en investigación de programación</span><small>Resultados enero 2026.pdf</small></div>
+  <div class="metric"><strong>53</strong><span>grupos en investigación de programación</span><small>Resultados enero 2026.pdf</small></div>
+  <div class="metric"><strong>1,457</strong><span>estudiantes en investigación de programación</span><small>Resultados enero 2026.pdf</small></div>
+  <div class="metric"><strong>20</strong><span>proyectos reportados en avances</span><small>Avances IA 202513.pdf</small></div>
+  <div class="metric"><strong>23</strong><span>herramientas especializadas</span><small>Avances IA 202513.pdf</small></div></div>
+</section>
+
+<section id="arquitectura">
+  <h2>2. Arquitectura conceptual de la plataforma</h2>
+  <p class="muted">La arquitectura se desprende de la función que cumple cada documento.</p>
+  <div class="flow">
+    <div class="step"><h3>Visión</h3><p>Fundamentos, Plan Estratégico, prioridades EIC y narrativa institucional.</p></div>
+    <div class="step"><h3>Diagnóstico</h3><p>Autodiagnóstico de seis dimensiones y resultados por docente.</p></div>
+    <div class="step"><h3>Formación</h3><p>Cursos, rutas AI Literacy, CEDDIE, CADIs y capacitación avanzada.</p></div>
+    <div class="step"><h3>Gobernanza</h3><p>Lineamientos para alumnos y profesores, integridad académica, declaración de uso y acciones no éticas.</p></div>
+    <div class="step"><h3>Currículo</h3><p>Mapeo de temáticas, línea IA, especificaciones por disciplina y unidades formativas.</p></div>
+    <div class="step"><h3>Pilotos</h3><p>Convocatorias, proyectos, actividades y experiencias digitales de aprendizaje.</p></div>
+    <div class="step"><h3>Evidencia</h3><p>Resultados, investigación, dashboards, métricas de alcance y análisis de impacto.</p></div>
+    <div class="step"><h3>Ecosistema</h3><p>Eventos, industria, Nvidia, MéxicoIA+, comunidad, herramientas e infraestructura.</p></div>
+  </div>
+</section>
+
+<section id="catalogo">
+  <h2>3. Catálogo de documentos</h2>
+  <p class="muted">Usa el buscador para filtrar por archivo, eje o palabra clave.</p>
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="Buscar: ética, autodiagnóstico, proyectos, currículo, Copilot...">
+    <select id="axis">
+      <option value="">Todos los ejes</option>
+      <option value="agentes y experiencias digitales">Agentes y experiencias digitales</option><option value="capacitación docente">Capacitación docente</option><option value="despliegue y comunicación">Despliegue y comunicación</option><option value="diagnóstico docente">Diagnóstico docente</option><option value="diagnóstico y recomendación">Diagnóstico y recomendación</option><option value="diseño curricular">Diseño curricular</option><option value="ecosistema e industria">Ecosistema e industria</option><option value="estrategia docente y cultura">Estrategia docente y cultura</option><option value="evaluación de impacto">Evaluación de impacto</option><option value="ia en disciplinas">IA en disciplinas</option><option value="innovación educativa">Innovación educativa</option><option value="pilotos y experimentación">Pilotos y experimentación</option><option value="portafolio de proyectos">Portafolio de proyectos</option><option value="secuencia curricular">Secuencia curricular</option><option value="seguimiento institucional">Seguimiento institucional</option><option value="visión y fundamentos">Visión y fundamentos</option><option value="ética e integridad para estudiantes">Ética e integridad para estudiantes</option><option value="ética e integridad para profesores">Ética e integridad para profesores</option><option value="ética, integridad y diseño docente">Ética, integridad y diseño docente</option><option value="ética, integridad y gobernanza">Ética, integridad y gobernanza</option>
+    </select>
+  </div>
+  <div class="doc-grid" id="docGrid">
+    
+    <article class="doc-card" data-title="fundamentos ia para potenciar las habilidades humanas_agosto 25.pdf" data-axis="visión y fundamentos" data-keywords="fundamentos habilidades humanas currículo ética uso eficiente diseño de soluciones">
+      <div class="doc-top">
+        <span class="num">01</span>
+        <div>
+          <h3>Fundamentos IA para potenciar las habilidades humanas_Agosto 25.pdf</h3>
+          <p class="meta">Marco estratégico / fundamentos · 14 págs. · <strong>Visión y fundamentos</strong></p>
+        </div>
+      </div>
+      <p>Define la línea de Fundamentos de IA para potenciar habilidades humanas, alineada al Plan Estratégico 2030 y a la prioridad de liderazgo educativo para un mundo con IA. Resume una investigación de marcos globales y propone componentes de entendimiento de IA, ética y responsabilidad, uso eficiente y aplicación de IA en el diseño de soluciones.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Presentación institucional</li><li>Panorama de investigación y hallazgos</li><li>Conclusiones: IA como pilar curricular, no como complemento</li><li>Componentes formativos: entendimiento, ética, uso eficiente, diseño de soluciones</li><li>Plan de actualización</li></ul>
+        <p><strong>Usuario principal:</strong> Estudiantes, docentes, diseño curricular, dirección académica</p>
+        <p><strong>Función en la plataforma:</strong> Documento base para convertir la estrategia de IA en marco curricular y en lenguaje común para toda la universidad.</p>
+      </details>
+      <div><span class="tag">fundamentos</span><span class="tag">habilidades humanas</span><span class="tag">currículo</span><span class="tag">ética</span><span class="tag">uso eficiente</span><span class="tag">diseño de soluciones</span></div>
+    </article>
+    <article class="doc-card" data-title="autodiagnóstico de habilidades básicas de inteligencia artificial.pdf" data-axis="diagnóstico docente" data-keywords="autodiagnóstico 6 dimensiones ai literacy docentes medición">
+      <div class="doc-top">
+        <span class="num">02</span>
+        <div>
+          <h3>Autodiagnóstico de habilidades básicas de inteligencia artificial.pdf</h3>
+          <p class="meta">Instrumento de diagnóstico · 10 págs. · <strong>Diagnóstico docente</strong></p>
+        </div>
+      </div>
+      <p>Cuestionario basado en el AI Literacy Framework del Digital Education Council y el documento Artificial intelligence and data ethics de SFIA Foundation. Evalúa seis dimensiones de habilidades básicas de IA.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Dimensión 1: Entendiendo la IA y los datos</li><li>Dimensión 2: Pensamiento crítico y aprendizaje del estudiantado</li><li>Dimensión 3: Ética y responsabilidad</li><li>Dimensión 4: Innovación educativa con IA</li><li>Dimensión 5: Adaptabilidad y respuesta al cambio</li><li>Dimensión 6: Aplicación de IA en la disciplina</li></ul>
+        <p><strong>Usuario principal:</strong> Docentes EIC / profesores que deben identificar su nivel de habilidades de IA</p>
+        <p><strong>Función en la plataforma:</strong> Motor de entrada de la plataforma: permite segmentar docentes, recomendar rutas de formación y medir avance.</p>
+      </details>
+      <div><span class="tag">autodiagnóstico</span><span class="tag">6 dimensiones</span><span class="tag">AI literacy</span><span class="tag">docentes</span><span class="tag">medición</span></div>
+    </article>
+    <article class="doc-card" data-title="habilidades básicas ia.pdf" data-axis="capacitación docente" data-keywords="capacitación ceddie coursera rutas docentes ai literacy">
+      <div class="doc-top">
+        <span class="num">03</span>
+        <div>
+          <h3>Habilidades básicas IA.pdf</h3>
+          <p class="meta">Ruta de capacitación / presentación · 22 págs. · <strong>Capacitación docente</strong></p>
+        </div>
+      </div>
+      <p>Presenta la visión institucional, prioridades EIC 25-26 y una ruta de autodiagnóstico y capacitación para docentes. Vincula cada dimensión con cursos, recursos y experiencias sugeridas.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Visión institucional de IA</li><li>Prioridad EIC 25-26</li><li>Diseño del autodiagnóstico</li><li>Cursos recomendados por dimensión</li><li>Acceso a cursos AI Literacy del CEDDIE</li><li>Seguimiento de capacitación</li></ul>
+        <p><strong>Usuario principal:</strong> Docentes, DAF, DAA, directores de departamento</p>
+        <p><strong>Función en la plataforma:</strong> Backbone de habilitación: traduce diagnóstico en desarrollo docente con cursos, materiales, seguimiento y comunidades.</p>
+      </details>
+      <div><span class="tag">capacitación</span><span class="tag">CEDDIE</span><span class="tag">Coursera</span><span class="tag">rutas</span><span class="tag">docentes</span><span class="tag">AI Literacy</span></div>
+    </article>
+    <article class="doc-card" data-title="correo inicial a docentes.pdf" data-axis="despliegue y comunicación" data-keywords="correo convocatoria interna onboarding docentes">
+      <div class="doc-top">
+        <span class="num">04</span>
+        <div>
+          <h3>Correo inicial a docentes.pdf</h3>
+          <p class="meta">Comunicación operativa · 2 págs. · <strong>Despliegue y comunicación</strong></p>
+        </div>
+      </div>
+      <p>Plantilla de correo institucional que explica la prioridad de liderazgo en IA, presenta el plan de desarrollo de habilidades básicas y convoca al autodiagnóstico.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Mensaje institucional</li><li>Explicación de las seis dimensiones</li><li>Liga al formulario</li><li>Promesa de resultados por correo</li><li>Seguimiento por DAF</li></ul>
+        <p><strong>Usuario principal:</strong> Docentes convocados al autodiagnóstico</p>
+        <p><strong>Función en la plataforma:</strong> Pieza de onboarding: activa la participación docente y formaliza el inicio del proceso de habilitación.</p>
+      </details>
+      <div><span class="tag">correo</span><span class="tag">convocatoria interna</span><span class="tag">onboarding</span><span class="tag">docentes</span></div>
+    </article>
+    <article class="doc-card" data-title="ejemplo resultados.pdf" data-axis="diagnóstico y recomendación" data-keywords="resultados recomendación brecha objetivo eic">
+      <div class="doc-top">
+        <span class="num">05</span>
+        <div>
+          <h3>Ejemplo resultados.pdf</h3>
+          <p class="meta">Reporte individual automatizado · 2 págs. · <strong>Diagnóstico y recomendación</strong></p>
+        </div>
+      </div>
+      <p>Ejemplo de correo de resultados con escala 0 a 6 por dimensión, objetivos EIC y puntajes del docente. Remite al archivo de cursos para cerrar brechas.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Tabla de dimensión, objetivo EIC y resultado docente</li><li>Escala 0-6</li><li>Instrucciones de uso de resultados</li><li>Referencia a cursos recomendados</li></ul>
+        <p><strong>Usuario principal:</strong> Docente que completó el autodiagnóstico</p>
+        <p><strong>Función en la plataforma:</strong> Módulo de retroalimentación: transforma respuestas del diagnóstico en recomendación accionable.</p>
+      </details>
+      <div><span class="tag">resultados</span><span class="tag">recomendación</span><span class="tag">brecha</span><span class="tag">objetivo EIC</span></div>
+    </article>
+    <article class="doc-card" data-title="lineamientos-eticos-alumnos-tec-de-monterrey.pdf" data-axis="ética, integridad y gobernanza" data-keywords="estudiantes ética integridad académica declaración de uso glosario">
+      <div class="doc-top">
+        <span class="num">06</span>
+        <div>
+          <h3>lineamientos-eticos-alumnos-tec-de-monterrey.pdf</h3>
+          <p class="meta">Política / lineamientos completos · 38 págs. · <strong>Ética, integridad y gobernanza</strong></p>
+        </div>
+      </div>
+      <p>Documento completo de lineamientos para el uso ético de IA dirigido al estudiantado. Incluye premisas generales, principios éticos, integridad académica, lineamientos, acciones no éticas, usos posibles, recursos, anexos y glosario.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Presentación</li><li>Premisas sobre uso de IA</li><li>Principios éticos</li><li>Integridad académica</li><li>Lineamientos para estudiantes</li><li>Acciones no éticas</li><li>Usos posibles en actividades de aprendizaje</li><li>Recursos, anexos y glosario</li></ul>
+        <p><strong>Usuario principal:</strong> Estudiantes</p>
+        <p><strong>Función en la plataforma:</strong> Base normativa estudiantil: permite que la plataforma tenga reglas claras de uso, declaración y límites.</p>
+      </details>
+      <div><span class="tag">estudiantes</span><span class="tag">ética</span><span class="tag">integridad académica</span><span class="tag">declaración de uso</span><span class="tag">glosario</span></div>
+    </article>
+    <article class="doc-card" data-title="lineamientos-ia-profesores-tec-de-monterrey.pdf" data-axis="ética, integridad y diseño docente" data-keywords="profesores lineamientos anexos declaración actividad con ia">
+      <div class="doc-top">
+        <span class="num">07</span>
+        <div>
+          <h3>lineamientos-ia-profesores-tec-de-monterrey.pdf</h3>
+          <p class="meta">Política / lineamientos completos · 44 págs. · <strong>Ética, integridad y diseño docente</strong></p>
+        </div>
+      </div>
+      <p>Documento completo de lineamientos para el profesorado. Añade anexos operativos para avisar actividades con IA, declarar herramientas, orientar escritura y declarar el uso de IA en el diseño del curso o actividad.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Premisas y principios éticos</li><li>IA e integridad académica</li><li>Lineamientos para profesores</li><li>Acciones no éticas</li><li>Recursos de apoyo</li><li>Anexo I: aviso de actividad con IA</li><li>Anexo II: declarar herramientas</li><li>Anexo III: uso de IA en escritura</li><li>Anexo IV: declarar uso de IA por el profesor</li></ul>
+        <p><strong>Usuario principal:</strong> Profesorado</p>
+        <p><strong>Función en la plataforma:</strong> Base normativa docente: convierte los principios éticos en prácticas concretas de diseño, evaluación y transparencia.</p>
+      </details>
+      <div><span class="tag">profesores</span><span class="tag">lineamientos</span><span class="tag">anexos</span><span class="tag">declaración</span><span class="tag">actividad con IA</span></div>
+    </article>
+    <article class="doc-card" data-title="guia-rapida-alumnos-inteligencia-artificial.pdf" data-axis="ética e integridad para estudiantes" data-keywords="guía rápida alumnos principios éticos acciones no éticas">
+      <div class="doc-top">
+        <span class="num">08</span>
+        <div>
+          <h3>guia-rapida-alumnos-inteligencia-artificial.pdf</h3>
+          <p class="meta">Guía rápida / infografía · 4 págs. · <strong>Ética e integridad para estudiantes</strong></p>
+        </div>
+      </div>
+      <p>Versión breve y visual de los lineamientos para estudiantes. Resume principios éticos, reglas de uso, usos posibles y acciones no éticas.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>9 principios éticos</li><li>Reglas de uso en clase</li><li>Declaración de IA</li><li>Uso colaborativo</li><li>Posibles usos: ideas, organización, revisión, consulta, generación declarada</li><li>Acciones no éticas: plagiar, falsear, falsificar, alterar realidad, propagar sesgos</li></ul>
+        <p><strong>Usuario principal:</strong> Estudiantes</p>
+        <p><strong>Función en la plataforma:</strong> Material de comunicación y sensibilización que puede integrarse al onboarding estudiantil o a Canvas.</p>
+      </details>
+      <div><span class="tag">guía rápida</span><span class="tag">alumnos</span><span class="tag">principios éticos</span><span class="tag">acciones no éticas</span></div>
+    </article>
+    <article class="doc-card" data-title="guia-rapida-profesores-tec-de-monterrey.pdf" data-axis="ética e integridad para profesores" data-keywords="guía rápida profesores integridad ciac declaración">
+      <div class="doc-top">
+        <span class="num">09</span>
+        <div>
+          <h3>guia-rapida-profesores-tec-de-monterrey.pdf</h3>
+          <p class="meta">Guía rápida / infografía · 3 págs. · <strong>Ética e integridad para profesores</strong></p>
+        </div>
+      </div>
+      <p>Versión breve de los lineamientos para docentes. Indica cómo declarar herramientas permitidas, reportar faltas, declarar el uso docente de IA y evitar prácticas no éticas.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>9 principios éticos</li><li>Lineamientos docentes</li><li>Declaración de herramientas permitidas</li><li>Revisión pedagógica ante sospechas</li><li>Reporte CIAC</li><li>Acciones no éticas</li></ul>
+        <p><strong>Usuario principal:</strong> Profesorado</p>
+        <p><strong>Función en la plataforma:</strong> Material de consulta rápida para profesores; útil para estandarizar mensajes al inicio de cursos.</p>
+      </details>
+      <div><span class="tag">guía rápida</span><span class="tag">profesores</span><span class="tag">integridad</span><span class="tag">CIAC</span><span class="tag">declaración</span></div>
+    </article>
+    <article class="doc-card" data-title="convocatoria.pdf" data-axis="pilotos y experimentación" data-keywords="convocatoria pilotos disciplinar especializado novus">
+      <div class="doc-top">
+        <span class="num">10</span>
+        <div>
+          <h3>Convocatoria.pdf</h3>
+          <p class="meta">Convocatoria de experimentación · 3 págs. · <strong>Pilotos y experimentación</strong></p>
+        </div>
+      </div>
+      <p>Convocatoria para experimentar el uso de herramientas de IA disciplinar y especializada. Distingue IA como objeto de aprendizaje disciplinar y como recurso especializado de apoyo al desarrollo de competencias.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Objetivo de experimentación</li><li>Modalidad disciplinar</li><li>Modalidad especializada</li><li>Fases de la convocatoria</li><li>Participantes elegibles</li><li>Presentación a comunidad académica</li></ul>
+        <p><strong>Usuario principal:</strong> Docentes de preparatoria, profesional y posgrado</p>
+        <p><strong>Función en la plataforma:</strong> Mecanismo para alimentar el portafolio de pilotos, experiencias y proyectos institucionales con IA.</p>
+      </details>
+      <div><span class="tag">convocatoria</span><span class="tag">pilotos</span><span class="tag">disciplinar</span><span class="tag">especializado</span><span class="tag">Novus</span></div>
+    </article>
+    <article class="doc-card" data-title="proyectos.xlsx" data-axis="portafolio de proyectos" data-keywords="actividades programas docentes estudiantes grupos métricas">
+      <div class="doc-top">
+        <span class="num">11</span>
+        <div>
+          <h3>Proyectos.xlsx</h3>
+          <p class="meta">Base de datos de actividades y métricas · 3 hojas · <strong>Portafolio de proyectos</strong></p>
+        </div>
+      </div>
+      <p>Libro con actividades por programa, métricas generales y resumen por programa. Reporta 23 actividades, 17 programas, 58 docentes implementadores, 1,929 estudiantes y 77 grupos.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Hoja Actividades: ID, objetivo, programa, profesores, grupos, alumnos</li><li>Hoja Estadística general: conteos globales</li><li>Hoja Por programa: profesores, grupos y alumnos por programa</li></ul>
+        <p><strong>Usuario principal:</strong> Coordinadores académicos, analítica institucional</p>
+        <p><strong>Función en la plataforma:</strong> Base cuantitativa para monitorear adopción, cobertura e impacto de actividades con IA.</p>
+      </details>
+      <div><span class="tag">actividades</span><span class="tag">programas</span><span class="tag">docentes</span><span class="tag">estudiantes</span><span class="tag">grupos</span><span class="tag">métricas</span></div>
+    </article>
+    <article class="doc-card" data-title="proyectosnovus.xlsx" data-axis="innovación educativa" data-keywords="novus proyectos innovación smart rockettrace symbiosis">
+      <div class="doc-top">
+        <span class="num">12</span>
+        <div>
+          <h3>ProyectosNovus.xlsx</h3>
+          <p class="meta">Portafolio de proyectos Novus · 2 hojas · <strong>Innovación educativa</strong></p>
+        </div>
+      </div>
+      <p>Libro con proyectos asociados a programas. Incluye ejemplos como objetivos SMART y Project Charter con IA, RocketTrace Dynamics, Ingeniería Aumentada y Symbiosis Lab.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Listado de proyectos y programas</li><li>Resumen por programa</li><li>Proyectos de IA aplicada a aprendizaje, ingeniería y razonamiento humano-máquina</li></ul>
+        <p><strong>Usuario principal:</strong> IFE, Novus, escuelas, líderes de innovación</p>
+        <p><strong>Función en la plataforma:</strong> Catálogo de experimentos transferibles para escalar prácticas de IA en distintas disciplinas.</p>
+      </details>
+      <div><span class="tag">Novus</span><span class="tag">proyectos</span><span class="tag">innovación</span><span class="tag">SMART</span><span class="tag">RocketTrace</span><span class="tag">Symbiosis</span></div>
+    </article>
+    <article class="doc-card" data-title="mapeo inicial.xlsx" data-axis="diseño curricular" data-keywords="mapeo curricular temáticas ciencia de datos ia sostenibilidad">
+      <div class="doc-top">
+        <span class="num">13</span>
+        <div>
+          <h3>Mapeo Inicial.xlsx</h3>
+          <p class="meta">Mapa curricular / temáticas EIC · 1 hoja · <strong>Diseño curricular</strong></p>
+        </div>
+      </div>
+      <p>Mapeo inicial de temáticas transversales: Administración y Gestión de Proyectos, Ciencias de Datos e IA, Innovación y emprendimiento tecnológico, y Sostenibilidad.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Perspectiva general por temática</li><li>Perspectiva específica</li><li>Programas</li><li>Cruce de competencias y temas</li></ul>
+        <p><strong>Usuario principal:</strong> Diseñadores curriculares, directores de programa</p>
+        <p><strong>Función en la plataforma:</strong> Estructura para ubicar IA dentro de las temáticas institucionales y evitar iniciativas aisladas.</p>
+      </details>
+      <div><span class="tag">mapeo curricular</span><span class="tag">temáticas</span><span class="tag">ciencia de datos</span><span class="tag">IA</span><span class="tag">sostenibilidad</span></div>
+    </article>
+    <article class="doc-card" data-title="[en construcción] línea ia.xlsx" data-axis="secuencia curricular" data-keywords="línea ia uf programación estadística ia generativa empalmes">
+      <div class="doc-top">
+        <span class="num">14</span>
+        <div>
+          <h3>[En construcción] Línea IA.xlsx</h3>
+          <p class="meta">Línea curricular de IA · 3 hojas · <strong>Secuencia curricular</strong></p>
+        </div>
+      </div>
+      <p>Matriz en construcción con unidades formativas y contenidos relacionados: pensamiento algorítmico, programación, matemáticas y ciencia de datos, estadística, IA para textos científicos, fundamentos de IA e IA generativa.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>TC1037 Pensamiento algorítmico</li><li>TC1038 Fundamentos de programación</li><li>MA1062 Matemáticas y ciencia de datos</li><li>MA1004B Estadística y manejo de datos</li><li>TI2002S IA para textos científicos</li><li>TC1043 Fundamentos de IA</li><li>TC3094 IA generativa</li><li>Hojas de empalmes MA1004B y TC1037/TC1038</li></ul>
+        <p><strong>Usuario principal:</strong> Diseño curricular, coordinadores de UF</p>
+        <p><strong>Función en la plataforma:</strong> Mapa de progresión curricular para diseñar trayectorias de IA por semestre y evitar duplicidades.</p>
+      </details>
+      <div><span class="tag">línea IA</span><span class="tag">UF</span><span class="tag">programación</span><span class="tag">estadística</span><span class="tag">IA generativa</span><span class="tag">empalmes</span></div>
+    </article>
+    <article class="doc-card" data-title="especificación iq.xlsx" data-axis="ia en disciplinas" data-keywords="ingeniería química disciplina ciencia de datos algoritmos herramientas">
+      <div class="doc-top">
+        <span class="num">15</span>
+        <div>
+          <h3>Especificación IQ.xlsx</h3>
+          <p class="meta">Especificación disciplinar · 1 hoja · <strong>IA en disciplinas</strong></p>
+        </div>
+      </div>
+      <p>Clasificación de integración de ciencia de datos e IA en Ingeniería Química. Relaciona claves de UF, tipo, semestre, concepto, técnica o algoritmo, herramienta y aplicación.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>IQ2018 Análisis numérico en ingeniería de procesos</li><li>IQ2016B Analítica de datos en ingeniería de proceso</li><li>Técnicas: métodos numéricos, análisis estadístico, patrones, análisis multivariable</li><li>Herramientas: MATLAB/Python, análisis y visualización</li></ul>
+        <p><strong>Usuario principal:</strong> Ingeniería Química, diseñadores curriculares</p>
+        <p><strong>Función en la plataforma:</strong> Plantilla replicable para especificar la IA por disciplina, no sólo como curso genérico.</p>
+      </details>
+      <div><span class="tag">Ingeniería Química</span><span class="tag">disciplina</span><span class="tag">ciencia de datos</span><span class="tag">algoritmos</span><span class="tag">herramientas</span></div>
+    </article>
+    <article class="doc-card" data-title="avances ia 202513.pdf" data-axis="seguimiento institucional" data-keywords="avances dashboard herramientas pilotos métricas">
+      <div class="doc-top">
+        <span class="num">16</span>
+        <div>
+          <h3>Avances IA 202513.pdf</h3>
+          <p class="meta">Dashboard ejecutivo de avances · 1 pág. · <strong>Seguimiento institucional</strong></p>
+        </div>
+      </div>
+      <p>Resumen visual de avances a enero 2026: herramientas, pilotos, fortalecimiento de programas, desarrollo de temática EIC, desarrollo docente e investigación educativa.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Herramientas: TECgpt, Agent Studio, Copilot, Canva AI, Timely Grader, Gradescope</li><li>30 docentes en 46 grupos</li><li>México IA+: 56 docentes y 34 estudiantes</li><li>20 proyectos, 43 grupos, 20 UFs, 1,187 estudiantes, 67 docentes, 23 herramientas especializadas</li><li>Autodiagnóstico con avance mayor al 50% y 20% de docentes alcanzando objetivo</li><li>Investigación educativa con 32 docentes, 53 grupos, 1,457 estudiantes</li></ul>
+        <p><strong>Usuario principal:</strong> Dirección académica, decanaturas, comités</p>
+        <p><strong>Función en la plataforma:</strong> Tablero estratégico para comunicar tracción, cobertura e hitos de la plataforma.</p>
+      </details>
+      <div><span class="tag">avances</span><span class="tag">dashboard</span><span class="tag">herramientas</span><span class="tag">pilotos</span><span class="tag">métricas</span></div>
+    </article>
+    <article class="doc-card" data-title="resultados enero 2026.pdf" data-axis="evaluación de impacto" data-keywords="investigación programación tc1028 quizzes copilot frustración aprendizaje">
+      <div class="doc-top">
+        <span class="num">17</span>
+        <div>
+          <h3>Resultados enero 2026.pdf</h3>
+          <p class="meta">Investigación educativa / evidencia · 60 págs. · <strong>Evaluación de impacto</strong></p>
+        </div>
+      </div>
+      <p>Reporte de investigación: ¿Cómo enseñar a programar en la era de la IA? Compara estrategias con IA y enseñanza tradicional en TC1028 con docentes y estudiantes.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>32 docentes, 53 grupos, 1,457 estudiantes</li><li>Estrategias: Quizzes, Copilot, Flipped learning con IA, Prompt problems y control</li><li>Análisis de aprendizaje, frustración, regresiones y comentarios</li><li>Ventajas: uso adecuado de IA, interacción, ética, evaluación de refuerzo</li><li>Riesgos: dependencia, abuso, desarrollo disciplinar insuficiente</li><li>Conclusión: acompañamiento docente indispensable</li></ul>
+        <p><strong>Usuario principal:</strong> Mejora continua, decanaturas, docentes de programación</p>
+        <p><strong>Función en la plataforma:</strong> Capa de evidencia: permite decidir qué estrategias escalar y bajo qué condiciones pedagógicas.</p>
+      </details>
+      <div><span class="tag">investigación</span><span class="tag">programación</span><span class="tag">TC1028</span><span class="tag">quizzes</span><span class="tag">Copilot</span><span class="tag">frustración</span></div>
+    </article>
+    <article class="doc-card" data-title="ejemplo conversación f1025b.pdf" data-axis="agentes y experiencias digitales" data-keywords="agente conversación canvas uf actividad reto">
+      <div class="doc-top">
+        <span class="num">18</span>
+        <div>
+          <h3>Ejemplo conversación F1025B.pdf</h3>
+          <p class="meta">Ejemplo de agente / tutor académico · 1 pág. · <strong>Agentes y experiencias digitales</strong></p>
+        </div>
+      </div>
+      <p>Transcripción de una conversación donde un asistente responde sobre competencias, semana 3, actividades de arranque y propuesta de reto. Sirve como ejemplo de agente que consulta información curricular y propone actividades.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Consulta sobre competencias de una UF</li><li>Explicación de semana 3</li><li>Actividad de arranque de 15 minutos</li><li>Propuesta de actividad de reto de 45 minutos + 3 horas fuera de clase</li><li>Uso de contexto curricular para generar diseño didáctico</li></ul>
+        <p><strong>Usuario principal:</strong> Docentes, diseñadores instruccionales, equipos de plataforma</p>
+        <p><strong>Función en la plataforma:</strong> Prototipo de asistente curricular que puede apoyar a docentes con diseño de clase, actividades y retos.</p>
+      </details>
+      <div><span class="tag">agente</span><span class="tag">conversación</span><span class="tag">Canvas</span><span class="tag">UF</span><span class="tag">actividad</span><span class="tag">reto</span></div>
+    </article>
+    <article class="doc-card" data-title="presentación eic summit 2025.pdf" data-axis="estrategia docente y cultura" data-keywords="summit capacitación talento docente tecgpt skillstudio">
+      <div class="doc-top">
+        <span class="num">19</span>
+        <div>
+          <h3>Presentación EIC summit 2025.pdf</h3>
+          <p class="meta">Presentación ejecutiva de capacitación · 27 págs. · <strong>Estrategia docente y cultura</strong></p>
+        </div>
+      </div>
+      <p>Presentación sobre capacitación en IA, prioridades EIC 25-26, estrategias de desarrollo docente, autodiagnóstico, cursos recomendados y monitoreo.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Prioridades EIC 25-26</li><li>Estrategias de búsqueda y desarrollo de talento docente</li><li>Creación de autodiagnóstico</li><li>Cursos: Conoce TecGPT, Prompt Master, IA Generativa en Educación, Estrategias didácticas, Ciudadanía Digital, Skillstudio</li><li>Monitoreo de capacitación</li></ul>
+        <p><strong>Usuario principal:</strong> Reunión nacional de profesores, líderes EIC</p>
+        <p><strong>Función en la plataforma:</strong> Pieza de alineación cultural: explica por qué la habilitación docente es parte de la estrategia de la Escuela.</p>
+      </details>
+      <div><span class="tag">summit</span><span class="tag">capacitación</span><span class="tag">talento docente</span><span class="tag">TecGPT</span><span class="tag">Skillstudio</span></div>
+    </article>
+    <article class="doc-card" data-title="méxicoia+ 2025.pdf" data-axis="ecosistema e industria" data-keywords="méxicoia+ nvidia ecosistema industria comunidad infraestructura">
+      <div class="doc-top">
+        <span class="num">20</span>
+        <div>
+          <h3>MéxicoIA+ 2025.pdf</h3>
+          <p class="meta">Reporte de evento / vinculación · 1 pág. · <strong>Ecosistema e industria</strong></p>
+        </div>
+      </div>
+      <p>Reporte de participación en MéxicoIA+ y acciones recomendadas: capacitación básica, habilidades avanzadas, infraestructura, eventos, industria, comunidad, ética e ir más allá de IA generativa.</p>
+      <details>
+        <summary>Qué hay en este documento</summary>
+        <ul><li>Evento con 11 ejes estratégicos como robótica, inteligencia financiera, economía circular y logística inteligente</li><li>90 asistentes EIC entre docentes y estudiantes</li><li>Encuesta de salida a docentes</li><li>Acciones recomendadas para fortalecer IA</li></ul>
+        <p><strong>Usuario principal:</strong> Decanaturas, docentes, estudiantes, aliados externos</p>
+        <p><strong>Función en la plataforma:</strong> Capa de ecosistema: conecta la plataforma universitaria con industria, eventos, comunidad y visión más allá de GenAI.</p>
+      </details>
+      <div><span class="tag">MéxicoIA+</span><span class="tag">Nvidia</span><span class="tag">ecosistema</span><span class="tag">industria</span><span class="tag">comunidad</span><span class="tag">infraestructura</span></div>
+    </article>
+  </div>
+</section>
+
+<section id="tabla">
+  <h2>4. Tabla maestra</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Documento</th><th>Eje</th><th>Tipo</th><th>Usuario principal</th><th>Función en la plataforma</th></tr></thead>
+      <tbody>
+<tr>
+<td>Fundamentos IA para potenciar las habilidades humanas_Agosto 25.pdf</td>
+<td>Visión y fundamentos</td>
+<td>Marco estratégico / fundamentos</td>
+<td>Estudiantes, docentes, diseño curricular, dirección académica</td>
+<td>Documento base para convertir la estrategia de IA en marco curricular y en lenguaje común para toda la universidad.</td>
+</tr>
+<tr>
+<td>Autodiagnóstico de habilidades básicas de inteligencia artificial.pdf</td>
+<td>Diagnóstico docente</td>
+<td>Instrumento de diagnóstico</td>
+<td>Docentes EIC / profesores que deben identificar su nivel de habilidades de IA</td>
+<td>Motor de entrada de la plataforma: permite segmentar docentes, recomendar rutas de formación y medir avance.</td>
+</tr>
+<tr>
+<td>Habilidades básicas IA.pdf</td>
+<td>Capacitación docente</td>
+<td>Ruta de capacitación / presentación</td>
+<td>Docentes, DAF, DAA, directores de departamento</td>
+<td>Backbone de habilitación: traduce diagnóstico en desarrollo docente con cursos, materiales, seguimiento y comunidades.</td>
+</tr>
+<tr>
+<td>Correo inicial a docentes.pdf</td>
+<td>Despliegue y comunicación</td>
+<td>Comunicación operativa</td>
+<td>Docentes convocados al autodiagnóstico</td>
+<td>Pieza de onboarding: activa la participación docente y formaliza el inicio del proceso de habilitación.</td>
+</tr>
+<tr>
+<td>Ejemplo resultados.pdf</td>
+<td>Diagnóstico y recomendación</td>
+<td>Reporte individual automatizado</td>
+<td>Docente que completó el autodiagnóstico</td>
+<td>Módulo de retroalimentación: transforma respuestas del diagnóstico en recomendación accionable.</td>
+</tr>
+<tr>
+<td>lineamientos-eticos-alumnos-tec-de-monterrey.pdf</td>
+<td>Ética, integridad y gobernanza</td>
+<td>Política / lineamientos completos</td>
+<td>Estudiantes</td>
+<td>Base normativa estudiantil: permite que la plataforma tenga reglas claras de uso, declaración y límites.</td>
+</tr>
+<tr>
+<td>lineamientos-ia-profesores-tec-de-monterrey.pdf</td>
+<td>Ética, integridad y diseño docente</td>
+<td>Política / lineamientos completos</td>
+<td>Profesorado</td>
+<td>Base normativa docente: convierte los principios éticos en prácticas concretas de diseño, evaluación y transparencia.</td>
+</tr>
+<tr>
+<td>guia-rapida-alumnos-inteligencia-artificial.pdf</td>
+<td>Ética e integridad para estudiantes</td>
+<td>Guía rápida / infografía</td>
+<td>Estudiantes</td>
+<td>Material de comunicación y sensibilización que puede integrarse al onboarding estudiantil o a Canvas.</td>
+</tr>
+<tr>
+<td>guia-rapida-profesores-tec-de-monterrey.pdf</td>
+<td>Ética e integridad para profesores</td>
+<td>Guía rápida / infografía</td>
+<td>Profesorado</td>
+<td>Material de consulta rápida para profesores; útil para estandarizar mensajes al inicio de cursos.</td>
+</tr>
+<tr>
+<td>Convocatoria.pdf</td>
+<td>Pilotos y experimentación</td>
+<td>Convocatoria de experimentación</td>
+<td>Docentes de preparatoria, profesional y posgrado</td>
+<td>Mecanismo para alimentar el portafolio de pilotos, experiencias y proyectos institucionales con IA.</td>
+</tr>
+<tr>
+<td>Proyectos.xlsx</td>
+<td>Portafolio de proyectos</td>
+<td>Base de datos de actividades y métricas</td>
+<td>Coordinadores académicos, analítica institucional</td>
+<td>Base cuantitativa para monitorear adopción, cobertura e impacto de actividades con IA.</td>
+</tr>
+<tr>
+<td>ProyectosNovus.xlsx</td>
+<td>Innovación educativa</td>
+<td>Portafolio de proyectos Novus</td>
+<td>IFE, Novus, escuelas, líderes de innovación</td>
+<td>Catálogo de experimentos transferibles para escalar prácticas de IA en distintas disciplinas.</td>
+</tr>
+<tr>
+<td>Mapeo Inicial.xlsx</td>
+<td>Diseño curricular</td>
+<td>Mapa curricular / temáticas EIC</td>
+<td>Diseñadores curriculares, directores de programa</td>
+<td>Estructura para ubicar IA dentro de las temáticas institucionales y evitar iniciativas aisladas.</td>
+</tr>
+<tr>
+<td>[En construcción] Línea IA.xlsx</td>
+<td>Secuencia curricular</td>
+<td>Línea curricular de IA</td>
+<td>Diseño curricular, coordinadores de UF</td>
+<td>Mapa de progresión curricular para diseñar trayectorias de IA por semestre y evitar duplicidades.</td>
+</tr>
+<tr>
+<td>Especificación IQ.xlsx</td>
+<td>IA en disciplinas</td>
+<td>Especificación disciplinar</td>
+<td>Ingeniería Química, diseñadores curriculares</td>
+<td>Plantilla replicable para especificar la IA por disciplina, no sólo como curso genérico.</td>
+</tr>
+<tr>
+<td>Avances IA 202513.pdf</td>
+<td>Seguimiento institucional</td>
+<td>Dashboard ejecutivo de avances</td>
+<td>Dirección académica, decanaturas, comités</td>
+<td>Tablero estratégico para comunicar tracción, cobertura e hitos de la plataforma.</td>
+</tr>
+<tr>
+<td>Resultados enero 2026.pdf</td>
+<td>Evaluación de impacto</td>
+<td>Investigación educativa / evidencia</td>
+<td>Mejora continua, decanaturas, docentes de programación</td>
+<td>Capa de evidencia: permite decidir qué estrategias escalar y bajo qué condiciones pedagógicas.</td>
+</tr>
+<tr>
+<td>Ejemplo conversación F1025B.pdf</td>
+<td>Agentes y experiencias digitales</td>
+<td>Ejemplo de agente / tutor académico</td>
+<td>Docentes, diseñadores instruccionales, equipos de plataforma</td>
+<td>Prototipo de asistente curricular que puede apoyar a docentes con diseño de clase, actividades y retos.</td>
+</tr>
+<tr>
+<td>Presentación EIC summit 2025.pdf</td>
+<td>Estrategia docente y cultura</td>
+<td>Presentación ejecutiva de capacitación</td>
+<td>Reunión nacional de profesores, líderes EIC</td>
+<td>Pieza de alineación cultural: explica por qué la habilitación docente es parte de la estrategia de la Escuela.</td>
+</tr>
+<tr>
+<td>MéxicoIA+ 2025.pdf</td>
+<td>Ecosistema e industria</td>
+<td>Reporte de evento / vinculación</td>
+<td>Decanaturas, docentes, estudiantes, aliados externos</td>
+<td>Capa de ecosistema: conecta la plataforma universitaria con industria, eventos, comunidad y visión más allá de GenAI.</td>
+</tr></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="mapa">
+  <h2>5. Mapa por ejes</h2>
+  <div class="grid">
+    
+      <div class="axis-card">
+        <h3>Visión y fundamentos</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Fundamentos IA para potenciar las habilidades humanas_Agosto 25.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Diagnóstico docente</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Autodiagnóstico de habilidades básicas de inteligencia artificial.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Capacitación docente</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Habilidades básicas IA.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Despliegue y comunicación</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Correo inicial a docentes.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Diagnóstico y recomendación</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Ejemplo resultados.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Ética, integridad y gobernanza</h3>
+        <p>1 documento(s)</p>
+        <ul><li>lineamientos-eticos-alumnos-tec-de-monterrey.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Ética, integridad y diseño docente</h3>
+        <p>1 documento(s)</p>
+        <ul><li>lineamientos-ia-profesores-tec-de-monterrey.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Ética e integridad para estudiantes</h3>
+        <p>1 documento(s)</p>
+        <ul><li>guia-rapida-alumnos-inteligencia-artificial.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Ética e integridad para profesores</h3>
+        <p>1 documento(s)</p>
+        <ul><li>guia-rapida-profesores-tec-de-monterrey.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Pilotos y experimentación</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Convocatoria.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Portafolio de proyectos</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Proyectos.xlsx</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Innovación educativa</h3>
+        <p>1 documento(s)</p>
+        <ul><li>ProyectosNovus.xlsx</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Diseño curricular</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Mapeo Inicial.xlsx</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Secuencia curricular</h3>
+        <p>1 documento(s)</p>
+        <ul><li>[En construcción] Línea IA.xlsx</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>IA en disciplinas</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Especificación IQ.xlsx</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Seguimiento institucional</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Avances IA 202513.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Evaluación de impacto</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Resultados enero 2026.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Agentes y experiencias digitales</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Ejemplo conversación F1025B.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Estrategia docente y cultura</h3>
+        <p>1 documento(s)</p>
+        <ul><li>Presentación EIC summit 2025.pdf</li></ul>
+      </div>
+      <div class="axis-card">
+        <h3>Ecosistema e industria</h3>
+        <p>1 documento(s)</p>
+        <ul><li>MéxicoIA+ 2025.pdf</li></ul>
+      </div>
+  </div>
+</section>
+
+<section id="diccionario">
+  <h2>6. Diccionario operativo</h2>
+  <p class="muted">Términos clave para convertir la colección documental en producto/plataforma.</p>
+  <dl>
+  <div class="term">
+    <dt>Plataforma universitaria de IA</dt>
+    <dd>Conjunto integrado de políticas, capacidades, herramientas, datos, formación, soporte y métricas para incorporar IA en docencia, investigación, gestión y vinculación.</dd>
+  </div>
+  <div class="term">
+    <dt>AI Literacy / Alfabetización en IA</dt>
+    <dd>Capacidad de entender, usar, evaluar críticamente y actuar éticamente con sistemas de IA, con criterio humano y aplicación disciplinar.</dd>
+  </div>
+  <div class="term">
+    <dt>Autodiagnóstico</dt>
+    <dd>Instrumento inicial para medir habilidades por dimensión, detectar brechas y recomendar cursos o experiencias.</dd>
+  </div>
+  <div class="term">
+    <dt>Dimensión de habilidad</dt>
+    <dd>Categoría de competencia evaluada: datos, pensamiento crítico, ética, innovación, adaptabilidad y aplicación disciplinar.</dd>
+  </div>
+  <div class="term">
+    <dt>IA disciplinar</dt>
+    <dd>Uso en el que la IA se convierte en objeto de aprendizaje propio de una carrera o profesión.</dd>
+  </div>
+  <div class="term">
+    <dt>IA especializada</dt>
+    <dd>Uso de herramientas de IA como recurso de apoyo para fortalecer competencias de una disciplina.</dd>
+  </div>
+  <div class="term">
+    <dt>Integridad académica</dt>
+    <dd>Conjunto de principios y prácticas para evitar plagio, simulación de autoría, uso no declarado, falsificación o dependencia indebida.</dd>
+  </div>
+  <div class="term">
+    <dt>Declaración de uso de IA</dt>
+    <dd>Evidencia explícita de qué herramienta se usó, para qué, cómo influyó en el trabajo y qué parte fue revisada por humanos.</dd>
+  </div>
+  <div class="term">
+    <dt>Human-in-the-loop</dt>
+    <dd>Principio operativo: la IA apoya, pero la responsabilidad, validación, juicio y decisión final permanecen en personas.</dd>
+  </div>
+  <div class="term">
+    <dt>Prompt engineering</dt>
+    <dd>Diseño de instrucciones para obtener respuestas útiles, verificables y alineadas con objetivos pedagógicos o profesionales.</dd>
+  </div>
+  <div class="term">
+    <dt>Evaluación de refuerzo</dt>
+    <dd>Actividad evaluativa breve, como quiz o comprobación de comprensión, para evitar que la IA sustituya el aprendizaje.</dd>
+  </div>
+  <div class="term">
+    <dt>Dependencia de IA</dt>
+    <dd>Riesgo de que estudiantes o docentes deleguen pensamiento, solución de problemas o juicio crítico en la herramienta.</dd>
+  </div>
+  <div class="term">
+    <dt>IA generativa</dt>
+    <dd>Familia de modelos capaces de producir texto, código, imágenes, audio, video u otros contenidos a partir de patrones aprendidos.</dd>
+  </div>
+  <div class="term">
+    <dt>TECgpt</dt>
+    <dd>Herramienta institucional referida en los documentos como parte del ecosistema de habilitación.</dd>
+  </div>
+  <div class="term">
+    <dt>Agent Studio</dt>
+    <dd>Herramienta/plataforma mencionada para la creación o despliegue de agentes en escenarios educativos.</dd>
+  </div>
+  <div class="term">
+    <dt>CADI</dt>
+    <dd>Cursos o mecanismos de actualización disciplinar usados para desarrollar habilidades avanzadas y por disciplina.</dd>
+  </div>
+  <div class="term">
+    <dt>CEDDIE</dt>
+    <dd>Instancia de apoyo y desarrollo docente que aparece como vía de capacitación en IA educativa.</dd>
+  </div>
+  <div class="term">
+    <dt>Piloto con IA</dt>
+    <dd>Experimento acotado de enseñanza, aprendizaje o operación con objetivos, métricas y posibilidad de escalamiento.</dd>
+  </div>
+  <div class="term">
+    <dt>Evidencia de impacto</dt>
+    <dd>Datos de aprendizaje, frustración, uso, aceptación, esfuerzo docente y comentarios que permiten decidir qué escalar.</dd>
+  </div>
+  <div class="term">
+    <dt>Gobernanza de IA</dt>
+    <dd>Reglas, roles, comités, criterios, políticas y flujos de decisión para usar IA de forma segura, ética y responsable.</dd>
+  </div></dl>
+</section>
+
+<section id="roadmap">
+  <h2>7. Roadmap recomendado para convertir los documentos en plataforma</h2>
+  <div class="grid">
+    <div class="card"><h3>Fase 1 · Inventario vivo</h3><p>Crear repositorio con metadatos: documento, eje, audiencia, versión, dueño, fecha, estado y acciones derivadas.</p></div>
+    <div class="card"><h3>Fase 2 · Portal por perfiles</h3><p>Vista para estudiante, profesor, directivo, diseñador curricular e investigador. Cada perfil ve políticas, rutas y actividades relevantes.</p></div>
+    <div class="card"><h3>Fase 3 · Diagnóstico + recomendador</h3><p>Conectar autodiagnóstico con resultados, rutas de capacitación, cursos CEDDIE/CADI y seguimiento por dimensión.</p></div>
+    <div class="card"><h3>Fase 4 · Banco de experiencias</h3><p>Convertir Proyectos.xlsx y ProyectosNovus.xlsx en un catálogo consultable de prácticas, pilotos, herramientas y evidencias.</p></div>
+    <div class="card"><h3>Fase 5 · Analítica institucional</h3><p>Dashboard de adopción: docentes, grupos, estudiantes, programas, herramientas, avance por dimensión y resultados de aprendizaje.</p></div>
+    <div class="card"><h3>Fase 6 · Agentes de apoyo</h3><p>Agentes para consultar lineamientos, diseñar actividades, preparar avisos de uso de IA, recomendar recursos y documentar evidencia.</p></div>
+  </div>
+</section>
+
+<section id="fuentes">
+  <h2>8. Fuentes y anclajes externos</h2>
+  <p>Esta página se apoya en los documentos cargados y en dos marcos externos útiles para alinear la plataforma con prácticas internacionales.</p>
+  <ul>
+    <li><strong>UNESCO AI Competency Framework for Teachers:</strong> referente para estructurar competencias docentes de IA con enfoque humano, ético, pedagógico y de desarrollo profesional.</li>
+    <li><strong>Digital Education Council AI Literacy Framework:</strong> referente citado por los propios documentos para organizar alfabetización en IA en educación superior con enfoque humano, crítico, ético y aplicado.</li>
+  </ul>
+  <p class="muted">Nota: esta página no reemplaza los documentos originales; funciona como índice ejecutivo, diccionario y mapa de navegación.</p>
+</section>
+</main>
+
+<footer>
+  Catálogo web autónomo · Preparado para explorar una plataforma universitaria de IA a partir de los documentos cargados.
+</footer>
+
+<script>
+const q = document.getElementById('q');
+const axis = document.getElementById('axis');
+const cards = [...document.querySelectorAll('.doc-card')];
+function filterCards(){
+  const query = q.value.toLowerCase().trim();
+  const ax = axis.value;
+  cards.forEach(card => {
+    const hay = (card.dataset.title + " " + card.dataset.axis + " " + card.dataset.keywords + " " + card.innerText.toLowerCase());
+    const okQ = !query || hay.includes(query);
+    const okA = !ax || card.dataset.axis === ax;
+    card.style.display = (okQ && okA) ? "" : "none";
+  });
+}
+q.addEventListener('input', filterCards);
+axis.addEventListener('change', filterCards);
+</script>
+</body>
+</html>
